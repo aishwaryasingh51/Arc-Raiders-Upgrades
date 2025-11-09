@@ -1,94 +1,359 @@
-ItemID,Name,Quantity,Station,Tier,Category,LocationType,Vendor,Source
-dog_collar,Dog Collar,1,Scrappy,2,Residential,Residential,,Item
-lemons,Lemons,3,Scrappy,3,Nature,Nature,,Item
-apricots_t3,Apricots,3,Scrappy,3,Nature,Nature,,Item
-apricots_t5,Apricots,12,Scrappy,5,Nature,Nature,,Item
-prickly_pears,Prickly Pears,6,Scrappy,4,Nature,Nature,,Item
-olives,Olives,6,Scrappy,4,Nature,Nature,,Item
-cat_bed_res,Cat Bed,1,Scrappy,4,Residential,Residential,,Item
-cat_bed_com,Cat Bed,1,Scrappy,4,Commercial,Commercial,,Item
-very_comfy_pillow_res,Very Comfortable Pillow,3,Scrappy,5,Residential,Residential,,Item
-very_comfy_pillow_com,Very Comfortable Pillow,3,Scrappy,5,Commercial,Commercial,,Item
-metal_parts_g1,Metal Parts,20,Gunsmith,1,Basic Material,Basic Material,,Item
-rubber_parts_g1,Rubber Parts,30,Gunsmith,1,Basic Material,Basic Material,,Item
-rusted_tools_g2,Rusted Tools,3,Gunsmith,2,Mechanical,Mechanical,,Item
-mech_components_g2,Mechanical Components,5,Gunsmith,2,Mechanical,Refiner,,Item
-wasp_driver_g2,Wasp Driver,8,Gunsmith,2,Drones,Drones,,Item
-rusted_gear_g3,Rusted Gear,3,Gunsmith,3,Industrial,Industrial,,Item
-adv_mech_components_g3,Advanced Mechanical Components,5,Gunsmith,3,Mechanical,Refiner,,Item
-sentinel_firing_core_g3,Sentinel Firing Core,4,Gunsmith,3,Drones,Drones,,Item
-plastic_parts_u1,Plastic Parts,25,Gear Bench,1,Basic Material,Basic Material,,Item
-fabric_u1,Fabric,30,Gear Bench,1,Basic Material,Basic Material,,Item
-power_cable_u2_res,Power Cable,3,Gear Bench,2,Electrical,Residential,,Item
-power_cable_u2_com,Power Cable,3,Gear Bench,2,Electrical,Commercial,,Item
-electrical_components_u2,Electrical Components,5,Gear Bench,2,Electrical,Refiner,,Item
-hornet_driver_u2,Hornet Driver,5,Gear Bench,2,Drones,Drones,,Item
-industrial_battery_u3,Industrial Battery,3,Gear Bench,3,Industrial,Industrial,,Item
-adv_electrical_components_u3,Advanced Electrical Components,5,Gear Bench,3,Electrical,Refiner,,Item
-bastion_cell_u3,Bastion Cell,6,Gear Bench,3,Drones,Drones,,Item
-fabric_m1,Fabric,50,Medical Lab,1,Basic Material,Basic Material,,Item
-arc_alloy_m1,ARC Alloy,6,Medical Lab,1,Drones,Drones,,Item
-cracked_bioscanner_m2,Cracked Bioscanner,2,Medical Lab,2,Medical,Medical,,Item
-durable_cloth_m2,Durable Cloth,5,Medical Lab,2,Medical,Commercial,,Item
-tick_pod_m2,Tick Pod,8,Medical Lab,2,Drones,Drones,,Item
-rusted_medkit_m3,Rusted Shut Medical Kit,3,Medical Lab,3,Medical,Medical,,Item
-antiseptic_m3,Antiseptic,8,Medical Lab,3,Medical,Medical,,Item
-surveyor_vault_m3,Surveyor Vault,5,Medical Lab,3,Drones,Drones,,Item
-rubber_parts_e1,Rubber Parts,50,Explosives Bench,1,Basic Material,Basic Material,,Item
-arc_alloy_e1,ARC Alloy,6,Explosives Bench,1,Drones,Drones,,Item
-synth_fuel_e2,Synthesized Fuel,3,Explosives Bench,2,Exodus,Celeste,,Item
-crude_explosives_e2,Crude Explosives,5,Explosives Bench,2,Industrial,Security,,Item
-pop_trigger_e2,Pop Trigger,5,Explosives Bench,2,Drones,Drones,,Item
-lab_reagents_e3,Laboratory Reagents,3,Explosives Bench,3,Medical,Medical,,Item
-explosive_compound_e3,Explosive Compound,5,Explosives Bench,3,Industrial,Security,,Item
-rocketeer_driver_e3,Rocketeer Driver,3,Explosives Bench,3,Drones,Drones,,Item
-plastic_parts_u1b,Plastic Parts,50,Utility Station,1,Basic Material,Basic Material,,Item
-arc_alloy_u1b,ARC Alloy,6,Utility Station,1,Drones,Drones,,Item
-damaged_heat_sink_u2,Damaged Heat Sink,2,Utility Station,2,Technological,Technological,,Item
-electrical_components_u2b,Electrical Components,5,Utility Station,2,Electrical,Refiner,,Item
-snitch_scanner_u2,Snitch Scanner,6,Utility Station,2,Drones,Drones,,Item
-fried_motherboard_u3,Fried Motherboard,3,Utility Station,3,Technological,Technological,,Item
-adv_electrical_components_u3b,Advanced Electrical Components,5,Utility Station,3,Electrical,Refiner,,Item
-leaper_pulse_unit_u3,Leaper Pulse Unit,4,Utility Station,3,Drones,Drones,,Item
-metal_parts_r1,Metal Parts,60,Refiner,1,Basic Material,Basic Material,,Item
-arc_powercell_r1,ARC Powercell,5,Refiner,1,Drones,Drones,,Item
-toaster_r2,Toaster,3,Refiner,2,Residential,Residential,,Item
-arc_motion_core_r2,ARC Motion Core,5,Refiner,2,Drones,Probes,,Item
-fireball_burner_r2,Fireball Burner,8,Refiner,2,Drones,Drones,,Item
-motor_r3,Motor,3,Refiner,3,Mechanical,Mechanical,,Item
-arc_circuitry_r3,ARC Circuitry,10,Refiner,3,Drones,Probes,,Item
-bombardier_cell_r3,Bombardier Cell,6,Refiner,3,Drones,Drones,,Item
-arc_alloy_clear_skies,ARC Alloy,3,Quest,0,Drones,Probes,,Quest
-wires_trash_treasure,Wires,6,Quest,0,Electrical,Technological,Celeste,Quest
-battery_trash_treasure,Battery,1,Quest,0,Electrical,Technological,Celeste,Quest
-snitch_scanner_trifecta,Snitch Scanner,2,Quest,0,Drones,Drones,,Quest
-wasp_driver_trifecta,Wasp Driver,2,Quest,0,Drones,Drones,,Quest
-hornet_driver_trifecta,Hornet Driver,2,Quest,0,Drones,Drones,,Quest
-surveyor_vault_mixed_signals,Surveyor Vault,1,Quest,0,Drones,Drones,,Quest
-water_pump_unexpected_initiative,Water Pump,1,Quest,0,Mechanical,Industrial,,Quest
-rocketeer_driver_out_shadows,Rocketeer Driver,1,Quest,0,Drones,Drones,,Quest
-antiseptic_doctors_orders,Antiseptic,2,Quest,0,Medical,Medical,,Quest
-syringe_doctors_orders,Syringe,1,Quest,0,Medical,Medical,Celeste,Quest
-durable_cloth_doctors_orders,Durable Cloth,1,Quest,0,Medical,Commercial,,Quest
-great_mullein_doctors_orders,Great Mullenin,1,Quest,0,Nature,Nature,Celeste,Quest
-esr_analyzer_reveal_ruins,ESR Analyzer,1,Quest,0,Medical,Plaza Rosa Pharmacy,,Quest
-metal_parts_exp1,Metal Parts,150,Expedition: Part 1,0,Basic Material,Basic Material,,Expedition
-rubber_parts_exp1,Rubber Parts,200,Expedition: Part 1,0,Basic Material,Basic Material,,Expedition
-arc_alloy_exp1,ARC Alloy,80,Expedition: Part 1,0,Drones,Drones,,Expedition
-steel_spring_exp1,Steel Spring,15,Expedition: Part 1,0,Mechanical,Mechanical,Celeste,Expedition
-durable_cloth_exp2,Durable Cloth,35,Expedition: Part 2,0,Medical,Commercial,,Expedition
-wires_exp2,Wires,30,Expedition: Part 2,0,Electrical,Technological,Celeste,Expedition
-electrical_components_exp2,Electrical Components,30,Expedition: Part 2,0,Electrical,Refiner,,Expedition
-cooling_fans_exp2,Cooling Fans,5,Expedition: Part 2,0,Technological,Technological,,Expedition
-light_bulb_exp3,Light Bulb,5,Expedition: Part 3,0,Electrical,Electrical,,Expedition
-battery_exp3,Battery,30,Expedition: Part 3,0,Electrical,Technological,Celeste,Expedition
-sensors_exp3,Sensors,20,Expedition: Part 3,0,Security,Technological,Celeste,Expedition
-exodus_modules_exp3,Exodus Modules,1,Expedition: Part 3,0,Exodus,Exodus,Celeste,Expedition
-humidifier_exp4,Humidifier,5,Expedition: Part 4,0,Residential,Residential,,Expedition
-adv_electrical_components_exp4,Advanced Electrical Components,5,Expedition: Part 4,0,Electrical,Refiner,,Expedition
-magnetic_accelerator_exp4,Magnetic Accelerator,3,Expedition: Part 4,0,Exodus,Exodus,,Expedition
-leaper_pulse_unit_exp4,Leaper Pulse Unit,3,Expedition: Part 4,0,Drones,Drones,,Expedition
-combat_items_exp5,Combat Items,250000,Expedition: Part 5,0,,,Expedition
-survival_items_exp5,Survival Items,100000,Expedition: Part 5,0,,,Expedition
-provisions_exp5,Provisions,180000,Expedition: Part 5,0,,,Expedition
-materials_exp5,Materials,300000,Expedition: Part 5,0,,,Expedition
+ItemID,Name,Rarity,Type,Value,StackSize,WeightKg,FoundIn,Description,Effects,UpdatedAt,Usage,RecycleOutputs,SalvageOutputs
+fabric,Fabric,Common,Basic Material,50,50,0.1,"Commercial, Medical, Residential",Used to craft medical supplies and shields. Can be used to slowly restore small amounts of health.,Healing: 0.4/s | Duration: 25s | Use Time: 1s,10/30/2025,Craft: Durable Cloth x14 | Craft: Bandage x5,,
+tick_pod,Tick Pod,Uncommon,Recyclable,640,3,0.5,ARC,Can be recycled into crafting materials.,,11/03/2025,,ARC Alloy x1 | Metal Parts x1,
+explosive_mixture,Explosive Mixture,,Material,,,,,A volatile crafting component.,,10/30/2025,,,
+dog_collar,Dog Collar,Rare,Recyclable,640,3,0.8,Residential,"After all this time, you can still smell the goodness.",,10/30/2025,,Fabric x8 | Metal Parts x1,Fabric x5
+torn_blanket,Torn Blanket,Rare,Recyclable,640,3,2,"Residential, Medical",Can be recycled into fabric.,,11/01/2025,,Fabric x12,
+lemon,Lemon,Uncommon,Nature,640,10,0.2,Nature,Can be consumed for a small amount of stamina.,Stamina: 20 | Use Time: 1s,11/01/2025,,,
+apricot,Apricot,Uncommon,Nature,640,10,0.2,Nature,A sun ripe apricot. Can be consumed for a small amount of stamina.,Stamina: 20 | Use Time: 1s,10/31/2025,,,
+metal_parts,Metal Parts,Common,Basic Material,75,50,0.15,"Mechanical, Industrial, Electrical, Technological","Used to craft a wide range of items. Used to craft: Launcher Ammo, Hairpin, Heavy Ammo, Ferro, Kettle",,11/03/2025,Craft: Ferro I x5 | Craft: Ferro I x5 | Craft: Light Ammo x3 | Craft: Heavy Ammo x3 | Craft: Medium Ammo x3 | Craft: Medium Ammo x4 | Craft: Mechanical Components x7 | Craft: Compensator I x6 | Craft: Compensator I x6 | Craft: Kettle I x6 | Craft: Stitcher I x8 | Craft: Door Blocker x3 | Craft: Muzzle Brake I x6 | Craft: Rattler I x16 | Craft: Hairpin I x2 | Craft: Shotgun Choke I x6 | Craft: Launcher Ammo x5 | Craft: Shotgun Ammo x3,,
+rubber_parts,Rubber Parts,Common,Basic Material,50,50,0.1,"Mechanical, Industrial, Electrical","Scrap rubber pieces for crafting. Used to craft: Ferro, Kettle, Looting Mk. 1, Shield Recharger, Stitcher",,11/03/2025,Craft: Ferro I x2 | Craft: Ferro I x2 | Craft: Electrical Components x4 | Craft: Mechanical Components x3 | Craft: Binoculars x4 | Craft: Stable Stock I x7 | Craft: Stable Stock I x6 | Craft: Gas Grenade x2 | Craft: Tactical Mk. 1 x6 | Craft: Combat Mk. 1 x6 | Craft: Kettle I x8 | Craft: Stitcher I x4 | Craft: Remote Raider Flare x4 | Craft: Shield Recharger x5 | Craft: Door Blocker x3 | Craft: Looting Mk. 1 x6 | Craft: Rattler I x12,,
+plastic_parts,Plastic Parts,Common,Basic Material,60,50,0.1,"Commercial, Residential, Technological","Used to craft a wide range of items. Used to craft: Hairpin, Light Shield, Looting Mk. 1, Light Impact Grenade, Extended Shotgun Mag I",,11/03/2025,Craft: Light Impact Grenade x2 | Craft: Electrical Components x8 | Craft: Light Shield x4 | Craft: Binoculars x8 | Craft: Extended Light Mag I x6 | Craft: Extended Light Mag I x6 | Craft: Defibrillator x9 | Craft: Adrenaline Shot x3 | Craft: Tactical Mk. 1 x6 | Craft: Combat Mk. 1 x6 | Craft: Li'l Smoke Grenade x1 | Craft: Looting Mk. 1 x6 | Craft: Hairpin I x5 | Craft: Angled Grip I x6 | Craft: Extended Shotgun Mag I x6 | Craft: Vertical Grip I x6,,
+voltage_converter,Voltage Converter,Rare,Topside Material,500,5,0.3,Electrical,"Used in crafting. Used to craft: Heavy Shield, Showstopper",,11/01/2025,Craft: Heavy Shield x2,Rubber Parts x1 | Wires x1,
+arc_motion_core,ARC Motion Core,Rare,Topside Material,1000,5,0.3,ARC,Obtained from ARC enemies or activities. Used to craft components. Can be recycled into ARC Alloy. Used to craft: Magnetic Accelerator,,11/03/2025,Craft: Magnetic Accelerator x2,ARC Alloy x2,
+toaster,Toaster,Rare,Recyclable,1000,3,2,Residential,Can be recycled into crafting materials.,,11/03/2025,,Plastic Parts x5 | Wires x3,Wires x3
+arc_circuitry,ARC Circuitry,Rare,Topside Material,1000,5,0.3,ARC,"Obtained from ARC enemies or activities. Used to craft components. Can be recycled into ARC Alloy. Used to craft: Medium Shield, Power Rod",,11/03/2025,Craft: Power Rod x2 | Craft: Medium Shield x1,ARC Alloy x2,
+motor,Motor,Rare,Recyclable,1000,,,,"A small electric motor, useful for various devices.",,10/30/2025,,Mechanical Components x1 | Oil x2,
+queen_reactor,Queen Reactor,Legendary,Recyclable,13000,,,,Can be recycled into crafting materials.,,10/30/2025,,Magnetic Accelerator x1 | Power Rod x1,
+wires,Wires,Uncommon,Topside Material,200,15,0.25,"Electrical, Technological","Used to craft a wide range of items. Can be recycled into crafting materials. Used to craft: Blaze Grenade Trap, Smoke Grenade Trap, Lure Grenade Trap, Gas Grenade Trap, Muzzle Brake I",,11/03/2025,Craft: Advanced Electrical Components x3 | Craft: Compensator I x1 | Craft: Compensator I x1 | Craft: Silencer I Blueprint x4 | Craft: Osprey I x7 | Craft: Muzzle Brake II x4 | Craft: Compensator II x4 | Craft: Muzzle Brake I x1 | Craft: Shotgun Choke I x1 | Craft: Muzzle Brake II Blueprint x4,Rubber Parts x2,Rubber Parts x1
+hornet_driver,Hornet Driver,Rare,Recyclable,2000,3,0.75,ARC,Can be thrown and will briefly stun nearby targets,ARC Stun Duration: 10s | Raider Stun Duration: 0.5s | Radius: 6m,11/03/2025,,ARC Alloy x2 | Electrical Components x2,Electrical Components x2
+fried_motherboard,Fried Motherboard,Rare,Recyclable,1000,,,,Can be recycled into crafting materials.,,10/30/2025,,Electrical Components x1 | Plastic Parts x5,Wires x5
+rusted_tools,Rusted Tools,Rare,Recyclable,1000,,,,"A set of tools, rusted but still usable for crafting.",,10/30/2025,,Metal Parts x8 | Steel Spring x1,Metal Parts x7
+wasp_driver,Wasp Driver,Rare,Recyclable,1000,3,0.6,ARC,"Can be recycled into ARC Alloy. Can be thrown, and will explode if shot.",Damage: 80 | Radius: 5m,11/03/2025,,ARC Alloy x1 | Electrical Components x1,Electrical Components x1
+rusted_gear,Rusted Gear,Rare,Recyclable,3000,3,3,Industrial,Can be recycled into crafting materials.,,11/04/2025,,Mechanical Components x2 | Metal Parts x4,
+sentinel_part,Sentinel Part,,Material,,,,,A salvaged component from a Sentinel unit.,,10/30/2025,,,
+synthesized_fuel,Synthesized Fuel,Rare,Topside Material,700,,,,A canister of synthetic fuel blend.,,10/30/2025,,Oil x1 | Plastic Parts x1,
+fireball_burner,Fireball Burner,Uncommon,Recyclable,640,3,0.5,ARC,Can be recycled into ARC Alloy. Can be thrown to create small fires.,Damage: 5/s | Duration: 10s | Radius: 2m,11/03/2025,,ARC Alloy x1 | Crude Explosives x1,
+laboratory_reagents,Laboratory Reagents,Rare,Recyclable,2000,,,,A set of chemical reagents used in laboratory experiments.,,10/30/2025,,Chemicals x2 | Crude Explosives x2,
+syringe,Syringe,Rare,Topside Material,500,5,0.3,Medical,Used to craft medical supplies. Can be recycled into plastic. Used to craft: Vita Shot,,11/03/2025,,Chemicals x2 | Plastic Parts x3,
+antiseptic,Antiseptic,Rare,Refined Material,1000,5,1,Medical,"Used to craft medical supplies. Can be recycled into chemicals. Used to craft: Sterilized Bandage, Vita Spray, Vita Shot",,11/03/2025,Craft: Sterilized Bandage x1 | Craft: Vita Spray x3,Chemicals x10,
+snitch_scanner,Snitch Scanner,Uncommon,Recyclable,2000,3,0.75,ARC,Can be recycled into ARC Alloy. Can be thrown to call in ARC.,,10/31/2025,,ARC Alloy x4,
+rusted_shut_medical_kit,Rusted Shut Medical Kit,Rare,Recyclable,1000,,,,"A medical kit rusted shut, its contents unknown.",,10/30/2025,,Antiseptic x1 | Syringe x2,
+spring,Spring,,Material,,,,,"A tightly wound coil of metal, useful for crafting mechanisms.",,10/30/2025,,,
+heavy_gun_parts,Heavy Gun Parts,Rare,Topside Material,700,5,0.5,"Security, Raider","Used to craft weapons. Used to craft: Vulcano, Hullcracker, Bettina, Complex Gun Parts",,11/03/2025,Craft: Complex Gun Parts x2 | Craft: Hullcracker I x3 | Craft: Bettina Blueprint x3 | Craft: Bettina I x3 | Upgrade: Anvil III x1 | Upgrade: Anvil IV x1,Simple Gun Parts x2,
+arc_alloy,ARC Alloy,Uncommon,Topside Material,200,15,0.25,ARC,"Obtained from ARC enemies or activities, or by recycling certain ARC parts. Used to craft components. Used to craft: Light Shield, ARC Motion Core, ARC Circuitry",,11/03/2025,Craft: ARC Motion Core x6 | Craft: ARC Circuitry x6 | Craft: Light Shield x2,Metal Parts x2,
+ferro_i,Ferro I,Common,Battle Rifle,475,,8,,"Packs a punch, but must be reloaded between every shot.",Durability: 100/100 | Ammo Type: Heavy Ammo | Magazine Size: 1 | Firing Mode: Break-Action | ARC Armor Penetration: Strong,11/03/2025,,,Metal Parts x2
+light_ammo,Light Ammo,,Ammunition,0.76,100,0.00323,,"Light bullets used mainly with SMGs and light handguns. Compatible with: Burletta, Stitcher, Kettle, Hairpin, Bobcat",,11/03/2025,,,
+heavy_ammo,Heavy Ammo,Common,Ammunition,12,40,0.05,,"Compatible with: Ferro, Anvil, Bettina",,11/03/2025,,,
+medium_ammo,Medium Ammo,Common,Ammunition,6,80,0.025,,"Compatible with: Rattler, Tempest, Arpeggio, Renegade, Torrente",,11/03/2025,,,
+sterilized_bandage,Sterilized Bandage,Rare,Quick Use,2000,3,0.2,,A medical item that gradually restores a large amount of health over time.,Healing: 5/s | Duration: 10s | Use Time: 1.5s,11/03/2025,,,
+lure_grenade,Lure Grenade,Uncommon,Quick Use,1000,,,,"A noise device that sticks to surfaces, distracting nearby ARC machines and drawing their fire.",,10/30/2025,,,
+ferro_iv,Ferro IV,Common,Battle Rifle,2900,,8,,"Packs a punch, but must be reloaded between every shot.",Durability: 130/130 | Ammo Type: Heavy Ammo | Magazine Size: 1 | Firing Mode: Break-Action | ARC Armor Penetration: Strong | Upgrade Modifiers: 39% Reduced Reload Time,11/03/2025,,Mechanical Components x1 | Simple Gun Parts x2,Metal Parts x2
+blaze_grenade,Blaze Grenade,Rare,Quick Use,1600,5,0.2,,"A grenade that detonates on impact, covering an area in fire that deals damage over time.",Damage: 5/s | Duration: 10s | Radius: 10m,10/30/2025,,Metal Parts x4 | Oil x2,
+apreggio_iv,Apreggio IV,Uncommon,Assault Rifle,7000,,6,,A 3-round burst assault rifle with decent damage output and accuracy.,,10/30/2025,,,
+rubber_duck,Rubber Duck,Common,Trinket,1000,15,0.3,,Always there to lend an ear when you need it. Can be thrown to create noise.,,11/04/2025,,,
+arc_powercell,ARC Powercell,Common,Topside Material,640,5,0.5,ARC,Valuable resource that drops from all ARC enemies. Used to craft: Shield Recharger Can be used to repair shields.,Recharge: 2/s | Duration: 10s | Use Time: 3s,11/03/2025,Craft: Shield Recharger x1,,
+water_filter,Water Filter,Rare,Recyclable,1000,3,2,Industrial,A portable filtration device for purifying water.,,11/1/2025,,Canister x3 | Rubber Parts x2,Canister x2
+water_pump,Water Pump,Rare,Recyclable,1000,3,2,"Mechanical, Industrial",Can be recycled into crafting materials.,,11/03/2025,,Metal Parts x4 | Oil x2,Oil x2
+advanced_electrical_components,Advanced Electrical Components,Rare,Refined Material,1750,5,1,Electrical,"Used to craft a wide range of items. Can be recycled into crafting materials. Used to craft: Tactical Mk. 3 (Defensive), Combat Mk. 3 (Flanking), Combat Mk. 3 (Aggressive), Looting Mk. 3 (Cautious), Tactical Mk. 3 (Healing)",,11/03/2025,Craft: Power Rod x2 | Craft: Raider Hatch Key x1 | Craft: Photoelectric Cloak x2 | Craft: Looting Mk. 3 (Cautious) x2,Electrical Components x1 | Wires x1,Electrical Components x1
+deflated_football,Deflated Football,Uncommon,Recyclable,,3,0.8,Residential,"Just by looking at this, you too start to feel slightly deflated.",,10/30/2025,,Rubber Parts x15,Rubber Parts x9
+duct_tape,Duct Tape,Uncommon,Topside Material,300,15,0.25,"Residential, Commercial","Used to craft a wide range of items. Can be recycled into crafting materials. Used to craft: Stable Stock I, Vertical Grip I, Angled Grip I, Vertical Grip II, Angled Grip II",,11/03/2025,Craft: Stable Stock I x1 | Craft: Stable Stock I x1 | Craft: Angled Grip I x1 | Craft: Vertical Grip I x1 | Craft: Lightweight Stock x5 | Craft: Vertical Grip III x5,Fabric x3,
+empty_wine_bottle,Empty Wine Bottle,Common,Trinket,1000,5,0.2,"Residential, Commercial","Yes, it really is empty.",,11/04/2025,,,
+light_impact_grenade,Light Impact Grenade,Common,Quick Use,270,5,0.1,,"A grenade that detonates on impact, dealing explosive damage in a small radius.",Damage: 30 | Radius: 2.5m,11/03/2025,,Chemicals x1 | Plastic Parts x1,Chemicals x1
+shrapnel_grenade,Shrapnel Grenade,Uncommon,Quick Use,800,5,0.15,,A makeshift fuze grenade that bursts into razor-sharp fragments upon detonation. Weak against ARC armor plating,Damage: 60 | Radius: 6m,11/03/2025,,Crude Explosives x1 | Metal Parts x1,
+oil,Oil,Uncommon,Topside Material,300,15,0.25,Mechanical,"Used to craft weapons and explosives. Can be recycled into chemicals. Used to craft: Renegade, Explosive Compound, Blaze Grenade",,11/03/2025,Craft: Renegade I x5 | Craft: Explosive Compound x2,Chemicals x3,
+snap_hook,Snap Hook,Legendary,Quick Use,14000,,5,,A gadget that allows the user to scale structures and cover large distances.,Durability: 100/100 | Range: 20m,11/05/2025,,,
+esr_analyzer,ESR Analyzer,,Misc,,,,,A specialized medical device for analyzing erythrocyte sedimentation rates.,,10/30/2025,,,
+wolfpack,Wolfpack,Epic,Quick Use,,,1,,"A grenade that scatters into multiple homing missiles, each one targeting ARC and dealing explosive damage on impact.",Damage: 166 x12 | Homing Range: 100m,10/30/2025,,Crude Explosives x2 | Synthesized Fuel x2,
+camera_lens,Camera Lens,Uncommon,Recyclable,640,5,0.8,Security,Can be recycled into crafting materials.,,11/03/2025,,Plastic Parts x8,Plastic Parts x4
+film_reel,Film Reel,Rare,Trinket,2000,3,0.2,"Old World, Residential",May be worth a few coins.,,11/03/2025,,,
+electrical_components,Electrical Components,Uncommon,Refined Material,640,10,0.5,Electrical,"Used to craft a wide range of items. Can be recycled into crafting materials. Used to craft: Tactical Mk. 2, Combat Mk. 2, Looting Mk. 2, Surge Shield Recharger, Lure Grenade",,11/03/2025,Craft: Lure Grenade x1 | Craft: Advanced Electrical Components x2 | Craft: Jolt Mine x1 | Craft: Tactical Mk. 2 x2 | Craft: Combat Mk. 2 x2 | Craft: Lure Grenade Blueprint x9 | Craft: Surge Shield Recharger x1 | Craft: Looting Mk. 2 x2,Plastic Parts x3 | Rubber Parts x3,Plastic Parts x3
+canister,Canister,Uncommon,Topside Material,300,15,0.25,Commercial,"Used to craft a wide range of items. Can be recycled into plastic. Used to craft: Bettina, Vita Spray, Heavy Fuze Grenade, Smoke Grenade",,11/03/2025,Craft: Vulcano I x4 | Craft: Vita Spray x1 | Craft: Bettina Blueprint x3 | Craft: Heavy Fuze Grenade x2 | Craft: Bettina I x3,Plastic Parts x3,
+advanced_mechanical_components,Advanced Mechanical Components,Rare,Refined Material,1750,5,1,Mechanical,"Used to craft advanced weapons. Can be recycled into crafting materials. Used to craft: Torrente, Venator, Osprey, Renegade, Bettina",,11/03/2025,Craft: Venator I x2 | Craft: Venator I x2 | Craft: Vulcano I x3 | Craft: Magnetic Accelerator x2 | Craft: Osprey I x2 | Craft: Bettina Blueprint x3 | Craft: Renegade I x2 | Craft: Bettina I x3 | Craft: Torrente I x2 | Upgrade: Torrente II x1 | Upgrade: Torrente III x1 | Upgrade: Torrente IV x2,Mechanical Components x1 | Wires x1,
+simple_gun_parts,Simple Gun Parts,Uncommon,Topside Material,330,10,0.3,"Raider, Security","Used to craft weapons. Used to craft: Il Toro, Burletta, Anvil, Arpeggio, Heavy Gun Parts",,10/31/2025,Craft: Heavy Gun Parts x4 | Craft: Arpeggio I x6 | Craft: Vulcano II x3 | Craft: Venator II x3 | Craft: Medium Gun Parts x4 | Craft: Light Gun Parts x4 | Craft: Burletta I x3 | Craft: Il Toro I x6 | Craft: Anvil I x6 | Upgrade: Anvil II x1,Metal Parts x2,
+mechanical_components,Mechanical Components,Uncommon,Refined Material,640,10,0.5,Mechanical,"Used to craft a wide range of items. Can be recycled into crafting materials. Used to craft: Il Toro, Burletta, Anvil, Muzzle Brake II, Extended Medium Mag II",,11/03/2025,Craft: Advanced Mechanical Components x2 | Craft: Arpeggio I x6 | Craft: Arpeggio I x1 | Craft: Vulcano II x1 | Craft: Venator II x1 | Craft: Arpeggio IV x1 | Craft: Zipline x1 | Craft: Silencer I Blueprint x2 | Craft: Burletta I x3 | Craft: Muzzle Brake II x2 | Craft: Compensator II x2 | Craft: Extended Medium Mag II x2 | Craft: Il Toro I x5 | Craft: Mod Components x2 | Craft: Muzzle Brake II Blueprint x2 | Craft: Anvil I x5 | Upgrade: Anvil II x3 | Upgrade: Anvil III x4 | Upgrade: Anvil IV x4,Metal Parts x8 | Steel Spring x2,
+arpeggio_i,Arpeggio I,Uncommon,Weapon,5500,,6,,Has decent damage output and accuracy.,Durability: 100/100 | Ammo Type: Medium Ammo | Magazine Size: 24 | Firing Mode: 3-Round Burst | ARC Armor Penetration: Moderate,11/03/2025,,,
+venator_i,Venator I,Rare,Pistol,,,,,Semi-automatic pistol. Fires two shots at a time.,,10/30/2025,,,
+vulcano_i,Vulcano I,Epic,Shotgun,,,,,Semi-automatic shotgun with good bullet spread but sharp falloff.,,10/30/2025,,,
+vulcano_ii,Vulcano II,Epic,Weapon,16800,1,9.25,,Has good bullet spread but sharp falloff.,Durability: 100/110 | Ammo Type: Shotgun Ammo | Magazine Size: 10 | Firing Mode: Semi-Automatic | ARC Armor Penetration: Weak,11/01/2025,,,
+venator_ii,Venator II,Rare,Pistol,,,,,Semi-automatic pistol. Fires two shots at a time.,,10/30/2025,,,
+arpeggio_iii,Arpeggio III,Uncommon,Assault Rifle,,,,,A 3-round burst assault rifle with decent damage output and accuracy.,,10/30/2025,,,
+arpeggio_iv,Arpeggio IV,Uncommon,Assault Rifle,,,,,A 3-round burst assault rifle with decent damage output and accuracy.,,10/30/2025,,,
+medium_gun_parts,Medium Gun Parts,Rare,Topside Material,700,5,0.4,"Raider, Security","Assorted spare parts used for rifles. Used to craft: Torrente, Venator, Osprey, Renegade, Tempest",,11/03/2025,Craft: Venator I x3 | Craft: Arpeggio IV x2 | Craft: Osprey I x3 | Craft: Complex Gun Parts x2 | Craft: Renegade I x3 | Craft: Torrente I x3 | Upgrade: Torrente II x2 | Upgrade: Torrente III x2 | Upgrade: Torrente IV x2,Simple Gun Parts x2,
+chemicals,Chemicals,Common,Basic Material,50,50,0.15,"Medical, Residential, Mechanical","Used to craft medical supplies, explosives, and utility items. Used to craft: Heavy Ammo, Medium Ammo, Shotgun Ammo, Light Ammo, Light Impact Grenade",,11/03/2025,Craft: Antiseptic x10 | Craft: Light Ammo x2 | Craft: Heavy Ammo x2 | Craft: Medium Ammo x2 | Craft: Medium Ammo x2 | Craft: Light Impact Grenade x3 | Craft: Crude Explosives x6 | Craft: Adrenaline Shot x3 | Craft: Gas Grenade x4 | Craft: Remote Raider Flare x2 | Craft: Li'l Smoke Grenade x5 | Craft: Green Light Stick x3 | Craft: Shotgun Ammo x2,,
+power_rod,Power Rod,Epic,Refined Material,5500,,2,Exodus,"Used in crafting. Used to craft: Heavy Shield, Snap Hook",,11/03/2025,Craft: Snap Hook x1 | Craft: Heavy Shield x1,Advanced Electrical Components x1 | ARC Circuitry x1,
+industrial_battery,Industrial Battery,Rare,Recyclable,1000,3,2,Industrial,"A large, high-capacity battery for industrial equipment.",,11/03/2025,,Battery x2 | Chemicals x7,Battery x2
+power_cable,Power Cable,Rare,Recyclable,1000,3,2,"Electrical, Residential, Commercial",A heavy-duty cable used for transmitting electrical power.,,11/03/2025,,Wires x4,
+processor,Processor,Rare,Topside Material,500,5,0.2,Technological,"Used in crafting. Used to craft: Tactical Mk. 3 (Defensive), Combat Mk. 3 (Flanking), Combat Mk. 3 (Aggressive), Looting Mk. 3 (Cautious), Tactical Mk. 3 (Healing)",,10/30/2025,Craft: Trigger 'Nade x1 | Craft: Trigger Nade Blueprint x1 | Craft: Looting Mk. 3 (Cautious) x3,Plastic Parts x1 | Wires x1,
+battery,Battery,Uncommon,Topside Material,250,15,0.25,"Technological, Electrical","Used to craft a wide range of items. Can be recycled into scrap metal. Used to craft: Energy Clip, Medium Shield, Jolt Mine",,11/03/2025,Craft: Medium Shield x4 | Craft: Jolt Mine x1,Metal Parts x2,
+sensors,Sensors,Rare,Topside Material,500,5,0.3,"Security, Technological","Used in crafting. Used to craft: Wolfpack, Explosive Mine, Raider Hatch Key, Tagging Grenade",,11/03/2025,Craft: Raider Hatch Key x3,Metal Parts x1 | Wires x1,Wires x1
+steel_spring,Steel Spring,Uncommon,Topside Material,300,15,0.25,Industrial,"Used to craft a wide range of items. Can be recycled into crafting materials. Used to craft: Extended Shotgun Mag I, Extended Medium Mag I, Extended Light Mag I, Torrente, Extended Medium Mag II",,11/03/2025,Craft: Shrapnel Grenade x2 | Craft: Advanced Mechanical Components x2 | Craft: Extended Light Mag I x1 | Craft: Extended Light Mag I x1 | Craft: Extended Medium Mag III x5 | Craft: Extended Medium Mag II x3 | Craft: Mod Components x2 | Craft: Extended Shotgun Mag I x1 | Craft: Torrente I x6,Metal Parts x3,Metal Parts x2
+speaker_component,Speaker Component,Rare,Topside Material,500,5,0.3,Commercial,"Used in crafting. Used to craft: Lure Grenade, Photoelectric Cloak",,11/03/2025,Craft: Lure Grenade x1 | Craft: Photoelectric Cloak x4 | Craft: Lure Grenade Blueprint x5,Plastic Parts x2 | Rubber Parts x3,
+magnet,Magnet,Uncommon,Topside Material,300,15,0.25,Exodus,Used to craft a wide range of items. Can be recycled into crafting materials.,,10/31/2025,Craft: Arpeggio I x3 | Craft: Venator I x5 | Craft: Venator I x4 | Craft: Tactical Mk. 2 x3 | Craft: Combat Mk. 2 x3 | Craft: Snap Blast Grenade x1 | Craft: Looting Mk. 2 x3,Metal Parts x3,
+advanced_arc_powercell,Advanced ARC Powercell,Rare,Topside Material,640,5,0.5,ARC,Very valuable resource that drops from certain ARC enemies.,,11/05/2025,Craft: Surge Shield Recharger x1,ARC Powercell x2,
+arc_coolant,ARC Coolant,Rare,Recyclable,1000,3,1,ARC,Obtained from ARC enemies or activities. Can be recycled into chemicals.,,10/30/2025,,Chemicals x16,Chemicals x9
+arc_performance_steel,ARC Performance Steel,Rare,Recyclable,1000,3,1,ARC,Can be recycled into crafting materials.,,11/01/2025,,Metal Parts x12,
+arc_synthetic_resin,ARC Synthetic Resin,Rare,Recyclable,1000,3,1,ARC,Can be recycled into crafting materials.,,10/30/2025,,Plastic Parts x14,Plastic Parts x8
+arc_thermo_lining,ARC Thermo Lining,Rare,Recyclable,1000,3,1,ARC,Can be recycled into crafting materials.,,11/03/2025,,Fabric x16,Fabric x9
+bastion_cell,Bastion Cell,Epic,Recyclable,5000,3,1,ARC,Can be recycled into crafting materials.,,11/01/2025,,Advanced Mechanical Components x2 | ARC Alloy x2,
+bicycle_pump,Bicycle Pump,Rare,Recyclable,2000,3,3,Residential,Can be recycled into crafting materials.,,11/01/2025,,Canister x4 | Metal Parts x10,Canister x3
+broken_flashlight,Broken Flashlight,Rare,Recyclable,,3,2,Security,Can be recycled into crafting materials.,,11/04/2025,,Battery x2 | Metal Parts x6,Metal Parts x7
+broken_handheld_radio,Broken Handheld Radio,Rare,Recyclable,2000,3,3,Security,Can be recycled into crafting materials.,,11/02/2025,,Sensors x3 | Wires x2,
+broken_riot_shield,Broken Riot Shield,Rare,Recyclable,,,,,,,10/30/2025,,Plastic Parts x12,
+broken_taser,Broken Taser,Rare,Recyclable,1000,3,2,Security,,,11/03/2025,,Battery x2 | Wires x2,
+cooling_coil,Cooling Coil,Rare,Recyclable,1000,,2,Industrial,Can be recycled into crafting materials.,,10/30/2025,,Chemicals x6 | Steel Spring x2,
+cooling_fan,Cooling Fan,Rare,Recyclable,2000,,1,Technological,Can be recycled into crafting materials.,,10/30/2025,,Battery x4 | Plastic Parts x14,
+cracked_bioscanner,Cracked Bioscanner,Rare,Recyclable,640,,,Medical,Can be recycled into crafting materials.,,10/30/2025,,Battery x5 | Rubber Parts x3,
+crude_explosives,Crude Explosives,Uncommon,Refined Material,270,10,0.5,"Industrial, Security","Used to craft explosives. Can be recycled into crafting materials. Used to craft: Launcher Ammo, Explosive Compound, Snap Blast Grenade, Shrapnel Grenade, Trigger 'Nade",Damage: 15 | Radius: 1.5m,11/03/2025,Craft: Shrapnel Grenade x1 | Craft: Trigger 'Nade x2 | Craft: Snap Blast Grenade x2 | Craft: Trigger Nade Blueprint x2 | Craft: Explosive Compound x2 | Craft: Launcher Ammo x1,Chemicals x3,Chemicals x2
+crumpled_plastic_bottle,Crumpled Plastic Bottle,Uncommon,Recyclable,270,3,0.8,Residential,Can be recycled into crafting materials.,,11/04/2025,,Plastic Parts x4,Plastic Parts x1
+garlic_press,Garlic Press,Uncommon,Recyclable,1000,3,0.8,"Residential, Commercial","It'll press garlic, olives, and probably many other things.",,11/04/2025,,Metal Parts x12,Metal Parts x7
+great_mullein,Great Mullein,Uncommon,Topside Material,300,15,0.25,Nature,"Used to craft medical supplies. Used to craft: Herbal Bandage, Antiseptic",,10/31/2025,Craft: Antiseptic x2 | Craft: Herbal Bandage x1,Assorted Seeds x2,
+headphones,Headphones,Rare,Recyclable,1000,3,2,"Residential, Commercial",Can be recycled into crafting materials.,,11/03/2025,,Rubber Parts x7 | Speaker Component x1,
+household_cleaner,Household Cleaner,Uncommon,Recyclable,640,3,0.8,Residential,Can be recycled into chemicals.,,11/03/2025,,Chemicals x11,
+humidifier,Humidifier,Rare,Recyclable,1000,3,2,Residential,Can be recycled into crafting materials.,,11/02/2025,,Canister x3 | Wires x2,
+ice_cream_scooper,Ice Cream Scooper,Uncommon,Recyclable,640,3,0.8,Commercial,It is theorized that scooping things was a favorite pastime in the world before.,,11/04/2025,,Metal Parts x7,Metal Parts x3
+impure_arc_coolant,Impure ARC Coolant,Uncommon,Recyclable,,3,0.33,ARC,Can be recycled into crafting materials.,,10/30/2025,,Chemicals x13,
+industrial_charger,Industrial Charger,Rare,Recyclable,1000,3,2,Industrial,Can be recycled into crafting materials.,,10/30/2025,,Metal Parts x5 | Voltage Converter x1,Voltage Converter x1
+industrial_magnet,Industrial Magnet,Rare,Recyclable,1000,3,2,Industrial,Can be recycled into crafting materials.,,10/30/2025,,Magnet x2 | Metal Parts x4,Magnet x2
+light_gun_parts,Light Gun Parts,Rare,Topside Material,700,5,0.3,"Raider, Security","Assorted spare parts used for pistols and SMGs. Used to craft: Bobcat, Complex Gun Parts",,11/03/2025,Craft: Complex Gun Parts x2,Simple Gun Parts x2,
+magnetic_accelerator,Magnetic Accelerator,Epic,Refined Material,5500,3,1,Exodus,"Used to craft advanced weapons. Used to craft: Tempest, Equalizer, Vulcano, Jupiter, Hullcracker",,11/03/2025,Craft: Hullcracker I x1,Advanced Mechanical Components x1 | ARC Motion Core x1,
+number_plate,Number Plate,Uncommon,Recyclable,270,3,0.8,Mechanical,Can be recycled into metal parts.,,11/04/2025,,Metal Parts x3,Metal Parts x1
+power_bank,Power Bank,Rare,Recyclable,1000,3,2,"Electrical, Residential, Commercial",Can be recycled into crafting materials.,,11/02/2025,,Battery x2 | Wires x2,Battery x2
+projector,Projector,Rare,Recyclable,1000,3,2,Residential,Can be recycled into crafting materials.,,11/04/2025,,Processor x1 | Wires x2,
+radio,Radio,Rare,Recyclable,1000,3,2,"Commercial, Residential",Can be recycled into crafting components.,,11/04/2025,,Sensors x1 | Speaker Component x1,Speaker Component x1
+recorder,Recorder,Common,Trinket,1000,,,,,,10/30/2025,,Plastic Parts x10,
+remote_control,Remote Control,Rare,Recyclable,1000,3,0.8,Residential,Can be recycled into crafting materials.,,11/03/2025,,Plastic Parts x7 | Sensors x1,Sensors x1
+rope,Rope,Rare,Topside Material,500,5,0.3,"Residential, Commercial","Used in crafting. Used to craft: Zipline, Snap Hook",,10/31/2025,Craft: Zipline x1,Fabric x5,
+rubber_pad,Rubber Pad,Rare,Recyclable,1000,3,2,Electrical,Can be recycled into rubber parts.,,11/04/2025,,Rubber Parts x18,Rubber Parts x9
+rusted_bolts,Rusted Bolts,Uncommon,Recyclable,640,3,0.8,"Industrial, Mechanical",Can be recycled into metal parts.,,11/01/2025,,Metal Parts x8,Metal Parts x4
+spring_cushion,Spring Cushion,Rare,Recyclable,2000,3,2,"Residential, Commercial",Can be recycled into crafting materials.,,11/04/2025,,Durable Cloth x2 | Steel Spring x2,Steel Spring x2
+spotter_relay,Spotter Relay,Uncommon,Recyclable,5000,3,1,ARC,Can be recycled into crafting materials.,,10/31/2025,,ARC Alloy x1 | Electrical Components x2,
+surveyor_vault,Surveyor Vault,Rare,Recyclable,2000,3,0.75,ARC,Can be recycled into crafting materials.,,10/30/2025,,ARC Alloy x2 | Mechanical Components x2,Mechanical Components x2
+tattered_clothes,Tattered Clothes,Uncommon,Recyclable,270,,,,,,10/30/2025,,Fabric x11,
+thermostat,Thermostat,Rare,Recyclable,1000,3,2,Residential,Can be recycled into crafting materials.,,11/05/2025,,Rubber Parts x6 | Sensors x2,
+rocketeer_driver,Rocketeer Driver,Epic,Recyclable,5000,3,1,ARC,Can be recycled into crafting materials.,,11/2/2025,,Advanced Electrical Components x2 | ARC Alloy x3,
+leaper_pulse_unit,Leaper Pulse Unit,Epic,Recyclable,5000,3,1,ARC,Can be recycled into crafting materials. Can be thrown to create a violent singularity.,Damage: 100 | Radius: 10m,11/03/2025,,Advanced Mechanical Components x2 | ARC Alloy x3,
+sentinel_firing_core,Sentinel Firing Core,Rare,Recyclable,3000,,,ARC,Can be recycled into crafting materials.,,10/30/2025,,ARC Alloy x2 | Mechanical Components x3,
+bombardier_cell,Bombardier Cell,Epic,Recyclable,5000,3,1,ARC,Can be recycled into crafting materials.,,11/01/2025,,Advanced Mechanical Components x2 | ARC Alloy x2,
+agave,Agave,Uncommon,Nature,2000,10,0.2,Nature,A piece of an agave leaf. Can be used to regain a small amount of health.,Healing: 1/s | Duration: 10s | Use Time: 1s,11/05/2025,,,
+assorted_seeds,Assorted Seeds,Common,Nature,100,100,0.05,Nature,A handful of seeds. Celeste might be looking for these.,,10/30/2025,,,
+prickly_pear,Prickly Pear,Common,Nature,640,,,,Can be consumed for a small amount of stamina.,,10/30/2025,,,
+resin,Resin,Common,Nature,1000,10,0.4,Nature,Can be used to gradually restore a small amount of health over time.,Healing: 1/s | Use Time: 1s | Duration: 10s,11/04/2025,,,
+roots,Roots,Uncommon,Nature,640,10,0.2,Nature,May be worth a few coins.,,10/31/2025,,Assorted Seeds x1,
+olives,Olives,Uncommon,Nature,640,10,0.2,Nature,Can be consumed for a small amount of stamina.,Stamina: 20 | Use Time: 1s,11/05/2025,,Assorted Seeds x2,
+mushroom,Mushroom,Uncommon,Nature,1000,,0.2,Nature,Can be consumed to regain a small amount of health.,Healing: 15 | Use Time: 1s,10/31/2025,,,
+polluted_air_filter,Polluted Air Filter,Rare,Recyclable,1000,3,0.8,Industrial,,,11/05/2025,,Fabric x6 | Oil x2,Oil x2
+frying_pan,Frying Pan,Rare,Recyclable,640,3,2,Residential,Can be recycled into crafting materials.,,11/04/2025,,Metal Parts x8,Metal Parts x4
+pop_trigger,Pop Trigger,Common,Recyclable,640,3,0.5,ARC,Can be recycled into crafting materials.,,11/01/2025,,ARC Alloy x1 | Crude Explosives x1,
+portable_tv,Portable TV,Rare,Recyclable,2000,,3,Residential,Can be recycled into crafting materials.,,11/03/2025,,Battery x2 | Wires x6,
+volcanic_rock,Volcanic Rock,Common,Misc,0.5,5,0.5,Nature,Can be thrown.,Damage: 10,10/30/2025,,,
+faded_photograph,Faded Photograph,Common,Trinket,640,15,0.3,Residential,"A snapshot of the world before, faded by sunlight and time.",,11/03/2025,,,
+portable_television,Portable Television,,Trinket,1000,,,,"A small, outdated portable TV.",,10/30/2025,,,
+cat_bed,Cat Bed,Uncommon,Trinket,1000,3,0.5,"Residential, Commercial",At least a tiny bit more comfortable than your face.,,10/30/2025,,,
+bloated_tuna_can,Bloated Tuna Can,Common,Trinket,1000,15,0.2,"Residential, Commercial",Something tells you that you don't want to open this... Can (reluctantly) be consumed to restore small amounts of stamina.,Stamina: 25 | Use Time: 1s,10/30/2025,,,
+coffee_pot,Coffee Pot,Common,Trinket,1000,3,0.3,Residential,"The power to face a new day, one cup at a time.",,11/04/2025,,,
+very_comfortable_pillow,Very Comfortable Pillow,Uncommon,Trinket,2000,3,0.3,"Residential, Commercial",The envy of every Raider. Like sleeping on an especially ergonomic cloud.,,10/30/2025,,,
+pottery,Pottery,Uncommon,Trinket,2000,3,0.3,"Old World, Residential",May be worth a few coins.,,11/03/2025,,,
+air_freshener,Air Freshener,Uncommon,Trinket,2000,5,0.3,Mechanical,May be worth a few coins.,,11/03/2025,,,
+light_bulb,Light Bulb,Uncommon,Trinket,2000,3,0.2,Electrical,"Without light, life underground would be impossible.",,11/01/2025,,,
+statuette,Statuette,Rare,Trinket,3000,3,0.3,"Old World, Residential",Worth a small fortune.,,11/01/2025,,,
+silver_teaspoon_set,Silver Teaspoon Set,Rare,Trinket,3000,3,0.3,"Residential, Old World, Commercial","A shining, shimmering set of refinement and elegance.",,11/03/2025,,,
+music_album,Music Album,Rare,Trinket,3000,3,0.3,"Residential, Commercial","Perfect for relaxing nights at home, casual get-togethers, and private air guitar concerts.",,11/04/2025,,,
+watch,Watch,,Valuable,3000,,,,A wristwatch that has stopped ticking.,,10/30/2025,,,
+vase,Vase,Rare,Trinket,1,3,0.3,"Old World, Residential, Commercial",Worth a small fortune.,,11/04/2025,,,
+music_box,Music Box,Rare,Trinket,5000,3,0.4,"Old World, Residential, Commercial",Worth a small fortune.,,11/04/2025,,,
+red_coral_jewelry,Red Coral Jewelry,Rare,Trinket,5000,3,0.3,"Residential, Old World, Commercial","Valued for its fine craftsmanship, and effortless ability to make your eyes pop.",,11/04/2025,,,
+playing_cards,Playing Cards,Rare,Trinket,5000,3,0.2,"Residential, Commercial",Speranzans love to see who can build the tallest tower - before the tremors knock them down.,,11/01/2025,,,
+snow_globe,Snow Globe,,Valuable,7000,,,,A globe containing a snowy scene.,,10/30/2025,,,
+lances_mixtape_5th_edition,Lance's Mixtape (5th Edition),Epic,Trinket,10000,3,0.2,"Residential, Commercial","Lance has personally planted a number of these around the Rust Belt, for some reason.",,11/04/2025,,,
+raider_hatch_key,Raider Hatch Key,Rare,Key,1000,,0.01,,Unlocks a Raider Hatch.,,11/03/2025,,,
+medium_shield,Medium Shield,Rare,Shield,2000,,7,,A standard shield that blocks a medium portion of incoming damage at a moderate cost to mobility.,Durability: 100/100 | Charge: 70 | Damage Reduction: 42.5% | Reduced Movement Speed: 5%,11/03/2025,,ARC Circuitry x1,
+light_shield,Light Shield,Uncommon,Shield,640,,5,,A lightweight shield that blocks a small portion of incoming damage without impacting mobility.,Durability: 100/100 | Charge: 40 | Damage Reduction: 40%,11/03/2025,,Plastic Parts x4,
+heavy_shield,Heavy Shield,Epic,Shield,5500,,9,,"A heavy shield that blocks a large portion of incoming damage, but carries a significant cost to mobility.",Durability: 100/100 | Charge: 80 | Damage Reduction: 52.5% | 15% Reduced Movement Speed,11/03/2025,,,
+zipline,Zipline,Rare,Quick Use,1000,,,,A deployable zipline that allows you to quickly move between two locations.,,11/05/2025,,Metal Parts x1 | Rope x1,
+arc_flex_rubber,ARC Flex Rubber,Rare,Recyclable,1000,3,1,ARC,Can be recycled into crafting materials.,,11/01/2025,,Rubber Parts x16,Rubber Parts x9
+damaged_heat_sink,Damaged Heat Sink,Rare,Recyclable,1000,3,2,Technological,Can be recycled into crafting materials.,,11/06/2025,,Metal Parts x6 | Wires x2,Wires x3
+showstopper,Showstopper,Rare,Quick Use,2200,5,0.4,,"A grenade that detonates after a delay, stunning enemies within its radius.",ARC Stun Duration: 10s | Raider Stun Duration: 2s | Radius: 6m,10/30/2025,,Battery x2 | Electrical Components x1,
+photoelectric_cloak,Photoelectric Cloak,Epic,Quick Use,5000,,1,,A gadget that allows the user to conceal themselves from ARC.,Durability: 100/100,11/01/2025,,,
+burletta_blueprint,Burletta Blueprint,,Blueprint,,,,,A blueprint to craft the Burletta weapon.,,11/04/2025,,,
+binoculars,Binoculars,Common,Quick Use,640,,0.5,,A basic pair of binoculars with two levels of magnification.,Durability: 100/100,11/03/2025,,Plastic Parts x4 | Rubber Parts x2,
+silencer_i,Silencer I,Uncommon,Modification,2000,,0.25,,Slightly reduces the amount of noise produced when firing.,Noise Reduction: 20%,10/30/2025,,,
+extended_light_mag_i,Extended Light Mag I,Common,Modification,640,,0.25,,"Slightly extends the ammo capacity of compatible weapons that use light ammo. Compatible with: Kettle, Burletta, Hairpin, Bobcat, Stitcher",Magazine Size: +5,11/03/2025,,Plastic Parts x6,Plastic Parts x3
+compensator_i,Compensator I,Common,Modification,640,,0.25,,"Slightly reduces per-shot dispersion. Compatible with: Arpeggio, Ferro, Renegade, Anvil, Stitcher",Reduced Per-Shot Dispersion: 20% | Reduced Max Shot Dispersion: 10%,10/30/2025,,Metal Parts x5,Metal Parts x3
+stable_stock_i,Stable Stock I,Common,Modification,640,,0.25,,Slightly improves dispersion & recoil recovery time.,Reduced Recoil Recovery Time: 20% | Reduced Dispersion Recovery Time: 20%,11/03/2025,,Rubber Parts x6,Rubber Parts x3
+silencer_i_blueprint,Silencer I Blueprint,Common,Blueprint,5000,,0,,A blueprint to craft the Silencer I.,,11/05/2025,,,
+vita_shot,Vita Shot,Rare,Quick Use,2000,3,0.4,,A medical item that restores a large amount of health.,Healing: 50 | Use Time: 4s,11/03/2025,,Chemicals x4 | Syringe x1,
+vita_spray,Vita Spray,Epic,Quick Use,3000,1,1,,A medical item that continuously restores health during use. Can be used on yourself or your allies.,Durability: 100/100 | Healing: 10/s | Heal Capacity: 150,10/30/2025,,Antiseptic x1 | Canister x2,Antiseptic x1
+jolt_mine,Jolt Mine,Rare,Quick Use,850,3,0.2,,A proximity-triggered mine that pops up and stuns anything within its radius.,ARC Stun Duration: 10s | Raider Stun Duration: 4s | Radius: 5m,11/03/2025,,Battery x1 | Plastic Parts x2,
+dam_staff_room_key,Dam Staff Room Key,,Key,,,,,A key to the staff room in The Dam.,,10/30/2025,,,
+buried_city_residential_master_key,Buried City Residential Master Key,,Key,,,,,A master key for residential areas in Buried City.,,10/30/2025,,,
+barricade_kit,Barricade Kit,Uncommon,Quick Use,640,3,0.4,,A deployable cover that can block incoming damage until it breaks.,Health: 500,11/03/2025,,Metal Parts x4,
+defibrillator,Defibrillator,Rare,Quick Use,1000,3,0.75,,An injection that quickly revives downed raiders and restores some health.,Healing: 50 | Use Time: 1.5s,11/03/2025,,Moss x1 | Plastic Parts x1,
+defibrillator_blueprint,Defibrillator Blueprint,Common,Blueprint,5000,3,0.75,,An injection that quickly revives downed raiders and restores some health.,,11/04/2025,,,
+buried_city_town_hall_key,Buried City Town Hall Key,Epic,Key,100,,0.25,,Unlocks the door to the Town Hall in Buried City,,10/31/2025,,,
+trigger_nade,Trigger 'Nade,Rare,Quick Use,1000,3,0.4,,"A remote-detonated grenade that can stick to surfaces and ARC, dealing explosive damage when triggered.",Damage: 90 | Radius: 7.5m,11/03/2025,,Chemicals x1 | Processor x1,
+spaceport_container_storage_key,Spaceport Container Storage Key,Rare,Key,100,1,0.25,,A key for container storage at the Spaceport.,,11/08/2025,,,
+burletta_i,Burletta I,Uncommon,Pistol,2900,,4,,Semi-automatic pistol with decent damage output and accuracy. Can be fired as fast as you can pull the trigger.,Durability: 100/100 | Ammo Type: Light Ammo | Magazine Size: 12 | Firing Mode: Semi-Automatic | ARC Armor Penetration: Very Weak,11/03/2025,,Mechanical Components x1 | Simple Gun Parts x2,
+spaceport_warehouse_key,Spaceport Warehouse Key,,Key,100,,0.25,,A key to a warehouse in the Spaceport.,,11/07/2025,,,
+osprey_i,Osprey I,Rare,Weapon,3859,,7,,Has reliable damage output and accuracy.,Durability: 100/100 | Ammo Type: Medium Ammo | Magazine Size: 8 | Firing Mode: Bolt-Action | ARC Armor Penetration: Moderate | Special Trait: Scoped,10/31/2025,,,
+buried_city_hospital_key,Buried City Hospital Key,Uncommon,Key,100,,,,A key to areas within the Buried City Hospital.,,10/30/2025,,,
+adrenaline_shot,Adrenaline Shot,Common,Quick Use,300,5,0.2,,A serum that fully restores stamina and temporarily increases stamina regeneration.,Stamina Regeneration: 5/s | Duration: 10s | Use Time: 1s,11/03/2025,,Chemicals x1 | Plastic Parts x1,
+gas_grenade,Gas Grenade,Common,Quick Use,270,3,0.2,,"A grenade that emits a lingering toxic cloud on impact, draining the stamina of any Raiders within its area of effect.",Stamina Drain: 25/s | Duration: 20s | Radius: 7.5m,11/03/2025,,Chemicals x1 | Rubber Parts x1,
+dam_utility_key,Dam Utility Key,,Key,,,,,A key for utility access in The Dam.,,10/30/2025,,,
+tactical_mk1,Tactical Mk. 1,Uncommon,Augment,640,,2,,"Basic tactical augment. More Quick Use slots for more tactical choice, but limited survivability and slightly lower looting potential.","Durability: 100/100 | Max Loadout Weight: 40 | Shield Compatibility: Light, Medium",11/03/2025,,Plastic Parts x3 | Rubber Parts x3,
+tactical_mk2,Tactical Mk. 2,Rare,Augment,2000,,2,,Adds more backpack space and an extra utility item slot.,"Durability: 100/100 | Max Loadout Weight: 45 | Shield Compatibility: Light, Medium",11/03/2025,,,
+combat_mk1,Combat Mk. 1,Uncommon,Augment,640,,2,,"Basic combat augment. Supports stronger shields, but with limited backpack capacity and Quick Use slots.","Durability: 100/100 | Max Loadout Weight: 45 | Shield Compatibility: Light, Medium",11/03/2025,,Plastic Parts x3 | Rubber Parts x3,
+combat_mk2,Combat Mk. 2,Rare,Augment,2000,,3,,A Combat augment more focused on maneuverability than absorbing damage.,"Restores: 1 health every 5 seconds. When damage is taken, the effect is paused for 30 seconds. | Durability: 100/100 | Max Loadout Weight: 55 | Shield Compatibility: Light, Medium, Heavy",11/03/2025,,,
+kettle_i,Kettle I,Common,Assault Rifle,840,,7,,"Quick and accurate, but has low bullet velocity and takes a long time to reload.",Durability: 100/100 | Ammo Type: Light Ammo | Magazine Size: 20 | Firing Mode: Semi-Automatic | ARC Armor Penetration: Very Weak,11/03/2025,,Plastic Parts x3 | Rubber Parts x2,
+kettle_ii,Kettle II,Common,Weapon,840,,,,"Semi-automatic assault rifle. Quick and accurate, but has low bullet velocity and takes a long time reload.",,10/30/2025,,Plastic Parts x6 | Rubber Parts x6,
+stitcher_i,Stitcher I,Common,Weapon,800,,5,,"Deals good damage, but has quite a low fire-rate and can be hard to control.",Durability: 100/100 | Ammo Type: Light Ammo | Magazine Size: 20 | Firing Mode: Fully-Automatic | ARC Armor Penetration: Very Weak,11/03/2025,,Metal Parts x3 | Rubber Parts x2,
+stitcher_ii,Stitcher II,Common,Weapon,2000,,5,,"Deals good damage, but has quite a low fire-rate and can be hard to control.","Durability: 110/110 | Ammo Type: Light Ammo | Magazine Size: 20 | Firing Mode: Fully-Automatic | ARC Armor Penetration: Very Weak | Upgrade Modifiers: ['16.6% Reduced Horizontal Recoil', '13% Reduced Reload Time']",10/31/2025,,Metal Parts x6 | Rubber Parts x6,
+stitcher_iii,Stitcher III,Uncommon,Weapon,840,,,,"Full automatic SMG. Deals good damage, but has quite a low fire-rate and can be hard to control.",,10/30/2025,,,
+stitcher_iv,Stitcher IV,Uncommon,Weapon,5000,,,,"Full automatic SMG. Deals good damage, but has quite a low fire-rate and can be hard to control.",,10/30/2025,,Mechanical Components x2 | Simple Gun Parts x2,
+burletta_ii,Burletta II,Uncommon,Weapon,5000,,,,Semi-automatic pistol with decent damage output and accuracy. Can be fired as fast as you can pull the trigger.,,10/30/2025,,Mechanical Components x2 | Simple Gun Parts x2,
+burletta_iii,Burletta III,Uncommon,Weapon,7000,,,,Semi-automatic pistol with decent damage output and accuracy. Can be fired as fast as you can pull the trigger.,,10/30/2025,,Mechanical Components x3 | Simple Gun Parts x3,
+burletta_iv,Burletta IV,Uncommon,Weapon,9000,,,,Semi-automatic pistol with decent damage output and accuracy. Can be fired as fast as you can pull the trigger.,,10/30/2025,,Mechanical Components x4 | Simple Gun Parts x4,
+remote_raider_flare,Remote Raider Flare,Common,Quick Use,270,3,0.2,,"A deployable device that, when manually triggered, launches a Raider Distress Flare.",,11/03/2025,,Chemicals x1 | Rubber Parts x1,
+backpack_black_hiker_color,Backpack (Black Hiker Color),,Cosmetic,,,,,Cosmetic Backpack,,10/30/2025,,,
+junior_outfit,Junior Outfit,,Cosmetic,,,,,Cosmetic Outfit,,10/30/2025,,,
+cans_backpack_attachment,Cans Backpack Attachment,,Cosmetic,,,,,Cosmetic Backpack Attachment,,10/30/2025,,,
+ruined_baton,Ruined Baton,Uncommon,Recyclable,,,,,Can be recyled into crafting materials,,10/30/2025,,,
+breathtaking_snow_globe,Breathtaking Snow Globe,Epic,Trinket,7000,1,0.2,"Residential, Old World, Commercial",The envy of every Speranzan. Proof that this world was once thriving and magical.,,11/03/2025,,,
+expired_pasta,Expired Pasta,Common,Trinket,1000,15,0.1,"Commercial, Residential",Way pasta its prime. Can (reluctantly) be consumed to restore small amounts of health.,Healing: 15 | Use Time: 1s,10/30/2025,,,
+exodus_modules,Exodus Modules,Epic,Topside Material,2750,3,1,Exodus,"Used to craft a wide range of items. Used to craft: Tempest, Vulcano, Hullcracker, Bobcat, Snap Hook",,11/05/2025,Craft: Snap Hook x1 | Craft: Hullcracker I x1,Processor x2 | Wires x2,Processor x2
+durable_cloth,Durable Cloth,Uncommon,Refined Material,640,10,0.25,"Medical, Commercial","Used to craft medical supplies. Used to craft: Herbal Bandage, Sterilized Bandage",,11/03/2025,Craft: Sterilized Bandage x2 | Craft: Herbal Bandage x1,Fabric x6,
+diving_goggles,Diving Goggles,Rare,Recyclable,,3,2,Residential,Can be recycled into crafting materials.,,10/30/2025,,,
+dried_out_arc_resin,Dried-Out ARC Resin,Uncommon,Recyclable,,3,1,ARC,Obtained from ARC enemies or activities. Can be recycled into plastic.,,10/30/2025,,,
+degraded_arc_rubber,Degraded ARC Rubber,Uncommon,Recyclable,640,3,1,ARC,Obtained from ARC enemies or activities. Can be recycled into rubber.,,10/30/2025,,Rubber Parts x11,Rubber Parts x5
+broken_guidance_system,Broken Guidance System,Rare,Recyclable,,3,3,Exodus,Can be recycled into crafting materials.,,10/30/2025,,,
+burned_arc_circuitry,Burned Arc Circuitry,Uncommon,Recyclable,640,3,1,ARC,Can be recycled into crafting materials.,,11/04/2025,,ARC Alloy x2,ARC Alloy x1
+candle_holder,Candle Holder,Uncommon,Recyclable,640,3,2,Residential,Can be recycled into crafting materials.,,11/04/2025,,Metal Parts x8,Metal Parts x4
+complex_gun_parts,Complex Gun Parts,Epic,Topside Material,2000,3,1,Security,"Used to craft advanced weapons. Used to craft: Equalizer, Jupiter",,11/03/2025,,Simple Gun Parts x3,
+alarm_clock,Alarm Clock,Rare,Recyclable,1000,3,2,Residential,Can be recycled into crafting materials.,,11/03/2025,,Plastic Parts x6 | Processor x1,Processor x1
+fine_wristwatch,Fine Wristwatch,Rare,Trinket,3000,3,0.2,"Residential, Commercial","Perfect for telling the time, and showcasing that you're an exceedingly dignified person.",,11/01/2025,,,
+hullcracker_i,Hullcracker I,Epic,Weapon,10000,1,7,,Fires explosive projectiles that only detonate when hitting ARC.,Durability: 100/100 | Ammo Type: Launcher Ammo | Magazine Size: 5 | Firing Mode: Pump-Action | ARC Armor Penetration: Very Strong,11/03/2025,,,
+rattler_iii,Rattler III,Common,Weapon,,,6,,"A cheap offensive option, but has to be reloaded 2 bullets at a time.",Durability: 120/120 | Ammo Type: Medium Ammo | Magazine Size: 18 | Firing Mode: Fully-Automatic | ARC Armor Penetration: Moderate | Upgrade Modifiers: +8 Magazine Size,10/30/2025,,,
+snap_blast_grenade,Snap Blast Grenade,Uncommon,Quick Use,800,3,0.2,,"A grenade that sticks to surfaces, dealing explosive damage after a short delay.",Damage: 70 | Radius: 7.5m,11/03/2025,,Chemicals x1 | Magnet x1,
+shield_recharger,Shield Recharger,Uncommon,Quick Use,520,5,0.15,,A handheld kit that gradually recharges shield over time.,Recharge: 4/s | Duration: 10s | Use Time: 2s,11/03/2025,,,
+lil_smoke_grenade,Li'l Smoke Grenade,Common,Quick Use,300,5,0.15,,"A grenade that pops a thick but small smoke cloud on impact, blocking visibility from ARC and other Raiders.",Duration: 6s | Radius: 2.5m,11/03/2025,,Chemicals x1 | Plastic Parts x1,
+red_light_stick,Red Light Stick,Common,Quick Use,150,5,0.15,,A throwable chemical light that illuminates the area around it.,Illumination Radius: 7m | Duration: 40s,11/03/2025,,Chemicals x1,
+noisemaker,Noisemaker,Common,Quick Use,640,3,0.3,,A deployable proximity sensor that sounds an alarm when enemy raiders are detected.,Trigger Radius: 8m | Duration: 4s,10/30/2025,,,
+dam_control_tower_key,Dam Control Tower Key,Epic,Key,100,,0.25,,Unlocks a door to the Control Tower on Dam Battlegrounds.,,10/30/2025,,,
+expired_respirator,Expired Respirator,Rare,Recyclable,640,3,2,Medical,The filters are clogged with sand and noxious fumes. Long past its lifespan.,,11/03/2025,,Fabric x4 | Rubber Parts x8,
+dart_board,Dart Board,Uncommon,Trinket,2000,3,1,"Residential, Commercial",Some Raiders use it to practice dexterity. Others just like throwing things at other things.,,11/06/2025,,,
+muzzle_brake_ii,Muzzle Brake II,Uncommon,Modification,2000,,0.5,,"Moderately reduces both vertical recoil & horizontal recoil. Compatible with: Tempest, Arpeggio, Kettle, Ferro, Renegade",Reduced Vertical Recoil: 20% | Reduced Horizontal Recoil: 20%,11/03/2025,,Mechanical Components x1 | Wires x1,
+wolfpack_blueprint,Wolfpack Blueprint,Common,Blueprint,5000,,0,,"A remote-detonated grenade that can stick to surfaces and ARC, dealing explosive damage when triggered.",,10/30/2025,,Explosive Compound x2 | explosives_station_iii x9 | Sensors x2,
+trigger_nade_blueprint,Trigger Nade Blueprint,Common,Blueprint,5000,,0,,"A remote-detonated grenade that can stick to surfaces and ARC, dealing explosive damage when triggered.",,11/05/2025,,,
+lure_grenade_blueprint,Lure Grenade Blueprint,Common,Blueprint,5000,,0,,"A noisy device that sticks to surfaces, distracting nearby ARC machines and drawing their fire.",,11/03/2025,,,
+dam_surveillance_key,Dam Surveillance Key,Uncommon,Key,100,,0.25,,Unlocks a door in the Water Treatment Control building on Dam Battlegrounds.,,11/03/2025,,,
+bettina_blueprint,Bettina Blueprint,Common,Blueprint,5000,,0,,Has slow fire rate and high damage output.,,11/05/2025,,,
+blue_gate_confiscation_room_key,Blue Gate Confiscation Room Key,Epic,Key,100,,0.25,,Unlocks a door to the confiscated goods area within the Blue Gate tunnels,,10/30/2025,,,
+heavy_fuze_grenade,Heavy Fuze Grenade,Rare,Quick Use,1600,3,0.2,,"A grenade that detonates after a delay, dealing explosive damage in its radius.",Damage: 80 | Radius: 7.5m,11/03/2025,,Oil x3,
+blue_light_stick,Blue Light Stick,Common,Quick Use,750,5,0.75,,A throwable chemical light that illuminates the area around it.,Illumination Radius: 7m | Duration: 40s,11/01/2025,,Chemicals x1,
+green_light_stick,Green Light Stick,Common,Quick Use,150,5,0.15,,A throwable chemical light that illuminates the area around it.,Illumination Radius: 7m | Duration: 40s,10/30/2025,,,
+surge_shield_recharger,Surge Shield Recharger,Rare,Quick Use,1200,5,0.2,,A handheld kit that recharges a shield on use.,Recharge: 50 | Use Time: 5s,11/03/2025,,Electrical Components x1,
+vertical_grip_ii,Vertical Grip II,Uncommon,Modification,2000,,0.5,,"Moderately reduces vertical recoil. Compatible with: Arpeggio, Ferro, Venator, Il Toro, Stitcher",Reduced Vertical Recoil: 30%,11/05/2025,,Duct Tape x1 | Mechanical Components x1,
+stable_stock_ii,Stable Stock II,Uncommon,Modification,2000,,0.5,,Moderately improves dispersion & recoil recovery time.,"Compatible with: Arpeggio, Ferro, Renegade, Il Toro, Stitcher | Reduced Recoil Recovery Time: 35% | Reduced Dispersion Recovery Time: 35%",11/05/2025,,Duct Tape x1 | Mechanical Components x1,
+looting_mk_2,Looting Mk. 2,Rare,Augment,1000,,1,,Significantly increases looting potential; adds slots for trinkets. Automatically throws off attached Ticks after 1s.,Durability: 100/100 | Max Loadout Weight: 60 | Shield Compatibility: Light,10/30/2025,,,
+banana,Banana,Common,Backpack Charm,,,,,A new cosmetic will be added to your collection.,,10/30/2025,,,
+flame_spray,Flame Spray,Uncommon,Weapon,640,,1,,"A classic makeshift weapon, sure to leave scorch marks.",Durability: 100/100 | Damage: 10/s,11/04/2025,,,
+blaze_grenade_trap,Blaze Grenade Trap,Rare,Quick Use,1000,3,0.3,,A laser trip wire that detonates a Blaze Grenade.,Damage: 5/s | Duration: 10s,10/30/2025,,,
+gas_grenade_trap,Gas Grenade Trap,Common,Quick Use,300,3,0.25,,A laser trip wire that detonates a Gas Grenade.,Stamina Drain: 25/s | Duration: 20s | Radius: 7.5m,10/30/2025,,,
+ruined_accordion,Ruined Accordion,Rare,Recyclable,2000,3,3,Residential,Can be recycled into crafting materials.,,11/02/2025,,Rubber Parts x18 | Steel Spring x3,
+damaged_tick_pod,Damaged Tick Pod,Common,Recyclable,90,3,0.083,ARC,Can be recycled into crafting materials.,,10/30/2025,,,
+tactical_mk3_healing,Tactical Mk. 3 (Healing),Epic,Augment,5000,,4,,"A healing-focused augment which adds extra slots for healing items. When revived from being downed, releases a healing cloud that restores 20 health over 10 seconds. Has a 30-second cooldown.","Durability: 100/100 | Max Loadout Weight: 55 | Shield Compatibility: Light, Medium",11/05/2025,,Advanced Electrical Components x1 | Processor x1,
+jolt_mine_blueprint,Jolt Mine Blueprint,Common,Blueprint,5000,,0,,A proximity-triggered mine that pops up and stuns anything within its radius.,,10/30/2025,,,
+ruined_handcuffs,Ruined Handcuffs,Uncommon,Recyclable,,3,0.8,Security,Can be recycled into crafting materials.,,10/30/2025,,,
+shotgun_choke_ii,Shotgun Choke II,Uncommon,Modification,2000,,0.5,,"Moderately reduces base dispersion. Compatible with: Il Toro, Vulcano",Reduced Base Dispersion: 20%,11/05/2025,,Mechanical Components x1 | Wires x1,
+angled_grip_ii,Angled Grip II,Uncommon,Modification,2000,,0.5,,"Moderately reduces horizontal recoil. Compatible with: Arpeggio, Ferro, Venator, Il Toro, Stitcher",Reduced Horizontal Recoil: 30%,11/05/2025,,Duct Tape x1 | Mechanical Components x1,
+kinetic_converter,Kinetic Converter,Legendary,Modification,7000,,0.75,,"Moderately increases fire rate. Compatible with: Arpeggio, Rattler, Kettle, Ferro, Renegade",Increased Fire Rate: 15% | Increased Vertical Recoil: 20% | Increased Horizontal Recoil: 20%,10/30/2025,,Duct Tape x2 | Mod Components x1,
+dam_testing_annex_key,Dam Testing Annex Key,Rare,Key,100,,0.25,,Unlocks a door in the Testing Annex on Dam Battlegrounds.,,10/30/2025,,,
+extended_light_mag_iii,Extended Light Mag III,Rare,Modification,5000,,0.75,,Significantly extends the ammo capacity of compatible weapons that use light ammo.,Magazine Size: +15,10/30/2025,,,
+launcher_ammo_blueprint,Launcher Ammo (Hullcracker) Blueprint,Common,Blueprint,5000,,0,,Anti-ARC payloads used mainly by the Hullcracker.,,10/30/2025,,,
+medium_gun_parts_blueprint,Medium Gun Parts Blueprint,Common,Blueprint,5000,,0,,Assorted spare parts used for rifles.,,10/30/2025,,,
+anvil_splitter,Anvil Splitter,Legendary,Modification,7000,,0.5,,Tech mod for the Anvil that replaces its bullets with ones that split into 4 weaker projectiles.,Projectiles Per Shot: +3 | Reduced Projectile Damage: 70%,11/01/2025,,Mod Components x1 | Processor x1,
+door_blocker,Door Blocker,Common,Quick Use,270,3,0.2,,A locking mechanism that can be placed on large metal doors to limit access.,,10/30/2025,,Metal Parts x2,
+renegade_i,Renegade I,Rare,Weapon,7000,,10,,"Has high damage output, accuracy, and headshot damage.",Durability: 100/100 | Ammo Type: Medium Ammo | Magazine Size: 8 | Firing Mode: Lever-Action | ARC Armor Penetration: Moderate,10/30/2025,,,
+stable_stock_iii,Stable Stock III,Rare,Modification,5000,,0.75,,Significantly improves dispersion & recoil recovery time.,50% Reduced Recoil Recovery Time | 50% Reduced Dispersion Recovery Time | 20% Increased Equip Time | 20% Increased Unequip Time,10/30/2025,,,
+extended_medium_mag_iii,Extended Medium Mag III,Rare,Modification,5000,,0.75,,"Significantly extends the ammo capacity of compatible weapons that use medium ammo. Compatible with: Arpeggio, Renegade, Venator, Tempest, Torrente",Magazine Size: +12,10/30/2025,,Mod Components x1 | Steel Spring x2,
+muzzle_brake_iii,Muzzle Brake III,Rare,Modification,5000,,0.75,,"Significantly reduces both vertical recoil & horizontal recoil. Compatible with: Arpeggio, Ferro, Renegade, Anvil, Stitcher",Reduced Vertical Recoil: 25% | Reduced Horizontal Recoil: 25% | Increased Durability Burn Rate: 20%,10/30/2025,,,
+shotgun_choke_iii,Shotgun Choke III,Rare,Modification,5000,,0.75,,Significantly reduces base dispersion.,"Compatible With: Il Toro, Vulcano | Reduced Base Dispersion: 30% | Increased Durability Burn Rate: 20%",10/30/2025,,,
+silencer_ii,Silencer II,Rare,Modification,5000,,0.5,,"Moderately reduces the amount of noise produced when firing. Compatible with: Arpeggio, Ferro, Renegade, Anvil, Stitcher",Reduced Noise: 40%,10/30/2025,,,
+angled_grip_iii,Angled Grip III,Rare,Modification,5000,,0.75,,"Significantly reduces horizontal recoil. Compatible with: Arpeggio, Ferro, Venator, Il Toro, Stitcher",Reduced Horizontal Recoil: 40% | Reduced ADS Speed: 30%,10/30/2025,,,
+compensator_ii,Compensator II,Uncommon,Modification,2000,,0.5,,"Moderately reduces per-shot dispersion. Compatible with: Arpeggio, Ferro, Renegade, Anvil, Stitcher",Reduced Per-Shot Dispersion: 40% | Reduced Max Shot Dispersion: 20%,11/03/2025,,Mechanical Components x1 | Wires x1,
+extended_light_mag_ii,Extended Light Mag II,Uncommon,Modification,2000,,0.5,,"Moderately extends the ammo capacity of compatible weapons that use light ammo. Compatible with: Stitcher, Kettle, Burletta, Hairpin, Bobcat",Magazine Size: +10,10/30/2025,,,
+extended_medium_mag_ii,Extended Medium Mag II,Uncommon,Modification,2000,,0.5,,"Moderately extends the ammo capacity of compatible weapons that use medium ammo. Compatible with: Arpeggio, Renegade, Venator, Tempest, Torrente",Magazine Size: +8,10/30/2025,,,
+extended_shotgun_mag_ii,Extended Shotgun Mag II,Uncommon,Modification,2000,,0.5,,"Moderately extends the ammo capacity of shotguns. Compatible with: Il Toro, Vulcano",Magazine Size: +4,11/02/2025,,,
+il_toro_i,Il Toro I,Uncommon,Weapon,5000,,8,,"Has a large bullet spread, sharp falloff, and high damage output.",Durability: 100/100 | Ammo Type: Shotgun Ammo | Magazine Size: 5 | Firing Mode: Pump-Action | ARC Armor Penetration: Weak,11/03/2025,,,
+ferro_ii,Ferro II,Common,Battle Rifle,1000,,8,,"Packs a punch, but must be reloaded between every shot.",Durability: 110/110 | Ammo Type: Heavy Ammo | Magazine Size: 1 | Firing Mode: Break-Action | ARC Armor Penetration: Strong,10/31/2025,,,
+ferro_iii,Ferro III,Common,Weapon,2000,,8,,"Packs a punch, but must be reloaded between every shot.",Durability: 120/120 | Ammo Type: Heavy Ammo | Magazine Size: 1 | Firing Mode: Break-Action | ARC Armor Penetration: Strong | Upgrade Modifiers: 26% Reduced Reload Time,10/31/2025,,,
+heavy_gun_parts_blueprint,Heavy Gun Parts Blueprint,Common,Blueprint,5000,,0,,Used to craft weapons.,,10/31/2025,,,
+herbal_bandage,Herbal Bandage,Uncommon,Quick Use,640,5,0.15,,An improvised medical item that gradually restores health over time.,Healing: 3.5/s | Duration: 10s | Use Time: 1.5s,11/03/2025,,,
+kettle_iv,Kettle IV,Common,Weapon,5000,,7,,"Quick and accurate, but has low bullet velocity and takes a long time to reload.",Durability: 130/130 | Ammo Type: Light Ammo | Magazine Size: 20 | Firing Mode: Semi-Automatic | ARC Armor Penetration: Very Weak,10/31/2025,,,
+kettle_iii,Kettle III,Common,Weapon,3000,,7,,"Quick and accurate, but has low bullet velocity and takes a long time to reload.","Durability: 120/120 | Ammo Type: Light Ammo | Magazine Size: 20 | Firing Mode: Semi-Automatic | ARC Armor Penetration: Very Weak | Upgrade Modifiers: ['50% Increased Bullet Velocity', '26% Reduced Reload Time']",10/31/2025,,,
+yellow_light_stick,Yellow Light Stick,Common,Quick Use,150,5,0.15,,A throwable chemical light that illuminates the area around it.,Illumination Radius: 7m | Duration: 40s,11/01/2025,,Chemicals x1,
+mod_components,Mod Components,Rare,Refined Material,1750,5,1,Security,"Used to craft weapon mods. Can be recycled into crafting materials. Used to craft: Lightweight Stock, Shotgun Choke III, Extended Shotgun Mag III, Padded Stock, Compensator III",,11/03/2025,Craft: Extended Medium Mag III x2 | Craft: Lightweight Stock x2 | Craft: Vertical Grip III x2,Mechanical Components x1 | Steel Spring x1,
+ruined_riot_shield,Ruined Riot Shield,Rare,Recyclable,1000,,2,Security,Can be recycled into crafting materials.,,11/01/2025,,Plastic Parts x10 | Rubber Parts x6,Plastic Parts x10
+smoke_grenade,Smoke Grenade,Rare,Quick Use,1000,3,0.2,,"A grenade that creates a lingering smoke cloud on impact, blocking visibility from ARC and other Raiders.",Duration: 20s | Radius: 7.5m,11/03/2025,,Canister x1 | Chemicals x2,
+lure_grenade_trap,Lure Grenade Trap,Uncommon,Quick Use,1000,3,0.25,,A laser trip wire that detonates a Lure Grenade.,Duration: 15s | Radius: 50m,11/01/2025,,,
+radio_renegade,Radio Renegade,Common,Outfit,,,,,A new cosmetic will be added to your collection.,,11/01/2025,,,
+burgerboy,Burgerboy,Common,Backpack Charm,,,,,A new cosmetic will be added to your collection.,,11/01/2025,,,
+vulcano_iii,Vulcano III,Epic,Weapon,17000,,8,,Has good bullet spread but sharp falloff.,Durability: 120/120 | Ammo Type: Shotgun Ammo | Magazine Size: 6 | Firing Mode: Semi-Automatic | ARC Armor Penetration: Weak | 20% Increased Fire Rate: True | 26% Reduced Reload Time: True,11/01/2025,,,
+rocket_thruster,Rocket Thruster,Rare,Recyclable,2000,3,3,Exodus,Can be recycled into crafting materials.,,11/01/2025,,Metal Parts x6 | Synthesized Fuel x2,
+poster_of_natural_wonders,Poster of Natural Wonders,Uncommon,Trinket,2000,3,0.3,"Residential, Commercial","If you stand close and squint your eyes, it's like the world never came crumbling down.",,11/01/2025,,,
+il_toro_blueprint,Il Toro Blueprint,Common,Blueprint,5000,,,,"Has a large bullet spread, sharp falloff, and high damage output.",,11/01/2025,,,
+compensator_ii_blueprint,Compensator II Blueprint,Common,Blueprint,5000,,0,,Moderately reduces per-shot dispersion.,,11/01/2025,,Mechanical Components x7 | Wires x15,
+light_gun_parts_blueprint,Light Gun Parts Blueprint,Common,Blueprint,5000,,0,,Assorted spare parts used for pistols and SMGs.,,11/01/2025,,refiner_ii x1 | Simple Gun Parts x4,
+smoke_grenade_trap,Smoke Grenade Trap,Rare,Quick Use,,3,0.3,,A laser trip wire that detonates a Smoke Grenade.,Duration: 20s | Radius: 7.5m,11/01/2025,,,
+complex_gun_parts_blueprint,Complex Gun Parts Blueprint,Common,Blueprint,5000,,0,,Used to craft advanced weapons.,,11/01/2025,,,
+lightweight_stock_blueprint,Lightweight Stock Blueprint,Common,Blueprint,5000,,0,,Moderately improves ADS & draw speed.,,11/01/2025,,,
+explosive_compound,Explosive Compound,Rare,Refined Material,1000,5,0.3,"Industrial, Security","Used to craft explosives. Used to craft: Wolfpack, Explosive Mine, Blaze Grenade, Heavy Fuze Grenade",,11/03/2025,Craft: Heavy Fuze Grenade x1,,
+shotgun_silencer,Shotgun Silencer,Epic,Modification,5000,,0.5,,Moderately reduces the amount of noise produced when firing.,Reduced Noise: 50%,11/02/2025,,,
+il_toro_ii,Il Toro II,Uncommon,Weapon,7000,,8,,"Has a large bullet spread, sharp falloff, and high damage output.",Durability: 110/110 | Ammo Type: Shotgun Ammo | Magazine Size: 6 | Firing Mode: Pump-Action | ARC Armor Penetration: Weak,11/02/2025,,,
+green_light_stick_blueprint,Green Light Stick Blueprint,Common,Blueprint,5000,,0,,A throwable chemical light that illuminates the area around it.,,11/02/2025,,,
+torn_book,Torn Book,Common,Trinket,1000,5,0.3,"Residential, Old World","What pages remain speak of heroes, vampires, and lots of glances.",,11/04/2025,,,
+fertilizer,Fertilizer,Uncommon,Nature,1000,5,0.4,Nature,May be worth a few coins.,,11/04/2025,,Assorted Seeds x2,
+damaged_rocketeer_driver,Damaged Rocketeer Driver,Common,Recyclable,2000,3,0.25,ARC,Can be recycled into crafting materials.,,11/03/2025,,ARC Alloy x3,
+damaged_hornet_driver,Damaged Hornet Driver,Common,Recyclable,640,3,0.3,ARC,Can be recycled into crafting materials.,,11/06/2025,,ARC Alloy x2,ARC Alloy x1
+turbo_pump,Turbo Pump,Rare,Recyclable,2000,3,3,Exodus,Can be recycled into crafting materials.,,11/04/2025,,Mechanical Components x1 | Oil x3,
+moss,Moss,Rare,Topside Material,500,10,0.3,Nature,Can be used to regain a small amount of health.,Healing: 1/s | Duration: 10s | Use Time: 1s,11/04/2025,Craft: Defibrillator x1,Assorted Seeds x3,Assorted Seeds x2
+bandage,Bandage,Common,Quick Use,250,5,0.1,,A medical item that gradually restores health over time.,Healing: 2/s | Duration: 10s | Use Time: 1.5s,11/03/2025,,Fabric x2,
+tagging_grenade,Tagging Grenade,Rare,Quick Use,1000,3,0.4,,"A grenade that detonates after a delay, tagging Raiders and ARC enemies in an area, allowing you to briefly track their location.",Duration: 30s | Radius: 6m,11/03/2025,,Plastic Parts x1 | Sensors x1,
+looting_mk1,Looting Mk. 1,Uncommon,Augment,640,,1,,"Basic looting augment. More backpack slots and weight capacity, but low defensive and tactical capability.",Durability: 100/100 | Max Loadout Weight: 50 | Shield Compatibility: Light,11/03/2025,,Plastic Parts x3 | Rubber Parts x3,
+muzzle_brake_i,Muzzle Brake I,Common,Modification,640,,0.25,,"Slightly reduces both vertical recoil & horizontal recoil. Compatible with: Rattler, Ferro, Burletta, Stitcher, Tempest",Reduced Vertical Recoil: 15% | Reduced Horizontal Recoil: 15%,11/03/2025,,Metal Parts x5,
+rattler_i,Rattler I,Common,Weapon,1750,,6,,"A cheap offensive option, but has to be reloaded 2 bullets at a time.",Durability: 100/100 | Ammo Type: Medium Ammo | Magazine Size: 10 | Firing Mode: Fully-Automatic | ARC Armor Penetration: Moderate,11/04/2025,,Metal Parts x8,
+painted_box,Painted Box,Uncommon,Trinket,2000,3,0.3,Old World,May be worth a few coins.,,11/03/2025,,,
+music_box,Music Box,Rare,Trinket,5000,3,0.4,"Old World, Residential, Commercial",Worth a small fortune.,,11/03/2025,,,
+hairpin_i,Hairpin I,Common,Pistol,450,,3,,"Has a built-in silencer. Great for stealth, but tricky in combat.",Durability: 100/100 | Ammo Type: Light Ammo | Magazine Size: 8 | Firing Mode: Slide-Action | ARC Armor Penetration: Very Weak | Special Trait: Integrated Silencer,11/03/2025,,,
+looting_mk2,Looting Mk. 2,Rare,Augment,2000,,2,,Significantly increases looting potential; adds slots for trinkets. Automatically throws off attached Ticks after 1s.,Durability: 100/100 | Max Loadout Weight: 60 | Shield Compatibility: Light,11/03/2025,,,
+looting_mk3_cautious,Looting Mk. 3 (Cautious),Epic,Augment,5000,,3,,"A looting augment that swaps some carry capacity to increase survivability. Upon Shield break, automatically administers a weak Adrenaline Shot. Has a fixed cooldown.",Durability: 100/100 | Max Loadout Weight: 70 | Shield Compatibility: Light,11/03/2025,,,
+angled_grip_i,Angled Grip I,Common,Modification,640,,0.25,,"Slightly reduces horizontal recoil. Compatible with: Tempest, Arpeggio, Kettle, Ferro, Hullcracker",Reduced Horizontal Recoil: 20%,11/03/2025,,,
+extended_shotgun_mag_i,Extended Shotgun Mag I,Common,Modification,640,,0.25,,"Slightly extends the ammo capacity of shotguns. Compatible with: Il Toro, Vulcano",Magazine Size: +2,11/03/2025,,,
+shotgun_choke_i,Shotgun Choke I,Common,Modification,640,,0.25,,"Slightly reduces base dispersion. Compatible with: Il Toro, Vulcano",Reduced Base Dispersion: 10%,11/03/2025,,,
+vertical_grip_i,Vertical Grip I,Common,Modification,640,,0.25,,"Slightly reduces vertical recoil. Compatible with: Tempest, Arpeggio, Kettle, Ferro, Hullcracker",Reduced Vertical Recoil: 20%,11/03/2025,,,
+lightweight_stock,Lightweight Stock,Epic,Modification,5000,,0.25,,"Moderately improves ADS & draw speed. Compatible with: Arpeggio, Kettle, Ferro, Renegade, Hullcracker",Increased ADS Speed: 200% | Reduced Equip Time: 30% | Reduced Unequip Time: 30% | Increased Vertical Recoil: 50% | Increased Recoil Recovery Time: 50%,11/03/2025,,,
+bettina_i,Bettina I,Epic,Weapon,8000,,11,,Has slow fire rate and high damage output.,Durability: 100/100 | Ammo Type: Heavy Ammo | Magazine Size: 20 | Firing Mode: Fully-Automatic | ARC Armor Penetration: Strong,11/03/2025,,,
+launcher_ammo,Launcher Ammo,Rare,Ammunition,10,24,0.1,,Anti-ARC payloads used mainly by the Hullcracker. Compatible with: Hullcracker,,11/03/2025,,,
+shotgun_ammo,Shotgun Ammo,Common,Ammunition,20,20,0.085,,"Compatible with: Il Toro, Vulcano",,11/03/2025,,,
+torrente_blueprint,Torrente Blueprint,Common,Blueprint,5000,,0,,"Has a large ammo capacity, but is only accurate while crouched.",,11/03/2025,,,
+anvil_blueprint,Anvil Blueprint,Common,Blueprint,5000,,0,,"Has high damage output and headshot damage, but slow handling.",,11/03/2025,,,
+osprey_blueprint,Osprey Blueprint,Common,Blueprint,5000,,0,,Has reliable damage output and accuracy.,,11/03/2025,,,
+venator_blueprint,Venator Blueprint,Common,Blueprint,5000,,,,Fires two shots at a time.,,11/04/2025,,,
+extended_medium_mag_iii_blueprint,Extended Medium Mag III Blueprint,Common,Blueprint,5000,,,,Significantly extends the ammo capacity of compataible weapons that use medium ammo.,Magazine Size: +12,11/04/2025,,,
+muzzle_brake_ii_blueprint,Muzzle Brake II Blueprint,Common,Blueprint,5000,,0,,Moderately reduces both vertical recoil & horizontal recoil.,Reduced Vertical Recoil: 20% | Reduced Horizontal Recoil: 20%,11/05/2025,,,
+damaged_arc_powercell,Damaged ARC Powercell,Common,Recyclable,293,5,0.25,ARC,Can be recycled into crafting materials.,,11/05/2025,,ARC Alloy x1,
+metal_brackets,Metal Brackets,Uncommon,Recyclable,640,3,0.8,"Mechanical, Electrical",Can be recycled into metal parts.,,11/05/2025,,Metal Parts x8,Metal Parts x4
+vita_spray_blueprint,Vita Spray Blueprint,Common,Blueprint,5000,,,,A medical item that continuously restores health during use. Can be used on yourself or your allies.,,11/04/2025,,,
+rosary,Rosary,Rare,Trinket,2000,3,0.3,"Old World, Residential",May be worth a few coins.,,11/04/2025,,,
+damaged_wasp_driver,Damaged Wasp Driver,Common,Recyclable,270,,0.25,ARC,Can be recycled into crafting materials.,,11/04/2025,,,
+ruined_parachute,Ruined Parachute,Uncommon,Recyclable,640,3,0.8,Exodus,Can be recycled into crafting materials.,,11/04/2025,,,
+extended_shotgun_mag_ii_blueprint,Extended Shotgun Mag II Blueprint,Common,Blueprint,5000,,,,Moderately extends the ammo capacity of shotguns.,,11/04/2025,,Mechanical Components x8 | Steel Spring x28,
+silencer_iii,Silencer III,Epic,Modification,7000,,0.75,,"Significantly reduces the amount of noise produced when firing. Compatible with: Tempest, Arpeggio, Kettle, Ferro, Renegade",Reduced Noise: 60% | Increased Durability Burn Rate: 20%,11/05/2025,,Mod Components x1 | Wires x3,Mod Components x1
+blue_light_stick_blueprint,Blue Light Stick Blueprint,Common,Blueprint,5000,,0,,A throwable chemical light that illuminates the area around it.,,11/04/2025,,,
+spaceport_control_tower_key,Spaceport Control Tower Key,Rare,Key,100,,0.25,,Unlocks a door in Control Tower A6 in Spaceport,,11/04/2025,,,
+extended_medium_mag_ii_blueprint,Extended Medium Mag II Blueprint,Common,Blueprint,5000,,0,,Moderately extends the ammo capacity of compatible weapons that use medium ammo.,,11/04/2025,,,
+rosary,Rosary,Rare,Trinket,2000,3,0.3,"Old World, Residential",May be worth a few coins.,,11/05/2025,,,
+anvil_i,Anvil I,Uncommon,Hand Cannon,5000,,5,,"Single-action hand cannon with high damage and headshot damage, but slow handling.",Durability: 100/100 | Ammo Type: Heavy Ammo | Magazine Size: 6 | Firing Mode: Single-Action | ARC Armor Penetration: Strong,11/06/2025,,Mechanical Components x2 | Simple Gun Parts x2,Simple Gun Parts x2
+anvil_ii,Anvil II,Uncommon,Hand Cannon,7000,,5,,"Single-action hand cannon with high damage and headshot damage, but slow handling.",Durability: 110/110 | Ammo Type: Heavy Ammo | Magazine Size: 6 | Firing Mode: Single-Action | ARC Armor Penetration: Strong | Reduced Dispersion Recovery Time: 6.5% | Increased Fire Rate: 25%,11/06/2025,,Mechanical Components x3 | Simple Gun Parts x3,Simple Gun Parts x3
+anvil_iii,Anvil III,Uncommon,Hand Cannon,10000,,5,,"Single-action hand cannon with high damage and headshot damage, but slow handling.",Durability: 120/120 | Ammo Type: Heavy Ammo | Magazine Size: 6 | Firing Mode: Single-Action | ARC Armor Penetration: Strong | Reduced Dispersion Recovery Time: 12.5% | Increased Fire Rate: 50%,11/06/2025,,Mechanical Components x4 | Simple Gun Parts x4,Simple Gun Parts x4
+anvil_iv,Anvil IV,Uncommon,Hand Cannon,130000,,5,,"Single-action hand cannon with high damage and headshot damage, but slow handling.",Durability: 130/130 | Ammo Type: Heavy Ammo | Magazine Size: 6 | Firing Mode: Single-Action | ARC Armor Penetration: Strong | Reduced Dispersion Recovery Time: 18.75% | Increased Fire Rate: 75%,11/06/2025,,Mechanical Components x5 | Simple Gun Parts x5,Simple Gun Parts x5
+torrente_i,Torrente I,Rare,LMG,7000,,12,,"Has a large ammo capacity, but is only accurate while crouched",Durability: 100/100 | Ammo Type: Medium Ammo | Magazine Size: 60 | Firing Mode: Fully-Automatic | ARC Armor Penetration: Moderate,10/30/2025,,Advanced Mechanical Components x1 | Medium Gun Parts x2,
+torrente_ii,Torrente II,Rare,LMG,10000,,12,,"Has a large ammo capacity, but is only accurate while crouched.",Durability: 110/110 | Ammo Type: Medium Ammo | Magazine Size: 70 | Reduced Reload Time: 15% | Firing Mode: Fully-Automatic | ARC Armor Penetration: Moderate,11/06/2025,,Advanced Mechanical Components x2 | Medium Gun Parts x2,
+torrente_iii,Torrente III,Rare,LMG,13000,,12,,"Has a large ammo capacity, but is only accurate while crouched.",Durability: 120/120 | Ammo Type: Medium Ammo | Magazine Size: 80 | Reduced Reload Time: 30% | Firing Mode: Fully-Automatic | ARC Armor Penetration: Moderate,11/06/2025,,Advanced Mechanical Components x2 | Medium Gun Parts x3,
+torrente_iv,Torrente IV,Rare,LMG,16000,,12,,"Has a large ammo capacity, but is only accurate while crouched.",Durability: 130/130 | Ammo Type: Medium Ammo | Magazine Size: 90 | Reduced Reload Time: 45% | Firing Mode: Fully-Automatic | ARC Armor Penetration: Moderate,11/06/2025,,Advanced Mechanical Components x3 | Medium Gun Parts x3,
+tattered_arc_lining,Tattered Arc Lining,Uncommon,Recyclable,640,3,1,ARC,Can be recycled into crafting materials.,,11/06/2025,,Fabric x12,
+coolant,Coolant,Rare,Recyclable,1000,3,2,Mechanical,Can be recycled into crafting materials.,,11/07/2025,,Chemicals x5 | Oil x2,Oil x2
+damaged_arc_motion_core,Damaged ARC Motion Core,Uncommon,Recyclable,640,,0.25,ARC,Can be recycled into crafting materials.,,11/07/2025,,ARC Alloy x2,ARC Alloy x1
+vertical_grip_iii_blueprint,Vertical Grip III Blueprint,Common,Blueprint,5000,,0,,Significantly reduces vertical recoil.,,11/07/2025,,,
+vertical_grip_iii,Vertical Grip III,Rare,Modification,5000,,0.75,,"Significantly reduces vertical recoil. Compatible with: Tempest, Kettle, Hullcracker, Venator, Il Toro",Reduced Vertical Recoil: 40% | Reduced ADS Speed: 30%,11/07/2025,,,
+spaceport_trench_tower_key,Spaceport Trench Tower Key,Uncommon,Key,100,,0.25,,Unlocks a door to the Trench Towers in Spaceport,,11/07/2025,,,

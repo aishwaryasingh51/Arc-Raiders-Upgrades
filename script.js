@@ -42,19 +42,10 @@ function parseCSV(text) {
   return rows;
 }
 
-function normalizeQuantity(q) {
-  const s = String(q || '').trim().toLowerCase();
-  if (!s) return 0;
-  const k = s.match(/^(\d+(?:\.\d+)?)k$/);
-  if (k) return Math.round(parseFloat(k[1]) * 1000);
-  const n = parseInt(s, 10);
-  return Number.isFinite(n) ? n : 0;
-}
-
-function splitLocations(loc) {
-  const s = String(loc || '').trim();
-  if (!s) return [''];
-  return s.replace(/\|/g, ';').split(/[,;]+/).map(x => x.trim()).filter(Boolean);
+function splitList(str, pattern = /[|,;]+/) {
+  const s = String(str || '').trim();
+  if (!s) return [];
+  return s.split(pattern).map(x => x.trim()).filter(Boolean);
 }
 
 function toObjects(rows) {
@@ -67,21 +58,14 @@ function toObjects(rows) {
     for (let c = 0; c < header.length; c++) {
       obj[header[c]] = row[c] !== undefined ? row[c] : '';
     }
-    // normalize
-    obj.Quantity = normalizeQuantity(obj.Quantity);
     obj._normName = String(obj.Name || '').trim().toLowerCase();
-
-    // expand multi-locations into multiple entries
-    const locs = splitLocations(obj.LocationType);
-    if (locs.length <= 1) {
-      obj.LocationType = locs[0] || '';
-      out.push(obj);
-    } else {
-      for (const l of locs) {
-        const dup = { ...obj, LocationType: l };
-        out.push(dup);
-      }
-    }
+    obj.FoundInList = splitList(obj.FoundIn);
+    obj.EffectsList = splitList(obj.Effects, /\|/);
+    obj.UsageList = splitList(obj.Usage, /\|/);
+    obj.RecycleList = splitList(obj.RecycleOutputs, /\|/);
+    obj.SalvageList = splitList(obj.SalvageOutputs, /\|/);
+    obj.ValueNum = Number(obj.Value) || 0;
+    out.push(obj);
   }
   return out;
 }
@@ -108,6 +92,13 @@ function similarity(a, b) {
 let ITEMS = [];
 let dataLoaded = false;
 let loadFailed = false;
+const rarityClassMap = {
+  common: 'tier-1',
+  uncommon: 'tier-2',
+  rare: 'tier-3',
+  epic: 'tier-4',
+  legendary: 'tier-5',
+};
 
 async function loadData() {
   const res = await fetch('items.csv');
@@ -134,55 +125,149 @@ function renderResults(list, q) {
   for (const r of list) {
     const div = document.createElement('div');
     div.className = 'result';
-    const tier = r.Source === 'Item' && r.Tier ? ` ${r.Tier}` : (r.Source?.startsWith('Expedition') ? '' : '');
+    const rarityClass = rarityClassMap[String(r.Rarity || '').toLowerCase()] || 'tier-0';
+    div.classList.add(rarityClass);
+    const content = document.createElement('div');
+    content.className = 'result-body';
+
     const title = document.createElement('div');
     const strong = document.createElement('strong');
     strong.textContent = r.Name || 'Unknown Item';
     title.appendChild(strong);
-    div.appendChild(title);
+    content.appendChild(title);
 
     const badges = document.createElement('div');
     badges.className = 'badges';
+    const badgeSet = new Set();
     const addBadge = (text) => {
-      if (!text) return;
+      if (!text || badgeSet.has(text)) return;
+      badgeSet.add(text);
       const badge = document.createElement('span');
       badge.className = 'badge';
       badge.textContent = text;
       badges.appendChild(badge);
     };
-    addBadge(r.Source);
-    if (r.Station) addBadge(`${r.Station}${tier}`);
-    addBadge(r.Category);
-    addBadge(r.LocationType);
-    if (r.Vendor) addBadge(`Vendor: ${r.Vendor}`);
-    div.appendChild(badges);
+    addBadge(r.Rarity);
+    addBadge(r.Type);
+    (r.FoundInList || []).forEach(loc => addBadge(loc));
+    if (r.Value) addBadge(`Value: ${r.Value}`);
+    if (r.StackSize) addBadge(`Stack: ${r.StackSize}`);
+    if (r.WeightKg) addBadge(`${r.WeightKg} kg`);
+    content.appendChild(badges);
 
-    const qty = document.createElement('div');
-    qty.className = 'muted';
-    qty.textContent = `Quantity: ${r.Quantity}`;
-    div.appendChild(qty);
+    if (r.Description) {
+      const desc = document.createElement('p');
+      desc.className = 'description';
+      desc.textContent = r.Description;
+      content.appendChild(desc);
+    }
 
+    const advisory = document.createElement('div');
+    const hasUsage = (r.UsageList || []).length > 0;
+    advisory.className = `usage ${hasUsage ? 'required' : 'optional'}`;
+    const usageTitle = document.createElement('div');
+    usageTitle.className = 'usage-title';
+    usageTitle.textContent = hasUsage ? 'Required for quests / upgrades' : 'Not required for quests or upgrades';
+    advisory.appendChild(usageTitle);
+
+    if (hasUsage) {
+      const usageList = document.createElement('ul');
+      usageList.className = 'usage-list';
+      r.UsageList.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        usageList.appendChild(li);
+      });
+      advisory.appendChild(usageList);
+    } else {
+      const safeMsg = document.createElement('p');
+      const valueText = r.ValueNum > 0 ? `₳${r.ValueNum.toLocaleString()}` : 'its listed value';
+      safeMsg.textContent = `Safe to sell for ${valueText} or dismantle for materials.`;
+      advisory.appendChild(safeMsg);
+
+      const recycleDetails = [...(r.RecycleList || []), ...(r.SalvageList || [])];
+      if (recycleDetails.length > 0) {
+        const recycleHeader = document.createElement('div');
+        recycleHeader.className = 'effects-header muted';
+        recycleHeader.textContent = 'Dismantle yields';
+        advisory.appendChild(recycleHeader);
+
+        const recycleList = document.createElement('ul');
+        recycleList.className = 'effects';
+        recycleDetails.forEach(detail => {
+          const li = document.createElement('li');
+          li.textContent = detail;
+          recycleList.appendChild(li);
+        });
+        advisory.appendChild(recycleList);
+      }
+    }
+
+    content.appendChild(advisory);
+
+    const meta = document.createElement('div');
+    meta.className = 'stats muted';
+    const details = [];
+    if (r.UpdatedAt) details.push(`Updated: ${r.UpdatedAt}`);
+    if (r.ItemID) details.push(`#${r.ItemID}`);
+    meta.textContent = details.join(' · ');
+    content.appendChild(meta);
+
+    if (r.EffectsList && r.EffectsList.length > 0) {
+      const effectsHeader = document.createElement('div');
+      effectsHeader.className = 'effects-header muted';
+      effectsHeader.textContent = 'Effects';
+      content.appendChild(effectsHeader);
+
+      const listEl = document.createElement('ul');
+      listEl.className = 'effects';
+      r.EffectsList.forEach(effect => {
+        const li = document.createElement('li');
+        li.textContent = effect;
+        listEl.appendChild(li);
+      });
+      content.appendChild(listEl);
+    }
+
+    div.appendChild(content);
     resultsEl.appendChild(div);
   }
+}
+
+function itemKey(r) {
+  return [r.Name, r.Rarity, r.Type, r.FoundIn, r.Value, r.StackSize].join('|');
+}
+
+function dedupeAndSort(list) {
+  const seen = new Set();
+  const out = [];
+  for (const item of list) {
+    const key = itemKey(item);
+    if (!seen.has(key)) {
+      seen.add(key);
+      out.push(item);
+    }
+  }
+  out.sort((a, b) => {
+    const nameCompare = a._normName.localeCompare(b._normName);
+    if (nameCompare !== 0) return nameCompare;
+    const rarityCompare = String(a.Rarity || '').localeCompare(String(b.Rarity || ''));
+    if (rarityCompare !== 0) return rarityCompare;
+    return String(a.Type || '').localeCompare(String(b.Type || ''));
+  });
+  return out;
 }
 
 function search(q, maxResults = 50) {
   const query = q.trim().toLowerCase();
   if (!query) return [];
 
-  // exact matches first
-  const exact = ITEMS.filter(it => it._normName === query);
+  const prefixMatches = dedupeAndSort(
+    ITEMS.filter(it => it._normName.startsWith(query))
+  );
 
-  if (exact.length > 0) {
-    // group by (Name, Station, Tier, LocationType, Source) to avoid duplicates
-    const key = r => [r.Name, r.Station, r.Tier, r.LocationType, r.Source].join('|');
-    const seen = new Set();
-    const unique = [];
-    for (const r of exact) {
-      const k = key(r);
-      if (!seen.has(k)) { unique.push(r); seen.add(k); }
-    }
-    return unique.slice(0, maxResults);
+  if (prefixMatches.length > 0) {
+    return prefixMatches.slice(0, maxResults);
   }
 
   // fuzzy matches
@@ -194,7 +279,7 @@ function search(q, maxResults = 50) {
   const results = [];
   const seen = new Set();
   for (const s of scored) {
-    const k = [s.it._normName, s.it.Station, s.it.Tier, s.it.LocationType, s.it.Source].join('|');
+    const k = itemKey(s.it);
     if (!seen.has(k)) {
       results.push(s.it);
       seen.add(k);
@@ -224,8 +309,17 @@ async function main() {
     loadFailed = true;
   }
 
-  async function doSearch() {
+  function doSearch() {
     const q = qEl.value;
+    if (!q.trim()) {
+      const resultsEl = document.getElementById('results');
+      resultsEl.innerHTML = '';
+      if (!loadFailed) {
+        msg.textContent = 'Start typing to search for upgrade items.';
+        msg.classList.remove('error');
+      }
+      return;
+    }
     if (!dataLoaded) {
       if (!loadFailed) {
         msg.textContent = 'Still loading data…';
@@ -239,6 +333,11 @@ async function main() {
 
   goEl.addEventListener('click', doSearch);
   qEl.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+  qEl.addEventListener('input', () => {
+    if (dataLoaded) {
+      doSearch();
+    }
+  });
 }
 
 main();

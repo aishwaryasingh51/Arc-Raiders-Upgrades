@@ -5,24 +5,299 @@
   <title>ARC Raiders Item Usage</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 24px; }
-    .container { max-width: 900px; margin: 0 auto; }
-    h1 { font-size: 1.6rem; margin-bottom: 8px; }
-    .muted { color: #666; }
-    .search { display: flex; gap: 8px; margin: 16px 0; }
-    input[type="text"] { flex: 1; padding: 10px; font-size: 1rem; }
-    button { padding: 10px 14px; font-size: 1rem; cursor: pointer; }
-    .result { border: 1px solid #ddd; border-radius: 8px; padding: 12px; margin-bottom: 10px; }
-    .badges { margin-top: 4px; }
-    .badge { display: inline-block; padding: 2px 6px; background: #f3f3f3; border: 1px solid #ddd; border-radius: 4px; margin-right: 6px; margin-top: 4px; }
-    .error { color: #b00020; }
-    footer { margin-top: 24px; font-size: 0.9rem; }
+    :root {
+      --bg: #050608;
+      --panel: rgba(6, 10, 18, 0.85);
+      --border: rgba(255, 255, 255, 0.1);
+      --accent: #ff6b2b;
+      --accent-2: #00c6ff;
+      --text: #f5f6ff;
+      --muted: #9ea5c0;
+      --badge-bg: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Space Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top, rgba(0, 198, 255, 0.25), transparent 45%),
+        radial-gradient(circle at 20% 20%, rgba(255, 107, 43, 0.4), transparent 35%),
+        var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
+    .container {
+      width: min(960px, 100%);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(18px);
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .search {
+      display: flex;
+      gap: 12px;
+      margin: 28px 0 12px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    input[type="text"] {
+      flex: 1;
+      background: rgba(4, 9, 17, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 1rem;
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--accent-2);
+      box-shadow: 0 0 0 2px rgba(0, 198, 255, 0.25);
+    }
+
+    button {
+      min-width: 120px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: #050608;
+      background: linear-gradient(120deg, var(--accent), #ff944d);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(255, 107, 43, 0.35);
+    }
+
+    button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    #msg {
+      min-height: 24px;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+
+    #results {
+      display: grid;
+      gap: 14px;
+    }
+
+    .result {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 18px;
+      background: rgba(8, 12, 20, 0.9);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 25px var(--tier-glow, rgba(0, 0, 0, 0));
+      --tier-gradient: linear-gradient(120deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+      --tier-glow: rgba(0, 0, 0, 0);
+    }
+
+    .result::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 18px;
+      background: var(--tier-gradient);
+      opacity: 0.55;
+      z-index: 0;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .result-body {
+      position: relative;
+      z-index: 1;
+    }
+
+    .result.tier-0 {
+      --tier-gradient: linear-gradient(120deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    }
+
+    .result.tier-1 {
+      --tier-gradient: linear-gradient(125deg, rgba(146, 154, 178, 0.65), rgba(84, 92, 115, 0.2));
+      --tier-glow: rgba(146, 154, 178, 0.3);
+    }
+
+    .result.tier-2 {
+      --tier-gradient: linear-gradient(125deg, rgba(0, 198, 255, 0.7), rgba(0, 123, 255, 0.25));
+      --tier-glow: rgba(0, 198, 255, 0.35);
+    }
+
+    .result.tier-3 {
+      --tier-gradient: linear-gradient(125deg, rgba(148, 255, 161, 0.75), rgba(0, 194, 120, 0.3));
+      --tier-glow: rgba(0, 194, 120, 0.35);
+    }
+
+    .result.tier-4 {
+      --tier-gradient: linear-gradient(125deg, rgba(199, 129, 255, 0.75), rgba(111, 71, 255, 0.35));
+      --tier-glow: rgba(199, 129, 255, 0.4);
+    }
+
+    .result.tier-5 {
+      --tier-gradient: linear-gradient(125deg, rgba(255, 150, 92, 0.8), rgba(255, 89, 36, 0.4));
+      --tier-glow: rgba(255, 150, 92, 0.45);
+    }
+
+    .result strong {
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+      background: var(--badge-bg);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .badge:first-child {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .description {
+      margin: 12px 0 6px;
+      line-height: 1.5;
+      color: rgba(245, 246, 255, 0.9);
+    }
+
+    .stats {
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .effects-header {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .effects {
+      list-style: disc;
+      padding-left: 20px;
+      margin: 6px 0 0;
+      color: rgba(245, 246, 255, 0.9);
+    }
+
+    .effects li {
+      margin-bottom: 4px;
+    }
+
+    .usage {
+      margin: 14px 0;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(4, 8, 16, 0.75);
+    }
+
+    .usage.required {
+      border-left: 4px solid var(--accent-2);
+      box-shadow: 0 0 15px rgba(0, 198, 255, 0.15);
+    }
+
+    .usage.optional {
+      border-left: 4px solid var(--accent);
+      box-shadow: 0 0 15px rgba(255, 107, 43, 0.15);
+    }
+
+    .usage-title {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+      color: rgba(245, 246, 255, 0.9);
+    }
+
+    .usage-list {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.45;
+      color: rgba(245, 246, 255, 0.9);
+    }
+
+    .muted.error,
+    #msg.error {
+      color: #ff5460;
+    }
+
+    footer {
+      margin-top: 32px;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 28px 20px;
+      }
+
+      .search {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>ARC Raiders: Item Usage Lookup</h1>
-    <p class="muted">Type an item name (e.g., “Metal Parts”, “ARC Alloy”, “Cat Bed”). Data loads from <code>items.csv</code>.</p>
+    <p class="muted">Start typing an ARC Raiders item (e.g., “Fabric”, “Tick Pod”, “Industrial Battery”). Data mirrors the ArcTracker items API and is cached locally in <code>items.csv</code>.</p>
 
     <div class="search">
       <input id="q" type="text" placeholder="Search item name…" />
