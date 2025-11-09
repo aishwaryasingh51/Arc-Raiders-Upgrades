@@ -210,6 +210,22 @@ function similarity(a, b) {
   return 0.6 * tokenScore + 0.4 * charScore;
 }
 
+const RARITY_ALIASES = {
+  uncommon: 'uncommon',
+  common: 'common',
+  rare: 'rare',
+  epic: 'epic',
+  legendary: 'legendary',
+  exotic: 'legendary',
+  mythic: 'legendary',
+  'ultra rare': 'legendary',
+};
+
+function getRarityClass(rarityText) {
+  const key = String(rarityText || '').trim().toLowerCase();
+  return RARITY_ALIASES[key] || key || '';
+}
+
 let ITEMS = [];
 let GROUPED_ITEMS = [];
 let dataLoaded = false;
@@ -289,8 +305,16 @@ function renderResults(list, q) {
         });
       }
       badges.appendChild(badge);
+      return badge;
     };
-    if (r.ArcRarity) addBadge(r.ArcRarity, 'rarity', r.ArcRarity);
+    const rarityLabel = r.ArcRarity || r.MetaRarity;
+    if (rarityLabel) {
+      const rarityBadge = addBadge(rarityLabel, 'rarity', rarityLabel);
+      const rarityClass = getRarityClass(rarityLabel);
+      if (rarityBadge && rarityClass) {
+        rarityBadge.classList.add('badge-rarity', `badge-rarity-${rarityClass}`);
+      }
+    }
     const locations = r.ArcFoundIn ? splitLocations(r.ArcFoundIn) : (r.LocationList?.length ? r.LocationList : [r.LocationType]);
     locations.forEach(loc => addBadge(loc, 'location', loc));
     const arcValueNum = Number(r.ArcValue);
@@ -336,12 +360,17 @@ function renderResults(list, q) {
         const sourceLower = String(entry.source || '').toLowerCase();
         const isQuestRequirement = stationLower === 'quest' || sourceLower === 'quest' || Boolean(entry.questName);
         const isExpeditionRequirement = stationLower.startsWith('expedition');
-        const hideTier =
-          entry.station?.startsWith('Expedition') && String(entry.tier || '0') === '0';
-        const tierText = entry.tier && !hideTier ? `Tier ${entry.tier}` : '';
+        const hideTier = isExpeditionRequirement && String(entry.tier || '0') === '0';
+        const tierText =
+          entry.tier && !hideTier
+            ? (isExpeditionRequirement ? String(entry.tier) : `Tier ${entry.tier}`)
+            : '';
+        const baseStationLabel = String(entry.station || '').trim().replace(/:$/, '');
         const heading = isQuestRequirement
           ? `Quest: ${entry.questName || 'Unknown Quest'}`
-          : [entry.station, tierText].filter(Boolean).join(' ').trim() || 'Upgrade requirement';
+          : (baseStationLabel && tierText)
+            ? `${baseStationLabel}: ${tierText}`
+            : (baseStationLabel || tierText || 'Upgrade requirement');
         const headingEl = document.createElement('div');
         headingEl.textContent = heading;
         li.appendChild(headingEl);
