@@ -216,6 +216,7 @@ let dataLoaded = false;
 let loadFailed = false;
 let activeFilterKey = '';
 let lastQuery = '';
+let triggerSearch = null;
 
 async function loadData() {
   const res = await fetch('items.csv');
@@ -226,19 +227,26 @@ async function loadData() {
   GROUPED_ITEMS = aggregateItems(ITEMS);
 }
 
+function setResultsMessage(text, type = '') {
+  const resultsEl = document.getElementById('results');
+  if (!resultsEl) return;
+  resultsEl.innerHTML = '';
+  if (!text) return;
+  const div = document.createElement('div');
+  div.className = `empty${type ? ` ${type}` : ''}`;
+  div.textContent = text;
+  resultsEl.appendChild(div);
+}
+
 function renderResults(list, q) {
-  const msg = document.getElementById('msg');
   const resultsEl = document.getElementById('results');
   resultsEl.innerHTML = '';
+  document.body.classList.toggle('search-active', Boolean(q.trim()));
 
   if (list.length === 0) {
-    msg.textContent = `No matches found for "${q}".`;
-    msg.classList.add('error');
+    setResultsMessage(`No matches found for "${q}".`, 'error');
     return;
   }
-
-  msg.textContent = `Found ${list.length} match${list.length > 1 ? 'es' : ''} for "${q}".`;
-  msg.classList.remove('error');
 
   for (const r of list) {
     const div = document.createElement('div');
@@ -265,7 +273,7 @@ function renderResults(list, q) {
     const addBadge = (text, keyType, rawValue = text) => {
       if (!text) return;
       const key = keyType ? `${keyType}:${normalizeFilterValue(rawValue ?? text)}` : '';
-      const dedupeKey = `${text}|${key}`;
+      const dedupeKey = text.trim().toLowerCase();
       if (badgeSet.has(dedupeKey)) return;
       badgeSet.add(dedupeKey);
       const badge = document.createElement('button');
@@ -361,18 +369,6 @@ function renderResults(list, q) {
 
     content.appendChild(advisory);
 
-    const meta = document.createElement('div');
-    meta.className = 'stats muted';
-    const details = [];
-    if (r.Source) details.push(r.Source);
-    if (r.ArcUpdatedAt) details.push(`Arc update: ${r.ArcUpdatedAt}`);
-    else if (r.UpdatedAt) details.push(`Updated: ${r.UpdatedAt}`);
-    if (r.ArcID) details.push(`Arc ID: ${r.ArcID}`);
-    if (r.MetaID) details.push(`Meta ID: ${r.MetaID}`);
-    if (r.ItemID) details.push(`#${r.ItemID}`);
-    meta.textContent = details.join(' · ');
-    content.appendChild(meta);
-
     div.appendChild(content);
     resultsEl.appendChild(div);
   }
@@ -400,6 +396,16 @@ function dedupeAndSort(list) {
     return String(a.Tier || '').localeCompare(String(b.Tier || ''));
   });
   return out;
+}
+
+function applyActiveFilter(list) {
+  if (!activeFilterKey) return list;
+  return list.filter(item => item.FilterKeys?.has(activeFilterKey));
+}
+
+function toggleFilter(key) {
+  activeFilterKey = activeFilterKey === key ? '' : key;
+  if (typeof triggerSearch === 'function') triggerSearch();
 }
 
 function search(q, maxResults = 50) {
@@ -434,42 +440,32 @@ function search(q, maxResults = 50) {
 }
 
 async function main() {
-  const msg = document.getElementById('msg');
   const qEl = document.getElementById('q');
-  const goEl = document.getElementById('go');
   qEl.disabled = true;
-  goEl.disabled = true;
 
   try {
     await loadData();
-    msg.textContent = `Loaded ${GROUPED_ITEMS.length} unique items.`;
-    msg.classList.remove('error');
     dataLoaded = true;
     qEl.disabled = false;
-    goEl.disabled = false;
     qEl.focus();
+    setResultsMessage('');
   } catch (e) {
-    msg.textContent = e.message;
-    msg.classList.add('error');
+    setResultsMessage(e.message, 'error');
     loadFailed = true;
   }
 
   function doSearch() {
     const q = qEl.value;
     lastQuery = q;
+    document.body.classList.toggle('search-active', Boolean(q.trim()));
+    const resultsEl = document.getElementById('results');
     if (!q.trim()) {
-      const resultsEl = document.getElementById('results');
-      resultsEl.innerHTML = '';
-      if (!loadFailed) {
-        msg.textContent = 'Start typing to search for upgrade items.';
-        msg.classList.remove('error');
-      }
+      if (resultsEl) resultsEl.innerHTML = '';
       return;
     }
     if (!dataLoaded) {
       if (!loadFailed) {
-        msg.textContent = 'Still loading data…';
-        msg.classList.remove('error');
+        setResultsMessage('Still loading data…');
       }
       return;
     }
@@ -477,12 +473,13 @@ async function main() {
     renderResults(applyActiveFilter(res), q);
   }
 
-  goEl.addEventListener('click', doSearch);
-  qEl.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
   qEl.addEventListener('input', () => {
     if (dataLoaded) {
       doSearch();
     }
+  });
+  document.addEventListener('click', () => {
+    if (!qEl.disabled) qEl.focus();
   });
   triggerSearch = doSearch;
 }

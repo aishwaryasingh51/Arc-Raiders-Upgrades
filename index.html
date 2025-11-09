@@ -6,14 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg: #050608;
-      --panel: rgba(6, 10, 18, 0.85);
-      --border: rgba(255, 255, 255, 0.1);
-      --accent: #ff6b2b;
-      --accent-2: #00c6ff;
-      --text: #f5f6ff;
-      --muted: #9ea5c0;
-      --badge-bg: rgba(255, 255, 255, 0.08);
+      --bg: #041615;
+      --panel: rgba(5, 15, 20, 0.78);
+      --border: rgba(54, 165, 172, 0.25);
+      --accent: #ff7a45;
+      --accent-2: #28d7c5;
+      --text: #f1fbf7;
+      --muted: rgba(205, 223, 218, 0.8);
+      --badge-bg: rgba(25, 52, 54, 0.7);
     }
 
     * {
@@ -38,19 +38,36 @@
       color: var(--text);
       background: rgba(5, 6, 8, 0.95);
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
-      padding: 40px 16px;
+      padding: 40px 16px 460px;
+      transition: padding 0.35s ease, align-items 0.35s ease;
+    }
+
+    body.top-align {
+      align-items: flex-start;
+      padding: 80px 16px 40px;
     }
 
     .container {
-      width: min(960px, 100%);
-      background: color-mix(in srgb, var(--panel) 92%, transparent);
+      width: min(1050px, 100%);
+      background: linear-gradient(145deg, rgba(4, 22, 25, 0.92), rgba(9, 30, 34, 0.85));
       border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 40px;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(18px);
+      padding: 32px 40px 40px;
+      box-shadow: 0 30px 80px rgba(3, 8, 10, 0.8), 0 0 60px rgba(40, 215, 197, 0.1);
+      backdrop-filter: blur(12px);
+      margin: 0 auto;
+      transition: padding 0.35s ease, margin 0.35s ease;
+    }
+
+    .container.compact {
+      padding-top: 24px;
+      margin-top: 20px;
+    }
+
+    .container.compact h1 {
+      display: none;
     }
 
     h1 {
@@ -65,29 +82,29 @@
     }
 
     .search {
-      display: flex;
-      gap: 12px;
-      margin: 28px 0 12px;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin: 24px 0 20px;
+      background: rgba(3, 20, 24, 0.8);
+      padding: 18px 24px;
+      border-radius: 20px;
+      border: 1px solid rgba(40, 215, 197, 0.25);
+      box-shadow: inset 0 0 35px rgba(40, 215, 197, 0.08);
+    }
+
+    .container.compact .search {
+      margin-top: 8px;
     }
 
     .search-label {
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-size: 0.85rem;
-      color: rgba(245, 246, 255, 0.85);
+      display: none;
     }
 
-    input[type="text"] {
-      flex: 1;
-      background: rgba(4, 9, 17, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      padding: 14px 16px;
-      font-size: 1rem;
+    .search input[type="text"] {
+      width: 100%;
+      background: rgba(6, 18, 22, 0.95);
+      border: 1px solid rgba(40, 215, 197, 0.3);
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-size: 1.05rem;
       color: var(--text);
       transition: border-color 0.2s, box-shadow 0.2s;
     }
@@ -98,38 +115,26 @@
       box-shadow: 0 0 0 2px rgba(0, 198, 255, 0.25);
     }
 
-    button {
-      min-width: 120px;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      color: #050608;
-      background: linear-gradient(120deg, var(--accent), #ff944d);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    button:hover:not(:disabled) {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 25px rgba(255, 107, 43, 0.35);
-    }
-
-    button:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
-
-    #msg {
-      min-height: 24px;
-      margin-bottom: 16px;
-      font-size: 0.95rem;
-    }
-
     #results {
       display: grid;
       gap: 14px;
+      margin-top: 12px;
+    }
+
+    .empty {
+      padding: 30px 20px;
+      border-radius: 16px;
+      background: rgba(4, 18, 22, 0.85);
+      border: 1px dashed rgba(92, 190, 186, 0.3);
+      text-align: center;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .empty.error {
+      border-color: rgba(255, 122, 69, 0.4);
+      color: #ffb0a0;
+      font-style: normal;
     }
 
     .result {
@@ -230,22 +235,24 @@
     .badge {
       display: inline-flex;
       align-items: center;
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: 999px;
       font-size: 0.85rem;
       letter-spacing: 0.03em;
       background: var(--badge-bg);
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(92, 190, 186, 0.25);
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
       color: inherit;
       text-transform: none;
+      backdrop-filter: blur(6px);
     }
 
     .badge:hover {
       border-color: var(--accent-2);
-      box-shadow: 0 6px 16px rgba(0, 198, 255, 0.2);
+      box-shadow: 0 6px 16px rgba(40, 215, 197, 0.25);
       transform: translateY(-2px);
+      background: rgba(16, 45, 47, 0.85);
     }
 
     .badge:focus-visible {
@@ -255,8 +262,9 @@
 
     .badge-active {
       border-color: var(--accent);
-      background: rgba(255, 107, 43, 0.18);
-      box-shadow: 0 6px 20px rgba(255, 107, 43, 0.35);
+      background: rgba(255, 122, 69, 0.18);
+      box-shadow: 0 6px 24px rgba(255, 122, 69, 0.4);
+      color: var(--text);
     }
 
     .badge:first-child {
@@ -336,8 +344,7 @@
       color: var(--muted);
     }
 
-    .muted.error,
-    #msg.error {
+    .muted.error {
       color: #ff5460;
     }
 
@@ -354,34 +361,35 @@
       .container {
         padding: 28px 20px;
       }
-
-      .search {
-        flex-direction: column;
-      }
-
-      button {
-        width: 100%;
-      }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>What item, Raider?</h1>
-    <div class="search-label">Search Item</div>
     <div class="search">
       <input id="q" type="text" placeholder="Search item name…" />
-      <button id="go">Search</button>
     </div>
 
-    <div id="msg" class="muted"></div>
     <div id="results"></div>
-
-    <footer class="muted">
-      Hosted on GitHub Pages. No tracking, no backend.
-    </footer>
   </div>
 
   <script src="script.js"></script>
+  <script>
+    (function () {
+      const container = document.querySelector('.container');
+      const input = document.getElementById('q');
+      function sync() {
+        if (!container || !input) return;
+        const active = input.value.trim().length > 0;
+        container.classList.toggle('compact', active);
+        document.body.classList.toggle('top-align', active);
+      }
+      document.addEventListener('input', e => {
+        if (e.target === input) sync();
+      });
+      sync();
+    })();
+  </script>
 </body>
 </html>
