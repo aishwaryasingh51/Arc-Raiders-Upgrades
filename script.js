@@ -332,20 +332,34 @@ function renderResults(list, q) {
       usageList.className = 'usage-list';
       usageEntries.forEach(entry => {
         const li = document.createElement('li');
+        const stationLower = String(entry.station || '').toLowerCase();
+        const sourceLower = String(entry.source || '').toLowerCase();
+        const isQuestRequirement = stationLower === 'quest' || sourceLower === 'quest' || Boolean(entry.questName);
+        const isExpeditionRequirement = stationLower.startsWith('expedition');
         const hideTier =
           entry.station?.startsWith('Expedition') && String(entry.tier || '0') === '0';
         const tierText = entry.tier && !hideTier ? `Tier ${entry.tier}` : '';
-        const heading = entry.questName || [entry.station, tierText].filter(Boolean).join(' ').trim() || 'Upgrade requirement';
+        const heading = isQuestRequirement
+          ? `Quest: ${entry.questName || 'Unknown Quest'}`
+          : [entry.station, tierText].filter(Boolean).join(' ').trim() || 'Upgrade requirement';
         const headingEl = document.createElement('div');
         headingEl.textContent = heading;
         li.appendChild(headingEl);
 
-        if (entry.quantity) {
+        const hasNumericQuantity = Number.isFinite(entry.quantity);
+        let showQuantity = null;
+        if (hasNumericQuantity && entry.quantity > 0) {
+          showQuantity = entry.quantity;
+        } else if (isQuestRequirement || isExpeditionRequirement) {
+          showQuantity = hasNumericQuantity ? entry.quantity : 0;
+        }
+        if (showQuantity !== null) {
           const qtyLine = document.createElement('div');
-          qtyLine.textContent = `Quantity: ${entry.quantity}`;
+          qtyLine.textContent = `Quantity: ${showQuantity}`;
           li.appendChild(qtyLine);
         }
-        if (entry.source && entry.source !== 'Item') {
+        const shouldShowSource = !isQuestRequirement && !isExpeditionRequirement && entry.source && entry.source !== 'Item';
+        if (shouldShowSource) {
           const srcLine = document.createElement('div');
           srcLine.textContent = `Source: ${entry.source}`;
           li.appendChild(srcLine);
