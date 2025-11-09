@@ -290,25 +290,15 @@ function renderResults(list, q) {
       }
       badges.appendChild(badge);
     };
-    addBadge(r.Source, 'source', r.Source);
-    if (r.Station) addBadge(`${r.Station}${r.Tier ? ` Tier ${r.Tier}` : ''}`, 'station', `${r.Station || ''}|${r.Tier || ''}`);
-    (r.CategoryList?.length ? r.CategoryList : [r.Category]).forEach(cat => addBadge(cat, 'category', cat));
-    (r.LocationList?.length ? r.LocationList : [r.LocationType]).forEach(loc => addBadge(loc, 'location', loc));
-    (r.VendorList || []).forEach(v => addBadge(`Vendor: ${v}`, 'vendor', v));
     if (r.ArcRarity) addBadge(r.ArcRarity, 'rarity', r.ArcRarity);
-    if (r.ArcType) addBadge(r.ArcType, 'type', r.ArcType);
-    if (r.ArcFoundIn) {
-      splitLocations(r.ArcFoundIn).forEach(loc => addBadge(loc, 'found', loc));
-    }
-    if (r.MetaWorkbench) addBadge(`Workbench: ${r.MetaWorkbench}`, 'workbench', r.MetaWorkbench);
+    const locations = r.ArcFoundIn ? splitLocations(r.ArcFoundIn) : (r.LocationList?.length ? r.LocationList : [r.LocationType]);
+    locations.forEach(loc => addBadge(loc, 'location', loc));
     const arcValueNum = Number(r.ArcValue);
     if (Number.isFinite(arcValueNum) && arcValueNum > 0) {
-      addBadge(`Value ₳${arcValueNum.toLocaleString()}`, 'value', arcValueNum);
+      addBadge(`₳${arcValueNum.toLocaleString()}`, 'value', arcValueNum);
     } else if (r.ArcValue) {
-      addBadge(`Value ${r.ArcValue}`, 'value', r.ArcValue);
+      addBadge(r.ArcValue, 'value', r.ArcValue);
     }
-    if (r.ArcStackSize) addBadge(`Stack ${r.ArcStackSize}`, 'stack', r.ArcStackSize);
-    if (r.ArcWeightKg) addBadge(`${r.ArcWeightKg} kg`, 'weight', r.ArcWeightKg);
     content.appendChild(badges);
 
     const description = r.ArcDescription || r.MetaDescription;
@@ -317,6 +307,14 @@ function renderResults(list, q) {
       desc.className = 'description';
       desc.textContent = description;
       content.appendChild(desc);
+
+      const recycleMatch = description.match(/Can be recycled into ([^.]+)\.?/i);
+      if (recycleMatch) {
+        const recycle = document.createElement('div');
+        recycle.className = 'description';
+        recycle.textContent = `Dismantle yields: ${recycleMatch[1].trim()}.`;
+        content.appendChild(recycle);
+      }
     }
 
     const hasUsage = (r.UsageEntries?.length || 0) > 0;
