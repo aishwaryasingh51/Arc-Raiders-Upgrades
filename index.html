@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ARC Raiders Upgrade Helper</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont,
+          sans-serif;
+        --bg: #0f1117;
+        --panel: #181b24;
+        --text: #eef3ff;
+        --accent: #57c4ff;
+        --muted: #8b95b5;
+        background-color: var(--bg);
+        color: var(--text);
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding: 3rem 1rem;
+      }
+
+      .app-shell {
+        width: min(960px, 100%);
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      h1 {
+        margin-bottom: 0.3rem;
+        font-size: clamp(2rem, 4vw, 2.75rem);
+      }
+
+      p.lede {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .search-area {
+        position: relative;
+        margin-bottom: 1rem;
+      }
+
+      input[type="search"] {
+        width: 100%;
+        padding: 0.85rem 1rem;
+        border-radius: 0.75rem;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background-color: var(--panel);
+        color: var(--text);
+        font-size: 1rem;
+        outline: none;
+        transition: border 0.2s ease;
+      }
+
+      input[type="search"]:focus {
+        border-color: var(--accent);
+      }
+
+      .suggestions {
+        list-style: none;
+        padding: 0;
+        margin: 0.4rem 0 0;
+        position: absolute;
+        width: 100%;
+        background-color: var(--panel);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.75rem;
+        max-height: 220px;
+        overflow-y: auto;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+        display: none;
+        z-index: 10;
+      }
+
+      .suggestions.visible {
+        display: block;
+      }
+
+      .suggestions li {
+        padding: 0.7rem 1rem;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .suggestions li:last-child {
+        border-bottom: none;
+      }
+
+      .suggestions li:hover,
+      .suggestions li:focus {
+        background-color: rgba(87, 196, 255, 0.08);
+      }
+
+      .info-card {
+        background-color: var(--panel);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        min-height: 200px;
+      }
+
+      .info-card h2 {
+        margin-top: 0;
+        font-size: 1.6rem;
+      }
+
+      .info-card .status {
+        font-weight: 600;
+        color: var(--accent);
+      }
+
+      .info-grid {
+        display: grid;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      @media (min-width: 720px) {
+        .info-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      .info-section {
+        padding: 1rem;
+        border-radius: 0.75rem;
+        background-color: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+      }
+
+      .info-section h3 {
+        margin-top: 0;
+        margin-bottom: 0.6rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+      }
+
+      .info-section ul {
+        list-style: none;
+        padding-left: 1rem;
+        margin: 0;
+      }
+
+      .info-section li {
+        margin-bottom: 0.35rem;
+        position: relative;
+      }
+
+      .info-section li::before {
+        content: "•";
+        position: absolute;
+        left: -0.9rem;
+        color: var(--accent);
+      }
+
+      .empty-state {
+        color: var(--muted);
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header>
+        <h1>ARC Raiders Upgrade Finder</h1>
+        <p class="lede">
+          Start typing an item to see where it drops and whether you should keep
+          it for crafting.
+        </p>
+      </header>
+
+      <div class="search-area">
+        <label class="sr-only" for="search">Search upgrades</label>
+        <input
+          id="search"
+          type="search"
+          placeholder="Search by item name…"
+          autocomplete="off"
+        />
+        <ul id="suggestions" class="suggestions" role="listbox"></ul>
+      </div>
+
+      <section id="info" class="info-card">
+        <p class="empty-state">
+          Search for an item to see if it is tied to any upgrades or can be sold
+          safely.
+        </p>
+      </section>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"
+      integrity="sha256-VoFHtaA99EfgQ6ulxXwfvX2gYdEx+kt1/3uzMdGIIKg="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const DATA_URL = "ARC Raiders Upgrade List - UPGRADES.csv";
+      const MAX_SUGGESTIONS = 8;
+
+      const searchInput = document.getElementById("search");
+      const suggestionsEl = document.getElementById("suggestions");
+      const infoEl = document.getElementById("info");
+
+      let itemsMap = new Map();
+      let allItems = [];
+
+      function normalizeName(value = "") {
+        return value.trim().toLowerCase();
+      }
+
+      function buildDisplayName(value = "") {
+        return value.trim();
+      }
+
+      function parseCsv(text) {
+        const { data } = Papa.parse(text, {
+          skipEmptyLines: "greedy",
+        });
+
+        const [header, ...rows] = data;
+        if (!header) return;
+
+        rows.forEach((row) => {
+          const [rawName, rawQty, rawNeeded, ...spots] = row;
+          const name = buildDisplayName(rawName || "");
+          if (!name) return;
+
+          const entry = {
+            quantity: (rawQty || "").trim(),
+            neededFor: (rawNeeded || "").trim(),
+            locations: spots
+              .map((spot) => (spot || "").trim())
+              .filter(Boolean),
+          };
+
+          const key = normalizeName(name);
+          if (!itemsMap.has(key)) {
+            itemsMap.set(key, { name, entries: [] });
+          }
+          itemsMap.get(key).entries.push(entry);
+        });
+
+        allItems = Array.from(itemsMap.values()).sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+      }
+
+      async function loadData() {
+        try {
+          const response = await fetch(DATA_URL);
+          if (!response.ok) {
+            throw new Error("Failed to fetch item list");
+          }
+          const text = await response.text();
+          parseCsv(text);
+        } catch (error) {
+          infoEl.innerHTML = `<p class="empty-state">Unable to load data. Please refresh to try again.</p>`;
+          console.error(error);
+        }
+      }
+
+      function handleInput(event) {
+        const query = event.target.value;
+        const normalized = normalizeName(query);
+
+        if (!normalized) {
+          suggestionsEl.classList.remove("visible");
+          suggestionsEl.innerHTML = "";
+          infoEl.innerHTML = `<p class="empty-state">Search for an item to see if it is tied to any upgrades or can be sold safely.</p>`;
+          return;
+        }
+
+        const matches = allItems
+          .filter((item) => normalizeName(item.name).includes(normalized))
+          .slice(0, MAX_SUGGESTIONS);
+
+        renderSuggestions(matches);
+      }
+
+      function renderSuggestions(matches) {
+        if (!matches.length) {
+          suggestionsEl.classList.remove("visible");
+          suggestionsEl.innerHTML = "";
+          return;
+        }
+
+        suggestionsEl.innerHTML = matches
+          .map(
+            (item) =>
+              `<li tabindex="0" role="option" data-name="${item.name}">${item.name}</li>`
+          )
+          .join("");
+        suggestionsEl.classList.add("visible");
+      }
+
+      function selectItem(name) {
+        searchInput.value = name;
+        suggestionsEl.classList.remove("visible");
+        suggestionsEl.innerHTML = "";
+        showItemInfo(name);
+      }
+
+      function showItemInfo(name) {
+        const key = normalizeName(name);
+        const record = itemsMap.get(key);
+
+        if (!record) {
+          infoEl.innerHTML = `
+            <div>
+              <h2>${name}</h2>
+              <p class="status">Not in the upgrade list</p>
+              <p>You can safely sell or dismantle this item according to the current list.</p>
+            </div>
+          `;
+          return;
+        }
+
+        const uniqueUseMap = new Map();
+        const quantityOnly = [];
+
+        record.entries.forEach((entry) => {
+          if (entry.neededFor) {
+            if (!uniqueUseMap.has(entry.neededFor)) {
+              uniqueUseMap.set(entry.neededFor, new Set());
+            }
+            if (entry.quantity) {
+              uniqueUseMap.get(entry.neededFor).add(entry.quantity);
+            }
+          } else if (entry.quantity) {
+            quantityOnly.push(entry.quantity);
+          }
+        });
+
+        const craftingUses = Array.from(uniqueUseMap.entries());
+
+        const locations = Array.from(
+          new Set(record.entries.flatMap((entry) => entry.locations))
+        );
+
+        const hasCraftingUse = craftingUses.length > 0;
+
+        infoEl.innerHTML = `
+          <div>
+            <h2>${record.name}</h2>
+            <p class="status">${
+              hasCraftingUse
+                ? "Needed for crafting—hold onto it."
+                : "No crafting use recorded—safe to sell if you need space."
+            }</p>
+            ${
+              hasCraftingUse
+                ? "<p>Below are the known crafting benches or quests that require it.</p>"
+                : ""
+            }
+            <div class="info-grid">
+              <div class="info-section">
+                <h3>Uses + Qty</h3>
+                ${
+                  craftingUses.length
+                    ? `<ul>${craftingUses
+                        .map(([use, qtySet]) => {
+                          const qtyText = qtySet.size
+                            ? ` — need ${Array.from(qtySet).join(" / ")}`
+                            : "";
+                          return `<li>${use}${qtyText}</li>`;
+                        })
+                        .join("")}</ul>`
+                    : quantityOnly.length
+                    ? `<ul>${quantityOnly
+                        .map((qty) => `<li>${qty} noted (no bench listed)</li>`)
+                        .join("")}</ul>`
+                    : `<p class="empty-state">No known upgrade requires this yet.</p>`
+                }
+              </div>
+              <div class="info-section">
+                <h3>Where to Find</h3>
+                ${
+                  locations.length
+                    ? `<ul>${locations
+                        .map((spot) => `<li>${spot}</li>`)
+                        .join("")}</ul>`
+                    : `<p class="empty-state">No farm locations listed.</p>`
+                }
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      suggestionsEl.addEventListener("click", (event) => {
+        if (event.target.matches("li[data-name]")) {
+          selectItem(event.target.dataset.name);
+        }
+      });
+
+      suggestionsEl.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" && event.target.matches("li[data-name]")) {
+          event.preventDefault();
+          selectItem(event.target.dataset.name);
+        }
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!event.target.closest(".search-area")) {
+          suggestionsEl.classList.remove("visible");
+        }
+      });
+
+      searchInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          const value = searchInput.value.trim();
+          if (!value) return;
+          showItemInfo(value);
+          suggestionsEl.classList.remove("visible");
+        }
+      });
+
+      searchInput.addEventListener("input", handleInput);
+      loadData();
+    </script>
+  </body>
+</html>
