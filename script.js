@@ -106,9 +106,11 @@ function similarity(a, b) {
 }
 
 let ITEMS = [];
+let dataLoaded = false;
+let loadFailed = false;
 
 async function loadData() {
-  const res = await fetch('data/items.csv');
+  const res = await fetch('items.csv');
   if (!res.ok) throw new Error(`Failed to load CSV (${res.status})`);
   const text = await res.text();
   const rows = parseCSV(text);
@@ -121,27 +123,45 @@ function renderResults(list, q) {
   resultsEl.innerHTML = '';
 
   if (list.length === 0) {
-    msg.innerHTML = `<span class="error">No matches found for "${q}".</span>`;
+    msg.textContent = `No matches found for "${q}".`;
+    msg.classList.add('error');
     return;
   }
 
   msg.textContent = `Found ${list.length} match${list.length > 1 ? 'es' : ''} for "${q}".`;
+  msg.classList.remove('error');
 
   for (const r of list) {
     const div = document.createElement('div');
     div.className = 'result';
     const tier = r.Source === 'Item' && r.Tier ? ` ${r.Tier}` : (r.Source?.startsWith('Expedition') ? '' : '');
-    div.innerHTML = `
-      <div><strong>${r.Name}</strong></div>
-      <div class="badges">
-        ${r.Source ? `<span class="badge">${r.Source}</span>` : ''}
-        ${r.Station ? `<span class="badge">${r.Station}${tier}</span>` : ''}
-        ${r.Category ? `<span class="badge">${r.Category}</span>` : ''}
-        ${r.LocationType ? `<span class="badge">${r.LocationType}</span>` : ''}
-        ${r.Vendor ? `<span class="badge">Vendor: ${r.Vendor}</span>` : ''}
-      </div>
-      <div class="muted">Quantity: ${r.Quantity}</div>
-    `;
+    const title = document.createElement('div');
+    const strong = document.createElement('strong');
+    strong.textContent = r.Name || 'Unknown Item';
+    title.appendChild(strong);
+    div.appendChild(title);
+
+    const badges = document.createElement('div');
+    badges.className = 'badges';
+    const addBadge = (text) => {
+      if (!text) return;
+      const badge = document.createElement('span');
+      badge.className = 'badge';
+      badge.textContent = text;
+      badges.appendChild(badge);
+    };
+    addBadge(r.Source);
+    if (r.Station) addBadge(`${r.Station}${tier}`);
+    addBadge(r.Category);
+    addBadge(r.LocationType);
+    if (r.Vendor) addBadge(`Vendor: ${r.Vendor}`);
+    div.appendChild(badges);
+
+    const qty = document.createElement('div');
+    qty.className = 'muted';
+    qty.textContent = `Quantity: ${r.Quantity}`;
+    div.appendChild(qty);
+
     resultsEl.appendChild(div);
   }
 }
@@ -186,18 +206,33 @@ function search(q, maxResults = 50) {
 
 async function main() {
   const msg = document.getElementById('msg');
+  const qEl = document.getElementById('q');
+  const goEl = document.getElementById('go');
+  qEl.disabled = true;
+  goEl.disabled = true;
+
   try {
     await loadData();
     msg.textContent = `Loaded ${ITEMS.length} entries.`;
+    msg.classList.remove('error');
+    dataLoaded = true;
+    qEl.disabled = false;
+    goEl.disabled = false;
   } catch (e) {
-    msg.innerHTML = `<span class="error">${e.message}</span>`;
+    msg.textContent = e.message;
+    msg.classList.add('error');
+    loadFailed = true;
   }
-
-  const qEl = document.getElementById('q');
-  const goEl = document.getElementById('go');
 
   async function doSearch() {
     const q = qEl.value;
+    if (!dataLoaded) {
+      if (!loadFailed) {
+        msg.textContent = 'Still loading data…';
+        msg.classList.remove('error');
+      }
+      return;
+    }
     const res = search(q);
     renderResults(res, q);
   }
