@@ -217,7 +217,8 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      const DATA_URL = "ARC Raiders Upgrade List - UPGRADES.csv";
+      const DATA_FILENAME = "arc_raiders_upgrads.csv";
+      const DATA_URL = DATA_FILENAME.split("/").map(encodeURIComponent).join("/");
       const MAX_SUGGESTIONS = 8;
 
       const searchInput = document.getElementById("search");
