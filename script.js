@@ -42,10 +42,34 @@ function parseCSV(text) {
   return rows;
 }
 
-function splitList(str, pattern = /[|,;]+/) {
-  const s = String(str || '').trim();
-  if (!s) return [];
-  return s.split(pattern).map(x => x.trim()).filter(Boolean);
+function normalizeQuantity(q) {
+  const s = String(q || '').trim().toLowerCase();
+  if (!s) return 0;
+  const k = s.match(/^(\d+(?:\.\d+)?)k$/);
+  if (k) return Math.round(parseFloat(k[1]) * 1000);
+  const n = parseInt(s, 10);
+  return Number.isFinite(n) ? n : 0;
+}
+
+function splitLocations(loc) {
+  const s = String(loc || '').trim();
+  if (!s) return [''];
+  return s.replace(/\|/g, ';').split(/[,;]+/).map(x => x.trim()).filter(Boolean);
+}
+
+function slugify(text) {
+  return String(text || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
+}
+
+function titleCase(text) {
+  return text.replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function normalizeFilterValue(value) {
+  return String(value || '').trim().toLowerCase();
 }
 
 function toObjects(rows) {
@@ -58,16 +82,113 @@ function toObjects(rows) {
     for (let c = 0; c < header.length; c++) {
       obj[header[c]] = row[c] !== undefined ? row[c] : '';
     }
+    obj.Quantity = normalizeQuantity(obj.Quantity);
     obj._normName = String(obj.Name || '').trim().toLowerCase();
-    obj.FoundInList = splitList(obj.FoundIn);
-    obj.EffectsList = splitList(obj.Effects, /\|/);
-    obj.UsageList = splitList(obj.Usage, /\|/);
-    obj.RecycleList = splitList(obj.RecycleOutputs, /\|/);
-    obj.SalvageList = splitList(obj.SalvageOutputs, /\|/);
-    obj.ValueNum = Number(obj.Value) || 0;
-    out.push(obj);
+
+    const locs = splitLocations(obj.LocationType);
+    if (locs.length <= 1) {
+      obj.LocationType = locs[0] || '';
+      out.push(obj);
+    } else {
+      for (const l of locs) {
+        const dup = { ...obj, LocationType: l };
+        out.push(dup);
+      }
+    }
   }
   return out;
+}
+
+function aggregateItems(rows) {
+  const map = new Map();
+  const pushUnique = (list, value) => {
+    if (!value) return;
+    if (!list.includes(value)) list.push(value);
+  };
+  const addFilterKey = (entry, type, value) => {
+    if (!value) return;
+    const values = Array.isArray(value) ? value : [value];
+    values.forEach(val => {
+      const norm = normalizeFilterValue(val);
+      if (norm) entry.FilterKeys.add(`${type}:${norm}`);
+    });
+  };
+  for (const row of rows) {
+    const key = row._normName;
+    let entry = map.get(key);
+    if (!entry) {
+      entry = {
+        ...row,
+        CategoryList: [],
+        LocationList: [],
+        VendorList: [],
+        SourceList: [],
+        UsageEntries: [],
+        _usageSet: new Set(),
+        FilterKeys: new Set(),
+      };
+      map.set(key, entry);
+    }
+    pushUnique(entry.CategoryList, row.Category);
+    pushUnique(entry.LocationList, row.LocationType);
+    pushUnique(entry.VendorList, row.Vendor);
+    pushUnique(entry.SourceList, row.Source);
+    addFilterKey(entry, 'category', row.Category);
+    addFilterKey(entry, 'location', row.LocationType);
+    addFilterKey(entry, 'vendor', row.Vendor);
+    addFilterKey(entry, 'source', row.Source);
+    addFilterKey(entry, 'station', `${row.Station || ''}|${row.Tier || ''}`);
+    addFilterKey(entry, 'rarity', row.ArcRarity || row.MetaRarity);
+    addFilterKey(entry, 'type', row.ArcType || row.MetaType || row.Category);
+    addFilterKey(entry, 'found', splitLocations(row.ArcFoundIn));
+    addFilterKey(entry, 'workbench', row.MetaWorkbench);
+    addFilterKey(entry, 'value', row.ArcValue);
+    addFilterKey(entry, 'stack', row.ArcStackSize);
+    addFilterKey(entry, 'weight', row.ArcWeightKg);
+    const slugName = slugify(row.Name);
+    let questName = '';
+    if (row.Station === 'Quest' || row.Source === 'Quest') {
+      questName = deriveQuestName(row.ItemID, slugName, row.ArcID, row.MetaID);
+    }
+    const usageKey = [row.Station, row.Tier, row.Quantity, row.Source, questName].join('|');
+    if (!entry._usageSet.has(usageKey)) {
+      entry._usageSet.add(usageKey);
+      entry.UsageEntries.push({
+        station: row.Station,
+        tier: row.Tier,
+        quantity: row.Quantity,
+        source: row.Source,
+        questName,
+      });
+    }
+
+    if (!entry.ArcDescription && row.ArcDescription) entry.ArcDescription = row.ArcDescription;
+    if (!entry.MetaDescription && row.MetaDescription) entry.MetaDescription = row.MetaDescription;
+    if (!entry.ArcRarity && row.ArcRarity) entry.ArcRarity = row.ArcRarity;
+    if (!entry.MetaRarity && row.MetaRarity) entry.MetaRarity = row.MetaRarity;
+  }
+  return Array.from(map.values()).map(({ _usageSet, ...rest }) => rest);
+}
+
+function deriveQuestName(itemId, slugName, arcId, metaId) {
+  if (!itemId) return '';
+  const tokens = itemId.split('_').filter(Boolean);
+  if (tokens.length <= 1) return '';
+  const nameTokens = slugName ? slugName.split('_').filter(Boolean) : [];
+  let dropCount = 0;
+  if (arcId && itemId.startsWith(arcId) && tokens.length > arcId.split('_').length) {
+    dropCount = arcId.split('_').length;
+  } else if (metaId && itemId.startsWith(metaId) && tokens.length > metaId.split('_').length) {
+    dropCount = metaId.split('_').length;
+  } else if (nameTokens.length && tokens.length > nameTokens.length) {
+    dropCount = nameTokens.length;
+  }
+  if (dropCount <= 0 || dropCount >= tokens.length) {
+    dropCount = Math.max(1, tokens.length - 2);
+  }
+  const remainder = tokens.slice(dropCount);
+  if (remainder.length === 0) return '';
+  return titleCase(remainder.join(' '));
 }
 
 // Basic fuzzy scorer (Jaro-Winkler-like using edit distance ratio)
@@ -90,15 +211,11 @@ function similarity(a, b) {
 }
 
 let ITEMS = [];
+let GROUPED_ITEMS = [];
 let dataLoaded = false;
 let loadFailed = false;
-const rarityClassMap = {
-  common: 'tier-1',
-  uncommon: 'tier-2',
-  rare: 'tier-3',
-  epic: 'tier-4',
-  legendary: 'tier-5',
-};
+let activeFilterKey = '';
+let lastQuery = '';
 
 async function loadData() {
   const res = await fetch('items.csv');
@@ -106,6 +223,7 @@ async function loadData() {
   const text = await res.text();
   const rows = parseCSV(text);
   ITEMS = toObjects(rows);
+  GROUPED_ITEMS = aggregateItems(ITEMS);
 }
 
 function renderResults(list, q) {
@@ -125,8 +243,13 @@ function renderResults(list, q) {
   for (const r of list) {
     const div = document.createElement('div');
     div.className = 'result';
-    const rarityClass = rarityClassMap[String(r.Rarity || '').toLowerCase()] || 'tier-0';
-    div.classList.add(rarityClass);
+    const rarityKey = String(r.ArcRarity || r.MetaRarity || '').trim().toLowerCase().replace(/\s+/g, '-');
+    if (rarityKey) {
+      div.classList.add(`rarity-${rarityKey}`);
+    } else {
+      const tierValue = Number.parseInt(r.Tier, 10);
+      div.classList.add(Number.isFinite(tierValue) ? `tier-${tierValue}` : 'tier-0');
+    }
     const content = document.createElement('div');
     content.className = 'result-body';
 
@@ -139,68 +262,101 @@ function renderResults(list, q) {
     const badges = document.createElement('div');
     badges.className = 'badges';
     const badgeSet = new Set();
-    const addBadge = (text) => {
-      if (!text || badgeSet.has(text)) return;
-      badgeSet.add(text);
-      const badge = document.createElement('span');
+    const addBadge = (text, keyType, rawValue = text) => {
+      if (!text) return;
+      const key = keyType ? `${keyType}:${normalizeFilterValue(rawValue ?? text)}` : '';
+      const dedupeKey = `${text}|${key}`;
+      if (badgeSet.has(dedupeKey)) return;
+      badgeSet.add(dedupeKey);
+      const badge = document.createElement('button');
+      badge.type = 'button';
       badge.className = 'badge';
       badge.textContent = text;
+      if (key) {
+        badge.dataset.filterKey = key;
+        if (activeFilterKey === key) badge.classList.add('badge-active');
+        badge.addEventListener('click', e => {
+          e.stopPropagation();
+          toggleFilter(key);
+        });
+      }
       badges.appendChild(badge);
     };
-    addBadge(r.Rarity);
-    addBadge(r.Type);
-    (r.FoundInList || []).forEach(loc => addBadge(loc));
-    if (r.Value) addBadge(`Value: ${r.Value}`);
-    if (r.StackSize) addBadge(`Stack: ${r.StackSize}`);
-    if (r.WeightKg) addBadge(`${r.WeightKg} kg`);
+    addBadge(r.Source, 'source', r.Source);
+    if (r.Station) addBadge(`${r.Station}${r.Tier ? ` Tier ${r.Tier}` : ''}`, 'station', `${r.Station || ''}|${r.Tier || ''}`);
+    (r.CategoryList?.length ? r.CategoryList : [r.Category]).forEach(cat => addBadge(cat, 'category', cat));
+    (r.LocationList?.length ? r.LocationList : [r.LocationType]).forEach(loc => addBadge(loc, 'location', loc));
+    (r.VendorList || []).forEach(v => addBadge(`Vendor: ${v}`, 'vendor', v));
+    if (r.ArcRarity) addBadge(r.ArcRarity, 'rarity', r.ArcRarity);
+    if (r.ArcType) addBadge(r.ArcType, 'type', r.ArcType);
+    if (r.ArcFoundIn) {
+      splitLocations(r.ArcFoundIn).forEach(loc => addBadge(loc, 'found', loc));
+    }
+    if (r.MetaWorkbench) addBadge(`Workbench: ${r.MetaWorkbench}`, 'workbench', r.MetaWorkbench);
+    const arcValueNum = Number(r.ArcValue);
+    if (Number.isFinite(arcValueNum) && arcValueNum > 0) {
+      addBadge(`Value ₳${arcValueNum.toLocaleString()}`, 'value', arcValueNum);
+    } else if (r.ArcValue) {
+      addBadge(`Value ${r.ArcValue}`, 'value', r.ArcValue);
+    }
+    if (r.ArcStackSize) addBadge(`Stack ${r.ArcStackSize}`, 'stack', r.ArcStackSize);
+    if (r.ArcWeightKg) addBadge(`${r.ArcWeightKg} kg`, 'weight', r.ArcWeightKg);
     content.appendChild(badges);
 
-    if (r.Description) {
+    const description = r.ArcDescription || r.MetaDescription;
+    if (description) {
       const desc = document.createElement('p');
       desc.className = 'description';
-      desc.textContent = r.Description;
+      desc.textContent = description;
       content.appendChild(desc);
     }
 
+    const hasUsage = (r.UsageEntries?.length || 0) > 0;
     const advisory = document.createElement('div');
-    const hasUsage = (r.UsageList || []).length > 0;
     advisory.className = `usage ${hasUsage ? 'required' : 'optional'}`;
     const usageTitle = document.createElement('div');
     usageTitle.className = 'usage-title';
-    usageTitle.textContent = hasUsage ? 'Required for quests / upgrades' : 'Not required for quests or upgrades';
-    advisory.appendChild(usageTitle);
 
     if (hasUsage) {
+      const usageEntries = r.UsageEntries || [];
+      usageTitle.textContent = 'Required';
+      advisory.appendChild(usageTitle);
+
       const usageList = document.createElement('ul');
       usageList.className = 'usage-list';
-      r.UsageList.forEach(item => {
+      usageEntries.forEach(entry => {
         const li = document.createElement('li');
-        li.textContent = item;
+        const hideTier =
+          entry.station?.startsWith('Expedition') && String(entry.tier || '0') === '0';
+        const tierText = entry.tier && !hideTier ? `Tier ${entry.tier}` : '';
+        const heading = entry.questName || [entry.station, tierText].filter(Boolean).join(' ').trim() || 'Upgrade requirement';
+        const headingEl = document.createElement('div');
+        headingEl.textContent = heading;
+        li.appendChild(headingEl);
+
+        if (entry.quantity) {
+          const qtyLine = document.createElement('div');
+          qtyLine.textContent = `Quantity: ${entry.quantity}`;
+          li.appendChild(qtyLine);
+        }
+        if (entry.source && entry.source !== 'Item') {
+          const srcLine = document.createElement('div');
+          srcLine.textContent = `Source: ${entry.source}`;
+          li.appendChild(srcLine);
+        }
         usageList.appendChild(li);
       });
       advisory.appendChild(usageList);
     } else {
+      usageTitle.textContent = 'Not listed for quests / upgrades';
+      advisory.appendChild(usageTitle);
       const safeMsg = document.createElement('p');
-      const valueText = r.ValueNum > 0 ? `₳${r.ValueNum.toLocaleString()}` : 'its listed value';
-      safeMsg.textContent = `Safe to sell for ${valueText} or dismantle for materials.`;
+      const saleValue = Number(r.ArcValue);
+      const saleText = Number.isFinite(saleValue) && saleValue > 0
+        ? `₳${saleValue.toLocaleString()}`
+        : (r.ArcValue || 'its listed value');
+      safeMsg.textContent = `This item does not appear in the upgrade data set and can be sold for ${saleText} or dismantled safely.`;
       advisory.appendChild(safeMsg);
-
-      const recycleDetails = [...(r.RecycleList || []), ...(r.SalvageList || [])];
-      if (recycleDetails.length > 0) {
-        const recycleHeader = document.createElement('div');
-        recycleHeader.className = 'effects-header muted';
-        recycleHeader.textContent = 'Dismantle yields';
-        advisory.appendChild(recycleHeader);
-
-        const recycleList = document.createElement('ul');
-        recycleList.className = 'effects';
-        recycleDetails.forEach(detail => {
-          const li = document.createElement('li');
-          li.textContent = detail;
-          recycleList.appendChild(li);
-        });
-        advisory.appendChild(recycleList);
-      }
     }
 
     content.appendChild(advisory);
@@ -208,26 +364,14 @@ function renderResults(list, q) {
     const meta = document.createElement('div');
     meta.className = 'stats muted';
     const details = [];
-    if (r.UpdatedAt) details.push(`Updated: ${r.UpdatedAt}`);
+    if (r.Source) details.push(r.Source);
+    if (r.ArcUpdatedAt) details.push(`Arc update: ${r.ArcUpdatedAt}`);
+    else if (r.UpdatedAt) details.push(`Updated: ${r.UpdatedAt}`);
+    if (r.ArcID) details.push(`Arc ID: ${r.ArcID}`);
+    if (r.MetaID) details.push(`Meta ID: ${r.MetaID}`);
     if (r.ItemID) details.push(`#${r.ItemID}`);
     meta.textContent = details.join(' · ');
     content.appendChild(meta);
-
-    if (r.EffectsList && r.EffectsList.length > 0) {
-      const effectsHeader = document.createElement('div');
-      effectsHeader.className = 'effects-header muted';
-      effectsHeader.textContent = 'Effects';
-      content.appendChild(effectsHeader);
-
-      const listEl = document.createElement('ul');
-      listEl.className = 'effects';
-      r.EffectsList.forEach(effect => {
-        const li = document.createElement('li');
-        li.textContent = effect;
-        listEl.appendChild(li);
-      });
-      content.appendChild(listEl);
-    }
 
     div.appendChild(content);
     resultsEl.appendChild(div);
@@ -235,7 +379,7 @@ function renderResults(list, q) {
 }
 
 function itemKey(r) {
-  return [r.Name, r.Rarity, r.Type, r.FoundIn, r.Value, r.StackSize].join('|');
+  return r._normName;
 }
 
 function dedupeAndSort(list) {
@@ -251,9 +395,9 @@ function dedupeAndSort(list) {
   out.sort((a, b) => {
     const nameCompare = a._normName.localeCompare(b._normName);
     if (nameCompare !== 0) return nameCompare;
-    const rarityCompare = String(a.Rarity || '').localeCompare(String(b.Rarity || ''));
-    if (rarityCompare !== 0) return rarityCompare;
-    return String(a.Type || '').localeCompare(String(b.Type || ''));
+    const stationCompare = String(a.Station || '').localeCompare(String(b.Station || ''));
+    if (stationCompare !== 0) return stationCompare;
+    return String(a.Tier || '').localeCompare(String(b.Tier || ''));
   });
   return out;
 }
@@ -263,7 +407,7 @@ function search(q, maxResults = 50) {
   if (!query) return [];
 
   const prefixMatches = dedupeAndSort(
-    ITEMS.filter(it => it._normName.startsWith(query))
+    GROUPED_ITEMS.filter(it => it._normName.startsWith(query))
   );
 
   if (prefixMatches.length > 0) {
@@ -271,7 +415,7 @@ function search(q, maxResults = 50) {
   }
 
   // fuzzy matches
-  const scored = ITEMS
+  const scored = GROUPED_ITEMS
     .map(it => ({ it, score: similarity(query, it._normName) }))
     .filter(x => x.score >= 0.6) // adjust threshold as needed
     .sort((a, b) => b.score - a.score);
@@ -298,11 +442,12 @@ async function main() {
 
   try {
     await loadData();
-    msg.textContent = `Loaded ${ITEMS.length} entries.`;
+    msg.textContent = `Loaded ${GROUPED_ITEMS.length} unique items.`;
     msg.classList.remove('error');
     dataLoaded = true;
     qEl.disabled = false;
     goEl.disabled = false;
+    qEl.focus();
   } catch (e) {
     msg.textContent = e.message;
     msg.classList.add('error');
@@ -311,6 +456,7 @@ async function main() {
 
   function doSearch() {
     const q = qEl.value;
+    lastQuery = q;
     if (!q.trim()) {
       const resultsEl = document.getElementById('results');
       resultsEl.innerHTML = '';
@@ -328,7 +474,7 @@ async function main() {
       return;
     }
     const res = search(q);
-    renderResults(res, q);
+    renderResults(applyActiveFilter(res), q);
   }
 
   goEl.addEventListener('click', doSearch);
@@ -338,6 +484,7 @@ async function main() {
       doSearch();
     }
   });
+  triggerSearch = doSearch;
 }
 
 main();
