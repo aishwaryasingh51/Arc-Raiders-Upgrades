@@ -1,0 +1,93 @@
+ItemID,Name,Quantity,Station,Tier,Category,LocationType,Vendor,Source
+dog_collar,Dog Collar,1,Scrappy,2,Residential,Residential,,Item
+lemons,Lemons,3,Scrappy,3,Nature,Nature,,Item
+apricots_t3,Apricots,3,Scrappy,3,Nature,Nature,,Item
+apricots_t5,Apricots,12,Scrappy,5,Nature,Nature,,Item
+prickly_pears,Prickly Pears,6,Scrappy,4,Nature,Nature,,Item
+cat_bed_res,Cat Bed,1,Scrappy,4,Residential,Residential,,Item
+cat_bed_com,Cat Bed,1,Scrappy,4,Commercial,Commercial,,Item
+very_comfy_pillow_res,Very Comfortable Pillow,3,Scrappy,5,Residential,Residential,,Item
+very_comfy_pillow_com,Very Comfortable Pillow,3,Scrappy,5,Commercial,Commercial,,Item
+metal_parts_g1,Metal Parts,20,Gunsmith,1,Basic Material,Basic Material,,Item
+rubber_parts_g1,Rubber Parts,30,Gunsmith,1,Basic Material,Basic Material,,Item
+rusted_tools_g2,Rusted Tools,3,Gunsmith,2,Mechanical,Mechanical,,Item
+mech_components_g2,Mechanical Components,5,Gunsmith,2,Mechanical,Refiner,,Item
+wasp_driver_g2,Wasp Driver,8,Gunsmith,2,Drones,Drones,,Item
+rusted_gear_g3,Rusted Gear,3,Gunsmith,3,Industrial,Industrial,,Item
+adv_mech_components_g3,Advanced Mechanical Components,5,Gunsmith,3,Mechanical,Refiner,,Item
+sentinel_firing_core_g3,Sentinel Firing Core,4,Gunsmith,3,Drones,Drones,,Item
+plastic_parts_u1,Plastic Parts,25,Gear Bench,1,Basic Material,Basic Material,,Item
+fabric_u1,Fabric,30,Gear Bench,1,Basic Material,Basic Material,,Item
+power_cable_u2_res,Power Cable,3,Gear Bench,2,Electrical,Residential,,Item
+power_cable_u2_com,Power Cable,3,Gear Bench,2,Electrical,Commercial,,Item
+electrical_components_u2,Electrical Components,5,Gear Bench,2,Electrical,Refiner,,Item
+hornet_driver_u2,Hornet Driver,5,Gear Bench,2,Drones,Drones,,Item
+industrial_battery_u3,Industrial Battery,3,Gear Bench,3,Industrial,Industrial,,Item
+adv_electrical_components_u3,Advanced Electrical Components,5,Gear Bench,3,Electrical,Refiner,,Item
+bastion_cell_u3,Bastion Cell,6,Gear Bench,3,Drones,Drones,,Item
+fabric_m1,Fabric,50,Medical Lab,1,Basic Material,Basic Material,,Item
+arc_alloy_m1,ARC Alloy,6,Medical Lab,1,Drones,Drones,,Item
+cracked_bioscanner_m2,Cracked Bioscanner,2,Medical Lab,2,Medical,Medical,,Item
+durable_cloth_m2,Durable Cloth,5,Medical Lab,2,Medical,Commercial,,Item
+tick_pod_m2,Tick Pod,8,Medical Lab,2,Drones,Drones,,Item
+rusted_medkit_m3,Rusted Shut Medical Kit,3,Medical Lab,3,Medical,Medical,,Item
+antiseptic_m3,Antiseptic,8,Medical Lab,3,Medical,Medical,,Item
+surveyor_vault_m3,Surveyor Vault,5,Medical Lab,3,Drones,Drones,,Item
+rubber_parts_e1,Rubber Parts,50,Explosives Bench,1,Basic Material,Basic Material,,Item
+arc_alloy_e1,ARC Alloy,6,Explosives Bench,1,Drones,Drones,,Item
+synth_fuel_e2,Synthesized Fuel,3,Explosives Bench,2,Exodus,Celeste,,Item
+crude_explosives_e2,Crude Explosives,5,Explosives Bench,2,Industrial,Security,,Item
+pop_trigger_e2,Pop Trigger,5,Explosives Bench,2,Drones,Drones,,Item
+lab_reagents_e3,Laboratory Reagents,3,Explosives Bench,3,Medical,Medical,,Item
+explosive_compound_e3,Explosive Compound,5,Explosives Bench,3,Industrial,Security,,Item
+rocketeer_driver_e3,Rocketeer Driver,3,Explosives Bench,3,Drones,Drones,,Item
+plastic_parts_u1b,Plastic Parts,50,Utility Station,1,Basic Material,Basic Material,,Item
+arc_alloy_u1b,ARC Alloy,6,Utility Station,1,Drones,Drones,,Item
+damaged_heat_sink_u2,Damaged Heat Sink,2,Utility Station,2,Technological,Technological,,Item
+electrical_components_u2b,Electrical Components,5,Utility Station,2,Electrical,Refiner,,Item
+snitch_scanner_u2,Snitch Scanner,6,Utility Station,2,Drones,Drones,,Item
+fried_motherboard_u3,Fried Motherboard,3,Utility Station,3,Technological,Technological,,Item
+adv_electrical_components_u3b,Advanced Electrical Components,5,Utility Station,3,Electrical,Refiner,,Item
+leaper_pulse_unit_u3,Leaper Pulse Unit,4,Utility Station,3,Drones,Drones,,Item
+metal_parts_r1,Metal Parts,60,Refiner,1,Basic Material,Basic Material,,Item
+arc_powercell_r1,ARC Powercell,5,Refiner,1,Drones,Drones,,Item
+toaster_r2,Toaster,3,Refiner,2,Residential,Residential,,Item
+arc_motion_core_r2,ARC Motion Core,5,Refiner,2,Drones,Probes,,Item
+fireball_burner_r2,Fireball Burner,8,Refiner,2,Drones,Drones,,Item
+motor_r3,Motor,3,Refiner,3,Mechanical,Mechanical,,Item
+arc_circuitry_r3,ARC Circuitry,10,Refiner,3,Drones,Probes,,Item
+bombardier_cell_r3,Bombardier Cell,6,Refiner,3,Drones,Drones,,Item
+arc_alloy_clear_skies,ARC Alloy,3,Quest,0,Drones,Probes,,Quest
+wires_trash_treasure,Wires,6,Quest,0,Electrical,Technological,Celeste,Quest
+battery_trash_treasure,Battery,1,Quest,0,Electrical,Technological,Celeste,Quest
+snitch_scanner_trifecta,Snitch Scanner,2,Quest,0,Drones,Drones,,Quest
+wasp_driver_trifecta,Wasp Driver,2,Quest,0,Drones,Drones,,Quest
+hornet_driver_trifecta,Hornet Driver,2,Quest,0,Drones,Drones,,Quest
+surveyor_vault_mixed_signals,Surveyor Vault,1,Quest,0,Drones,Drones,,Quest
+water_pump_unexpected_initiative,Water Pump,1,Quest,0,Mechanical,Industrial,,Quest
+rocketeer_driver_out_shadows,Rocketeer Driver,1,Quest,0,Drones,Drones,,Quest
+antiseptic_doctors_orders,Antiseptic,2,Quest,0,Medical,Medical,,Quest
+syringe_doctors_orders,Syringe,1,Quest,0,Medical,Medical,Celeste,Quest
+durable_cloth_doctors_orders,Durable Cloth,1,Quest,0,Medical,Commercial,,Quest
+great_mullein_doctors_orders,Great Mullenin,1,Quest,0,Nature,Nature,Celeste,Quest
+esr_analyzer_reveal_ruins,ESR Analyzer,1,Quest,0,Medical,Plaza Rosa Pharmacy,,Quest
+metal_parts_exp1,Metal Parts,150,Expedition: Part 1,0,Basic Material,Basic Material,,Expedition
+rubber_parts_exp1,Rubber Parts,200,Expedition: Part 1,0,Basic Material,Basic Material,,Expedition
+arc_alloy_exp1,ARC Alloy,80,Expedition: Part 1,0,Drones,Drones,,Expedition
+steel_spring_exp1,Steel Spring,15,Expedition: Part 1,0,Mechanical,Mechanical,Celeste,Expedition
+durable_cloth_exp2,Durable Cloth,35,Expedition: Part 2,0,Medical,Commercial,,Expedition
+wires_exp2,Wires,30,Expedition: Part 2,0,Electrical,Technological,Celeste,Expedition
+electrical_components_exp2,Electrical Components,30,Expedition: Part 2,0,Electrical,Refiner,,Expedition
+cooling_fans_exp2,Cooling Fans,5,Expedition: Part 2,0,Technological,Technological,,Expedition
+light_bulb_exp3,Light Bulb,5,Expedition: Part 3,0,Electrical,Electrical,,Expedition
+battery_exp3,Battery,30,Expedition: Part 3,0,Electrical,Technological,Celeste,Expedition
+sensors_exp3,Sensors,20,Expedition: Part 3,0,Security,Technological,Celeste,Expedition
+exodus_modules_exp3,Exodus Modules,1,Expedition: Part 3,0,Exodus,Exodus,Celeste,Expedition
+humidifier_exp4,Humidifier,5,Expedition: Part 4,0,Residential,Residential,,Expedition
+adv_electrical_components_exp4,Advanced Electrical Components,5,Expedition: Part 4,0,Electrical,Refiner,,Expedition
+magnetic_accelerator_exp4,Magnetic Accelerator,3,Expedition: Part 4,0,Exodus,Exodus,,Expedition
+leaper_pulse_unit_exp4,Leaper Pulse Unit,3,Expedition: Part 4,0,Drones,Drones,,Expedition
+combat_items_exp5,Combat Items,250000,Expedition: Part 5,0,,,Expedition
+survival_items_exp5,Survival Items,100000,Expedition: Part 5,0,,,Expedition
+provisions_exp5,Provisions,180000,Expedition: Part 5,0,,,Expedition
+materials_exp5,Materials,300000,Expedition: Part 5,0,,,Expedition
