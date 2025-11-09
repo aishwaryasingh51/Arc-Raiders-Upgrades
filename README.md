@@ -4,7 +4,7 @@ Up-to-date reference for every crafting component, bench upgrade, and quest requ
 
 ## Live Web App
 
-👉 https://jim.github.io/Arc-Raiders-Upgrades/
+👉 https://aishwaryasingh51.github.io/Arc-Raiders-Upgrades/
 
 ## Features
 
@@ -24,3 +24,8 @@ The app bundles a curated `items.csv` generated from in-game observations and co
 3. Edits to `items.csv`, `index.html`, or `script.js` hot-reload when the page refreshes.
 
 Because everything runs client-side, no build tooling is required. Update the CSV, refresh, and you’re done.
+
+## Credits
+
+- Data compiled from [Metaforge ARC Raiders Database](https://metaforge.app/arc-raiders/database/items/page/1) and the [ARC Raiders Wiki](https://arc-raiders.fandom.com/wiki/Items).
+- Web app built and maintained by [Aishwarya Singh](https://github.com/aishwaryasingh51).
