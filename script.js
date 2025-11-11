@@ -72,6 +72,10 @@ function normalizeFilterValue(value) {
   return String(value || '').trim().toLowerCase();
 }
 
+function tokenizeName(name) {
+  return String(name || '').toLowerCase().split(/\s+/).filter(Boolean);
+}
+
 function toObjects(rows) {
   const header = rows[0];
   const out = [];
@@ -126,6 +130,7 @@ function aggregateItems(rows) {
         UsageEntries: [],
         _usageSet: new Set(),
         FilterKeys: new Set(),
+        _tokenSet: new Set(),
       };
       map.set(key, entry);
     }
@@ -167,7 +172,10 @@ function aggregateItems(rows) {
     if (!entry.ArcRarity && row.ArcRarity) entry.ArcRarity = row.ArcRarity;
     if (!entry.MetaRarity && row.MetaRarity) entry.MetaRarity = row.MetaRarity;
   }
-  return Array.from(map.values()).map(({ _usageSet, ...rest }) => rest);
+  return Array.from(map.values()).map(({ _usageSet, _tokenSet, ...rest }) => ({
+    ...rest,
+    _tokens: Array.from(_tokenSet),
+  }));
 }
 
 function deriveQuestName(itemId, slugName, arcId, metaId) {
@@ -439,6 +447,12 @@ function dedupeAndSort(list) {
   return out;
 }
 
+function matchesQuery(item, query) {
+  if (!query) return false;
+  if (item._normName.includes(query)) return true;
+  return item._tokens?.some(token => token.startsWith(query));
+}
+
 function applyActiveFilter(list) {
   if (!activeFilterKey) return list;
   return list.filter(item => item.FilterKeys?.has(activeFilterKey));
@@ -454,7 +468,7 @@ function search(q, maxResults = 50) {
   if (!query) return [];
 
   const prefixMatches = dedupeAndSort(
-    GROUPED_ITEMS.filter(it => it._normName.startsWith(query))
+    GROUPED_ITEMS.filter(it => matchesQuery(it, query))
   );
 
   if (prefixMatches.length > 0) {
@@ -526,3 +540,4 @@ async function main() {
 }
 
 main();
+    tokenizeName(row.Name).forEach(token => entry._tokenSet.add(token));
