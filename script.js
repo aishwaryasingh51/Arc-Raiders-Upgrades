@@ -209,25 +209,33 @@ function aggregateItems(rows) {
 
     const slugName = slugify(row.Name);
     let questName = "";
-    if (row.Station === "Quest" || row.Source === "Quest") {
+    if (
+      row.Source === "Quest" &&
+      row.Station &&
+      row.Station.toLowerCase() !== "quest"
+    ) {
+      questName = row.Station.replace(/^Quest:\s*/i, "").trim();
+    } else if (row.Station === "Quest" || row.Source === "Quest") {
       questName = deriveQuestName(row.ItemID, slugName, row.ArcID, row.MetaID);
     }
-    const usageKey = [
-      row.Station,
-      row.Tier,
-      row.Quantity,
-      row.Source,
-      questName,
-    ].join("|");
-    if (!entry._usageSet.has(usageKey)) {
-      entry._usageSet.add(usageKey);
-      entry.UsageEntries.push({
-        station: row.Station,
-        tier: row.Tier,
-        quantity: row.Quantity,
-        source: row.Source,
+    if (row.Station && row.Station !== "Item") {
+      const usageKey = [
+        row.Station,
+        row.Tier,
+        row.Quantity,
+        row.Source,
         questName,
-      });
+      ].join("|");
+      if (!entry._usageSet.has(usageKey)) {
+        entry._usageSet.add(usageKey);
+        entry.UsageEntries.push({
+          station: row.Station,
+          tier: row.Tier,
+          quantity: row.Quantity,
+          source: row.Source,
+          questName,
+        });
+      }
     }
 
     tokenizeName(row.Name).forEach((token) => entry._tokenSet.add(token));
