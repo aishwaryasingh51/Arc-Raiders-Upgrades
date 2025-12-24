@@ -601,7 +601,7 @@ function syncUI() {
 
 function matchesQuery(item, query) {
   if (!query) return false;
-  if (item._normName.includes(query)) return true;
+  if (item._normName.startsWith(query)) return true;
   return item._tokens?.some((token) => token.startsWith(query));
 }
 
