@@ -504,14 +504,9 @@ function renderResults(list, q) {
           sourceLower === "quest" ||
           Boolean(entry.questName);
         const isExpeditionRequirement = stationLower.startsWith("expedition");
-        const hideTier =
-          isExpeditionRequirement && String(entry.tier || "0") === "0";
-        const tierText =
-          entry.tier && !hideTier
-            ? isExpeditionRequirement
-              ? String(entry.tier)
-              : `Tier ${entry.tier}`
-            : "";
+        const rawTier = String(entry.tier || "").trim();
+        const hideTier = !rawTier || rawTier === "0";
+        const tierText = hideTier ? "" : `Tier ${rawTier}`;
         const baseStationLabel = String(entry.station || "")
           .trim()
           .replace(/:$/, "");
