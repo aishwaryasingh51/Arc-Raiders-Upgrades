@@ -125,7 +125,7 @@ q_shadow_wires,Wires,10,Quest: Out Of The Shadows,0,Electrical,Technological,,Qu
 q_orders_antiseptic,Antiseptic,2,Quest: Doctor's Orders,0,Medical,Medical,,Quest,antiseptic,Rare,Refined Material,1000,,,Medical,Used to craft medical supplies.,11/03/2025,,,,,,,,
 q_orders_syringe,Syringe,1,Quest: Doctor's Orders,0,Medical,Medical,,Quest,syringe,Rare,Topside Material,500,,,Medical,Used to craft medical supplies.,11/03/2025,,,,,,,,
 q_orders_cloth,Durable Cloth,1,Quest: Doctor's Orders,0,Medical,Commercial,,Quest,durable_cloth,Uncommon,Refined Material,640,,,Medical,Used to craft medical supplies.,11/03/2025,,,,,,,,
-q_orders_mullein,Great Mullein,1,Quest: Doctor's Orders,0,Topside Material,Nature,,Quest,great_mullein,Uncommon,Topside Material,300,,,Nature,Medicinal herb gathered for Doctor's Orders.,11/09/2025,,,,,,,,
+q_orders_mullein,Great Mullein,1,Quest: Doctor's Orders,0,Topside Material,Nature,Celeste,Quest,great_mullein,Uncommon,Topside Material,300,,,Nature,Medicinal herb gathered for Doctor's Orders. Recycles into 2x Assorted Seeds.,11/09/2025,great-muullein,Nature,Uncommon,300,,,,Medicinal herb gathered for Doctor's Orders. Recycles into 2x Assorted Seeds.
 q_reveal_analyzer,ESR Analyzer,1,Quest: Reveal The Ruins,0,Medical,Plaza Rosa Pharmacy,,Quest,esr_analyzer,,Misc,,,,,A specialized medical device.,10/30/2025,,,,,,,,
 q_reveal_battery,Battery,5,Quest: Reveal The Ruins,0,Electrical,Technological,,Quest,battery,Uncommon,Topside Material,250,,,Technological,Used to craft a wide range of items.,11/03/2025,,,,,,,,
 q_reveal_wires,Wires,10,Quest: Reveal The Ruins,0,Electrical,Technological,,Quest,wires,Uncommon,Topside Material,200,,,Electrical,Used to craft a wide range of items.,11/03/2025,,,,,,,,
