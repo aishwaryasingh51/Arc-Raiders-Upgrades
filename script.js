@@ -1,5 +1,7 @@
 // Client-only CSV loader + fuzzy search
 
+const SEARCH_BLACKLIST = new Set(["item", "project", "quest"]);
+
 // Tiny CSV parser that handles quoted values and commas
 function parseCSV(text) {
   const rows = [];
@@ -97,7 +99,7 @@ function normalizeFilterValue(value) {
 function tokenizeName(name) {
   return String(name || "")
     .toLowerCase()
-    .split(/\s+/)
+    .split(/[^a-z0-9-_]+/)
     .filter(Boolean);
 }
 
@@ -238,7 +240,17 @@ function aggregateItems(rows) {
       }
     }
 
-    tokenizeName(row.Name).forEach((token) => entry._tokenSet.add(token));
+    const allTokens = [
+      ...tokenizeName(row.Name),
+      ...tokenizeName(row.Station),
+      ...tokenizeName(questName),
+      ...tokenizeName(row.Source),
+    ];
+    allTokens.forEach((token) => {
+      if (!SEARCH_BLACKLIST.has(token)) {
+        entry._tokenSet.add(token);
+      }
+    });
 
     if (!entry.ArcDescription && row.ArcDescription)
       entry.ArcDescription = row.ArcDescription;
@@ -609,8 +621,13 @@ function syncUI() {
 
 function matchesQuery(item, query) {
   if (!query) return false;
-  if (item._normName.startsWith(query)) return true;
-  return item._tokens?.some((token) => token.startsWith(query));
+  const qTokens = query.toLowerCase().split(/\s+/).filter(Boolean);
+  if (qTokens.length === 0) return false;
+
+  const itemTokens = item._tokens || [];
+
+  // All query tokens must match at least one item token
+  return qTokens.every((q) => itemTokens.some((t) => t.startsWith(q)));
 }
 
 function applyActiveFilter(list) {
