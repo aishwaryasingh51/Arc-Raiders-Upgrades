@@ -471,8 +471,8 @@ function renderResults(list, q) {
     const locations = r.ArcFoundIn
       ? splitLocations(r.ArcFoundIn)
       : r.LocationList?.length
-      ? r.LocationList
-      : [r.LocationType];
+        ? r.LocationList
+        : [r.LocationType];
     locations.forEach((loc) => addBadge(loc, "location", loc));
     const arcValueNum = Number(r.ArcValue);
     if (Number.isFinite(arcValueNum) && arcValueNum > 0) {
@@ -533,8 +533,8 @@ function renderResults(list, q) {
         const heading = isQuestRequirement
           ? `Quest: ${entry.questName || "Unknown Quest"}`
           : baseStationLabel && tierText
-          ? `${baseStationLabel}: ${tierText}`
-          : baseStationLabel || tierText || "Upgrade requirement";
+            ? `${baseStationLabel}: ${tierText}`
+            : baseStationLabel || tierText || "Upgrade requirement";
         const headingEl = document.createElement("div");
         headingEl.textContent = heading;
         li.appendChild(headingEl);
