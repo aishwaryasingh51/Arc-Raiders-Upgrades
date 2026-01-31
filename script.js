@@ -490,16 +490,29 @@ function renderResults(list, q) {
       desc.className = "description";
       desc.textContent = description;
       content.appendChild(desc);
+    }
 
-      const recycleMatch = description.match(
-        /Can be recycled into ([^.]+)\.?/i
-      );
-      if (recycleMatch) {
-        const recycle = document.createElement("div");
-        recycle.className = "description";
-        recycle.textContent = `Dismantle yields: ${recycleMatch[1].trim()}.`;
-        content.appendChild(recycle);
+    // Extract recycling/dismantling information
+    const recyclePatterns = [
+      /Can be recycled into ([^.]+)\.?/i,
+      /Dismantle(?:s)? (?:into|yields):?\s*([^.]+)\.?/i,
+      /(?:Breaks down|Converts) (?:into|to):?\s*([^.]+)\.?/i,
+    ];
+
+    let recycleInfo = null;
+    for (const pattern of recyclePatterns) {
+      const match = description?.match(pattern);
+      if (match) {
+        recycleInfo = match[1].trim();
+        break;
       }
+    }
+
+    if (recycleInfo) {
+      const dismantleDiv = document.createElement("div");
+      dismantleDiv.className = "dismantle-info";
+      dismantleDiv.innerHTML = `<strong>Recycles Into:</strong> ${recycleInfo}`;
+      content.appendChild(dismantleDiv);
     }
 
     const hasUsage = (r.UsageEntries?.length || 0) > 0;
