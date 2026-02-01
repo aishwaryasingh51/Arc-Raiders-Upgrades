@@ -716,8 +716,9 @@ function parseRecyclingMaterials(recycleText) {
     const trimmed = part.trim();
     if (!trimmed) continue;
 
-    // Try to match: "<number> <material name>"
-    const match = trimmed.match(/^(\d+)\s+(.+)$/);
+    // Try to match: "<number>x? <material name>"
+    // Matches "1 Metal Parts" and "1x Metal Parts"
+    const match = trimmed.match(/^(\d+)x?\s+(.+)$/i);
     if (match) {
       materials.push({
         quantity: parseInt(match[1], 10),
