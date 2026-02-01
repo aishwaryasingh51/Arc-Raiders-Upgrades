@@ -701,7 +701,23 @@ function toggleFilter(key) {
 
 function findItemByName(name) {
   const normalized = String(name || "").trim().toLowerCase();
-  return GROUPED_ITEMS.find(item => item._normName === normalized);
+
+  // First, try to find in CSV data (GROUPED_ITEMS)
+  let item = GROUPED_ITEMS.find(item => item._normName === normalized);
+
+  // If not found, fallback to JSON data and construct a minimal item object
+  if (!item) {
+    const jsonItem = JSON_DATA_MAP.get(normalized);
+    if (jsonItem) {
+      item = {
+        _normName: normalized,
+        Name: jsonItem.name,
+        IconURL: jsonItem.icon
+      };
+    }
+  }
+
+  return item;
 }
 
 function parseRecyclingMaterials(recycleText) {
