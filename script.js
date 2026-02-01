@@ -513,10 +513,10 @@ function renderResults(list, q) {
       dismantleDiv.className = "dismantle-info";
 
       const label = document.createElement("strong");
-      label.textContent = "Recycles Into:";
+      label.textContent = "Recycles Into: ";
       dismantleDiv.appendChild(label);
 
-      const materialsContainer = document.createElement("div");
+      const materialsContainer = document.createElement("span");
       materialsContainer.className = "recycle-materials";
 
       const materials = parseRecyclingMaterials(recycleInfo);
@@ -524,11 +524,11 @@ function renderResults(list, q) {
       for (const material of materials) {
         const item = findItemByName(material.name);
 
-        const materialDiv = document.createElement("div");
-        materialDiv.className = "recycle-material";
+        const materialSpan = document.createElement("span");
+        materialSpan.className = "recycle-material";
 
         if (item?.IconURL) {
-          const iconContainer = document.createElement("div");
+          const iconContainer = document.createElement("span");
           iconContainer.className = "recycle-material-icon";
 
           const icon = document.createElement("img");
@@ -544,17 +544,17 @@ function renderResults(list, q) {
             iconContainer.appendChild(qtyBadge);
           }
 
-          materialDiv.appendChild(iconContainer);
+          materialSpan.appendChild(iconContainer);
         }
 
-        const nameDiv = document.createElement("div");
-        nameDiv.className = "recycle-material-name";
-        nameDiv.textContent = material.quantity !== null
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "recycle-material-name";
+        nameSpan.textContent = material.quantity !== null
           ? `${material.quantity} ${material.name}`
           : material.name;
-        materialDiv.appendChild(nameDiv);
+        materialSpan.appendChild(nameSpan);
 
-        materialsContainer.appendChild(materialDiv);
+        materialsContainer.appendChild(materialSpan);
       }
 
       dismantleDiv.appendChild(materialsContainer);
