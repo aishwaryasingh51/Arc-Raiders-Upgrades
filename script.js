@@ -511,7 +511,53 @@ function renderResults(list, q) {
     if (recycleInfo) {
       const dismantleDiv = document.createElement("div");
       dismantleDiv.className = "dismantle-info";
-      dismantleDiv.innerHTML = `<strong>Recycles Into:</strong> ${recycleInfo}`;
+
+      const label = document.createElement("strong");
+      label.textContent = "Recycles Into:";
+      dismantleDiv.appendChild(label);
+
+      const materialsContainer = document.createElement("div");
+      materialsContainer.className = "recycle-materials";
+
+      const materials = parseRecyclingMaterials(recycleInfo);
+
+      for (const material of materials) {
+        const item = findItemByName(material.name);
+
+        const materialDiv = document.createElement("div");
+        materialDiv.className = "recycle-material";
+
+        if (item?.IconURL) {
+          const iconContainer = document.createElement("div");
+          iconContainer.className = "recycle-material-icon";
+
+          const icon = document.createElement("img");
+          const cleanUrl = item.IconURL.replace(/^http:/, "https:");
+          icon.src = cleanUrl;
+          icon.alt = material.name;
+          iconContainer.appendChild(icon);
+
+          if (material.quantity !== null) {
+            const qtyBadge = document.createElement("span");
+            qtyBadge.className = "recycle-quantity-badge";
+            qtyBadge.textContent = material.quantity;
+            iconContainer.appendChild(qtyBadge);
+          }
+
+          materialDiv.appendChild(iconContainer);
+        }
+
+        const nameDiv = document.createElement("div");
+        nameDiv.className = "recycle-material-name";
+        nameDiv.textContent = material.quantity !== null
+          ? `${material.quantity} ${material.name}`
+          : material.name;
+        materialDiv.appendChild(nameDiv);
+
+        materialsContainer.appendChild(materialDiv);
+      }
+
+      dismantleDiv.appendChild(materialsContainer);
       content.appendChild(dismantleDiv);
     }
 
@@ -651,6 +697,42 @@ function applyActiveFilter(list) {
 function toggleFilter(key) {
   activeFilterKey = activeFilterKey === key ? "" : key;
   if (typeof triggerSearch === "function") triggerSearch();
+}
+
+function findItemByName(name) {
+  const normalized = String(name || "").trim().toLowerCase();
+  return GROUPED_ITEMS.find(item => item._normName === normalized);
+}
+
+function parseRecyclingMaterials(recycleText) {
+  if (!recycleText) return [];
+
+  const materials = [];
+  // Pattern: "14 Plastic Parts and 4 Wires" or just "ARC Alloy"
+  // Split by "and" or "," to separate multiple materials
+  const parts = recycleText.split(/\s+and\s+|,\s*/i);
+
+  for (const part of parts) {
+    const trimmed = part.trim();
+    if (!trimmed) continue;
+
+    // Try to match: "<number> <material name>"
+    const match = trimmed.match(/^(\d+)\s+(.+)$/);
+    if (match) {
+      materials.push({
+        quantity: parseInt(match[1], 10),
+        name: match[2].trim()
+      });
+    } else {
+      // Just a material name without quantity
+      materials.push({
+        quantity: null,
+        name: trimmed
+      });
+    }
+  }
+
+  return materials;
 }
 
 function search(q, maxResults = 50) {
