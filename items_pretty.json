@@ -3413,6 +3413,27 @@
       "sources": null,
       "ammo_type": "heavy",
       "locations": []
+    },
+    {
+      "id": "power-rod",
+      "name": "Power Rod",
+      "description": "Used to open the Locked room near the Loading Bay. Also used to craft shields. Can be recycled into crafting materials.",
+      "item_type": "Advanced Material",
+      "loadout_slots": [
+        "backpack",
+        "safePocket"
+      ],
+      "icon": "https://cdn.metaforge.app/arc-raiders/icons/power-rod.webp",
+      "rarity": "Epic",
+      "value": 5500,
+      "workbench": "Refiner",
+      "stat_block": {
+        "weight": 1,
+        "stackSize": 5
+      },
+      "loot_area": "Exodus",
+      "sources": null,
+      "locations": []
     }
   ],
   "maxValue": 34000,
