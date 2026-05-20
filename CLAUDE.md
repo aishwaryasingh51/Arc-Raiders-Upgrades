@@ -7,6 +7,20 @@ https://aishwaryasingh51.github.io/Arc-Raiders-Upgrades/
 
 ---
 
+## Maintaining This File
+
+**This file must be kept up to date.** Whenever a change is made to this project — new logic in `script.js`, new CSV columns, new content types, changes to search behaviour, new naming conventions, or anything else a future session would need to know — update the relevant section of this file in the same commit. This is not optional. CLAUDE.md is the memory of this project across sessions; if it goes stale, future sessions will make mistakes.
+
+What always warrants an update:
+- Any change to `script.js` that affects search, display, or data loading
+- New CSV columns or changes to how existing columns are used
+- New content types (new bench, new content category beyond quest/project/expedition)
+- New ItemID prefix conventions
+- Changes to the deployment setup or file structure
+- Any non-obvious decision made during a session that future Claude should know
+
+---
+
 ## What This App Does
 
 A single-page web app that lets players search for any Arc Raiders item and instantly see:
