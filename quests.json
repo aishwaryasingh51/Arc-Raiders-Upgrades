@@ -1,0 +1,1753 @@
+{
+ "syncedAt": "2026-10-26",
+ "data": [
+  {
+   "id": "a-bad-feeling",
+   "name": "A Bad Feeling",
+   "trader": "Celeste",
+   "objectives": [
+    "Find and search any ARC Probe or ARC Courier"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "a-balanced-harvest",
+   "name": "A Balanced Harvest",
+   "trader": "Celeste",
+   "objectives": [
+    "Go to the Research & Administration building",
+    "Locate Lab 1 on the upper floor above the reception",
+    "Search for any traces of the agricultural research project"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "a-better-use",
+   "name": "A Better Use",
+   "trader": "TianWen",
+   "objectives": [
+    "Request in a Supply Drop from a Call Station",
+    "Loot a Supply Drop"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "a-dead-end",
+   "name": "A Dead End",
+   "trader": "Shani",
+   "objectives": [
+    "Find MANTIKOR's underground facilities",
+    "Find a way into into the locked room in the Security Wing",
+    "Search the locked room for any records on Project Heartwood",
+    "Find the Dusty Film Reel",
+    "Deliver the Dusty Film Reel to Shani"
+   ],
+   "required_items": [],
+   "created_at": "2026-02-24"
+  },
+  {
+   "id": "a-first-foothold",
+   "name": "A First Foothold",
+   "trader": "Apollo",
+   "objectives": [
+    "Stabilize the observation deck near the Ridgeline",
+    "Enable the comms terminal near the Olive Grove",
+    "Rotate the satellite dishes on the church roof, north of the Data Vault",
+    "Nail down the roof plates on the Raider structure near Trapper's Glade"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-30"
+  },
+  {
+   "id": "a-lay-of-the-land",
+   "name": "A Lay of the Land",
+   "trader": "Shani",
+   "objectives": [
+    "Reach the Jiangsu Warehouse",
+    "Find the shipping notes in the foreman’s office",
+    "Locate the scanners in the Flight Control office of Control Tower A6",
+    "Deliver 1 LiDAR Scanners to Shani"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-01"
+  },
+  {
+   "id": "a-new-type-of-plant",
+   "name": "A New Type of Plant",
+   "trader": "Lance",
+   "objectives": [
+    "Search for the new plant near the Baron Husk in the Old Battleground",
+    "Deliver the Possibly Toxic Plant to Lance"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-03"
+  },
+  {
+   "id": "a-path-not-yours",
+   "name": "A Path Not Yours",
+   "trader": "Cassio",
+   "objectives": [
+    "Find the start of the Nomad trail under the Highway Collapse",
+    "Follow the trail markers to the Nomad hideout",
+    "Find Bilguun's gift at the buried cache under the hideout",
+    "Loot the secret stash in Bilguun's hideout",
+    "Deliver the Broken Compass to the Nomadic Envoy"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-09"
+  },
+  {
+   "id": "a-prime-specimen",
+   "name": "A Prime Specimen",
+   "trader": "Shani",
+   "objectives": [
+    "Obtain 2 ARC Powercells",
+    "Interact with any ARC Deforester",
+    "Loot an ARC Deforester"
+   ],
+   "required_items": [],
+   "created_at": "2026-01-27"
+  },
+  {
+   "id": "esr-analyzer",
+   "name": "A Reveal in Ruins",
+   "trader": "Lance",
+   "objectives": [
+    "Search for an ESR Analyzer inside any pharmacy in Buried City",
+    "Deliver the ESR Analyzer to Lance"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "a-rising-tide",
+   "name": "A Rising Tide",
+   "trader": "Celeste",
+   "objectives": [
+    "On Buried City, find the foreman's barricaded apartment south of Piazza Roma",
+    "Access the foreman's digital logbook",
+    "On Dam Battlegrounds, reach the Power Generation Complex",
+    "Find a way into the Controlled Access Zone",
+    "Search the Controlled Access Zone for any clues about the foreman's reconstruction project"
+   ],
+   "required_items": [],
+   "created_at": "2026-02-24"
+  },
+  {
+   "id": "a-symbol-of-unification",
+   "name": "A Symbol of Unification",
+   "trader": "Celeste",
+   "objectives": [
+    "Reach the Formicai Outpost in Dam Battlegrounds",
+    "Locate the flag at the Formicai Outpost",
+    "Hoist the flag on the small platform overlooking the Red Lake"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-01"
+  },
+  {
+   "id": "a-toxic-trail",
+   "name": "A Toxic Trail",
+   "trader": "Shani",
+   "objectives": [
+    "Return to the water intake below the Water Treatment Control building",
+    "Search the swamp for traces of the barrel's origins",
+    "Take a photo of the barrel truck",
+    "Search the truck for clues about the saboteur's identity"
+   ],
+   "required_items": [],
+   "created_at": "2025-12-16"
+  },
+  {
+   "id": "a-warm-place-to-rest",
+   "name": "A Warm Place To Rest",
+   "trader": "Apollo",
+   "objectives": [
+    "Locate the Abandoned Highway Camp",
+    "Search for any signs of survivors",
+    "Follow the red markers",
+    "Inspect the grave"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-02"
+  },
+  {
+   "id": "a-wrench-in-the-works",
+   "name": "A Wrench in the Works",
+   "trader": "Celeste",
+   "objectives": [
+    "Search the buses near the western gate",
+    "Locate the stash of sabotage supplies hidden at the Water Towers"
+   ],
+   "required_items": [],
+   "created_at": "2026-04-28"
+  },
+  {
+   "id": "after-rain-comes",
+   "name": "After Rain Comes",
+   "trader": "Celeste",
+   "objectives": [
+    "Find the flooded solar panels nearby the Grandioso Apartments",
+    "Repair the solar panels using 5 Wires and 2 Batteries"
+   ],
+   "required_items": [
+    {
+     "name": "Wires",
+     "quantity": 5
+    },
+    {
+     "name": "Battery",
+     "quantity": 2
+    }
+   ],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "armored-transports",
+   "name": "Armored Transports",
+   "trader": "TianWen",
+   "objectives": [
+    "Reach the Checkpoint",
+    "Search the Guard huts for an Armored Patrol Key Card",
+    "Reach the Traffic Tunnel near the Blue Gate Checkpoint",
+    "Find a spare Armored Patrol Car Key Card",
+    "Find and unlock the rear door of an armored patrol car"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-03"
+  },
+  {
+   "id": "back-on-top",
+   "name": "Back on Top",
+   "trader": "TianWen",
+   "objectives": [
+    "On Dam Battlegrounds, mark the Pattern House",
+    "On The Blue Gate, mark the white lookout tower south of the Warehouse Complex",
+    "On Spaceport, mark the South Trench Tower",
+    "On Buried City, mark the building with the mural in the Buried Properties"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-02"
+  },
+  {
+   "id": "bait-fetch-blast",
+   "name": "Bait, Fetch, Blast",
+   "trader": "Apollo",
+   "objectives": [
+    "Destroy a Bully",
+    "Destroy the head of a Bully",
+    "Destroy 4 Bully legs",
+    "Deliver a Bully Fragmenter to Apollo"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-09"
+  },
+  {
+   "id": "battening-down",
+   "name": "Battening Down",
+   "trader": "Apollo",
+   "objectives": [
+    "Photograph the cracks forming in the seawall",
+    "Sample the shoreline near the hotel beach",
+    "Fix the leaking oil pipe in the northeast"
+   ],
+   "required_items": [],
+   "created_at": "2026-04-28"
+  },
+  {
+   "id": "bees",
+   "name": "Bees!",
+   "trader": "Celeste",
+   "objectives": [
+    "Reach the Olive Grove in Blue Gate",
+    "Search for bee hives around the Olive Grove"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-02"
+  },
+  {
+   "id": "belly-of-the-beast",
+   "name": "Belly of the Beast",
+   "trader": "Shani",
+   "objectives": [
+    "Acquire an Emperor Gateway Conduit",
+    "Enter the Emperor",
+    "Find where the power inside the Emperor comes from",
+    "Find out what happens to the Harvester Payloads that enter the Emperor",
+    "Find where the Harvester Payloads sent to the Emperor are stored",
+    "Search 5 containers inside the Emperor",
+    "Obtain a unique piece of Emperor loot"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-09"
+  },
+  {
+   "id": "boarding-the-frigate",
+   "name": "Boarding the Frigate",
+   "trader": "Shani",
+   "objectives": [
+    "Find a way on top of the Frigate",
+    "Damage a Hydra",
+    "Damage a Vaporizer",
+    "Damage a Rocketeer"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-08"
+  },
+  {
+   "id": "bombing-run",
+   "name": "Bombing Run",
+   "trader": "Shani",
+   "objectives": [
+    "Destroy a Bombardier",
+    "Deliver a Bombardier Cell to Shani"
+   ],
+   "required_items": [],
+   "created_at": "2026-01-27"
+  },
+  {
+   "id": "broken-monument",
+   "name": "Broken Monument",
+   "trader": "TianWen",
+   "objectives": [
+    "Reach the hallowed grounds by the Scrap Yard",
+    "Search for a compass near the broken-down vehicles",
+    "Deliver First Wave Compass to Tian Wen",
+    "Search for the video tape near the cylindrical containers",
+    "Deliver the First Wave Tape to Tian Wen",
+    "Search for the old field rations in the Raider camp",
+    "Deliver First Wave Rations to Tian Wen"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-31"
+  },
+  {
+   "id": "building-a-library",
+   "name": "Building a Library",
+   "trader": "Apollo",
+   "objectives": [
+    "Locate the Library in the City Center",
+    "Find 1 romance book",
+    "Find 1 detective book",
+    "Find 1 adventure book",
+    "Deliver 3 books to Apollo"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "celestes-childhood-drawings",
+   "name": "Celeste’s Childhood Drawings",
+   "trader": "Lance",
+   "objectives": [
+    "Find young Celeste’s room in Hotel Panorama Azzurro",
+    "Search for anything significant in Celeste's Room",
+    "Find the drawing on the roof of the third Customs House",
+    "Find the drawing at the Quay"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-08"
+  },
+  {
+   "id": "celestes-journals",
+   "name": "Celeste’s Journals",
+   "trader": "Celeste",
+   "objectives": [
+    "Retrieve Celeste’s Journals from the South Swamp Outpost",
+    "Retrieve Celeste’s Journals from Raider Outpost East",
+    "Deliver 2 Journals to Celeste"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-02"
+  },
+  {
+   "id": "celestes-teenage-rebellion",
+   "name": "Celeste's Teenage Rebellion",
+   "trader": "Celeste",
+   "objectives": [
+    "Reach the lookout tower on Mulatierra Hill",
+    "Transmit the location from the top of the tower",
+    "Spot 3 ARC from the Lookout Tower",
+    "Reach the old Raider Camp near the hotel, overlooking the beach",
+    "Search for a radio transmitter at the Raider Camp",
+    "Find the large antenna overlooking Riven Tides harbor",
+    "Weld the broken generator",
+    "Start the transmitter"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-09"
+  },
+  {
+   "id": "clamoring-for-attention",
+   "name": "Clamoring for Attention",
+   "trader": "Shani",
+   "objectives": [
+    "Use 3 Wires to repair and sound the emergency siren by the Warehouse Complex",
+    "Use a Battery to start the boom box in the Village",
+    "Sound any bus horn by the Checkpoint"
+   ],
+   "required_items": [
+    {
+     "name": "Wires",
+     "quantity": 3
+    },
+    {
+     "name": "Battery",
+     "quantity": 1
+    }
+   ],
+   "created_at": "2026-03-31"
+  },
+  {
+   "id": "clean-hands",
+   "name": "Clean Hands",
+   "trader": "Cassio",
+   "objectives": [
+    "Find the Nomad Camp under the Railyard",
+    "Search for the polluted item in the Nomad camp",
+    "Bring the Equatorial Sundial to the top of the Church in Old Town",
+    "Deliver the Equatorial Sundial to the Nomadic Envoy"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-08"
+  },
+  {
+   "id": "clearer-skies",
+   "name": "Clearer Skies",
+   "trader": "Shani",
+   "objectives": [
+    "Destroy 3 ARC enemies",
+    "Get 3 ARC Alloy for Shani"
+   ],
+   "required_items": [
+    {
+     "name": "ARC Alloy",
+     "quantity": 3
+    }
+   ],
+   "created_at": "2025-10-17"
+  },
+  {
+   "id": "cold-storage",
+   "name": "Cold Storage",
+   "trader": "Shani",
+   "objectives": [
+    "Search any J Kozma Ventures container",
+    "Deliver the Old World Books to Shani"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-14"
+  },
+  {
+   "id": "collision-course",
+   "name": "Collision Course",
+   "trader": "TianWen",
+   "objectives": [
+    "Destroy a Comet",
+    "Deliver a Comet Igniter to Tian Wen"
+   ],
+   "required_items": [],
+   "created_at": "2026-04-28"
+  },
+  {
+   "id": "combat-recon",
+   "name": "Combat Recon",
+   "trader": "Shani",
+   "objectives": [
+    "Scope out a cover spot in the Parking Garage staircases",
+    "Scope out a cover spot in the buses near Marano Park",
+    "Scope out a cover spot in the attics around Main Street",
+    "Destroy 2 Spotters",
+    "Deliver a Spotter Relay to Shani"
+   ],
+   "required_items": [],
+   "created_at": "2026-01-27"
+  },
+  {
+   "id": "communication-hideout",
+   "name": "Communication Hideout",
+   "trader": "Shani",
+   "objectives": [
+    "Reach the Red Tower in Old Town",
+    "Find missing battery cell",
+    "Install the battery cell in the Generator",
+    "Enable the power on the Generator",
+    "Boot the antenna terminal near the Red Tower"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "deciphering-the-data",
+   "name": "Deciphering The Data",
+   "trader": "Shani",
+   "objectives": [
+    "Use the Magnetic Decryptor in the Fuel Control Building",
+    "Reach the Arrival Building in Spaceport",
+    "Use the Magnetic Decryptor on the top floor of the Arrival Building"
+   ],
+   "required_items": [],
+   "created_at": "2025-12-16"
+  },
+  {
+   "id": "digging-up-dirt",
+   "name": "Digging Up Dirt",
+   "trader": "Celeste",
+   "objectives": [
+    "Locate the Santa Maria Houses in Old Town",
+    "Locate the Dead Drop inside the courtyard"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "disrupting-the-frigate",
+   "name": "Disrupting the Frigate",
+   "trader": "Celeste",
+   "objectives": [
+    "Destroy the Power Cores on top of the Frigate",
+    "Find a way to access the Frigate's cargo",
+    "Loot the Frigate's cargo",
+    "Destroy a Hydra",
+    "Destroy 2 Rocketeers",
+    "Destroy 2 Vaporizers"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-09"
+  },
+  {
+   "id": "divided",
+   "name": "Divided",
+   "trader": "Cassio",
+   "objectives": [
+    "Search for the Nomad recording at the Loading Platforms",
+    "Search for the Nomad recording at the Weather Station",
+    "Search for the Nomad recording at the Dispatch Tower",
+    "Search for the Nomad recording at Almatera Station"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-13"
+  },
+  {
+   "id": "doctors-orders",
+   "name": "Doctor's Orders",
+   "trader": "Lance",
+   "objectives": [
+    "Obtain 1 Syringe",
+    "Obtain 2 Antiseptic",
+    "Obtain 1 Durable Cloth",
+    "Obtain 1 Great Mullein",
+    "Heal any Raider"
+   ],
+   "required_items": [
+    {
+     "name": "Great Mullein",
+     "quantity": 1
+    },
+    {
+     "name": "Syringe",
+     "quantity": 1
+    },
+    {
+     "name": "Antiseptic",
+     "quantity": 2
+    },
+    {
+     "name": "Durable Cloth",
+     "quantity": 1
+    }
+   ],
+   "created_at": "2025-10-30"
+  },
+  {
+   "id": "dormant-barons",
+   "name": "Dormant Barons",
+   "trader": "Shani",
+   "objectives": [
+    "Loot a Baron husk"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "down-to-earth",
+   "name": "Down to Earth",
+   "trader": "Shani",
+   "objectives": [
+    "Visit a Field Depot",
+    "Deliver a Field Crate to a Field Depot",
+    "Collect the reward"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-17"
+  },
+  {
+   "id": "dust-on-the-wires",
+   "name": "Dust on the Wires",
+   "trader": "Shani",
+   "objectives": [
+    "Visit any Field Depot on the eastern side of the Spaceport",
+    "Use the Field Radio to transmit the scout group’s last log to Shani",
+    "Interact with the terminal in the old Raider Tower north of the Maintenance Hangar",
+    "Find traces of the scout patrol near the Maintenance Hangar",
+    "Search the remains left by the scouts",
+    "Deliver the Scout Patrol Note to Shani"
+   ],
+   "required_items": [],
+   "created_at": "2026-03-31"
+  },
+  {
+   "id": "echoes-of-victory-ridge",
+   "name": "Echoes of Victory Ridge",
+   "trader": "Celeste",
+   "objectives": [
+    "Reach Victory Ridge",
+    "Retrieve the battle plans from the hideout under the broken highway",
+    "Deliver Major Aiva's Patch to Celeste"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-01"
+  },
+  {
+   "id": "empathetic-prototypes",
+   "name": "Empathetic Prototypes",
+   "trader": "Lance",
+   "objectives": [
+    "Reach the Trench Towers in the Spaceport Trench",
+    "Find the Terminal and disable the Magnetic Lock",
+    "Find the Magnetic Lock on the Crate and manually disable it",
+    "Search the Cargo Crate",
+    "Deliver the Project Pathos Empathy Core to Lance"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-09"
+  },
+  {
+   "id": "espresso",
+   "name": "Espresso",
+   "trader": "Apollo",
+   "objectives": [
+    "Find an espresso machine to salvage for spare parts",
+    "Get the Espresso Machine Parts for Apollo"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "exploring-pendola-pass",
+   "name": "Exploring Pendola Pass",
+   "trader": "Celeste",
+   "objectives": [
+    "Destroy 20 ARC enemies",
+    "Search the control room at the Cielo Sereno Observatory for power",
+    "Use 1 Wire to patch into the antenna on top of the tallest tower in the Railyard",
+    "Search 3 containers inside the Commissary Supermarket"
+   ],
+   "required_items": [
+    {
+     "name": "Zipline",
+     "quantity": 3
+    }
+   ],
+   "created_at": "2026-10-08"
+  },
+  {
+   "id": "eyes-in-the-sky",
+   "name": "Eyes in the Sky",
+   "trader": "Shani",
+   "objectives": [
+    "On Dam Battlegrounds, install a LiDAR Scanner at the top of the Control Tower",
+    "On Spaceport, install a LiDAR Scanner at the Communications Tower",
+    "On Buried City, install a LiDAR Scanner on top of the Galleria sign"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-02"
+  },
+  {
+   "id": "eyes-on-the-prize",
+   "name": "Eyes on the Prize",
+   "trader": "TianWen",
+   "objectives": [
+    "Find the secluded roof terrace south-west of the Southern Station, look for blue tarps.",
+    "Rewire the solar panel using 3 Wires"
+   ],
+   "required_items": [
+    {
+     "name": "Wires",
+     "quantity": 3
+    }
+   ],
+   "created_at": "2025-11-01"
+  },
+  {
+   "id": "flickering-threat",
+   "name": "Flickering Threat",
+   "trader": "Celeste",
+   "objectives": [
+    "Find the Generator Room",
+    "Repair the Generator using 4 Wires",
+    "Find the Ventilation Shaft",
+    "Enable the power via the power switch underneath the stairs"
+   ],
+   "required_items": [
+    {
+     "name": "Wires",
+     "quantity": 4
+    }
+   ],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "fragmented-logs",
+   "name": "Fragmented Logs",
+   "trader": "Shani",
+   "objectives": [
+    "In either of the Robotic Sandbox control rooms, repair the out-of-service terminal with 1 Electrical Component",
+    "Enable the power in any of the conduit backrooms near the Robotic Sandboxes",
+    "Boot the main frame data terminal in the Cultural Archives service backrooms"
+   ],
+   "required_items": [],
+   "created_at": "2026-04-04"
+  },
+  {
+   "id": "furtive-meetings",
+   "name": "Furtive Meetings",
+   "trader": "Shani",
+   "objectives": [
+    "Search for the secret meeting spot under a staircase in the Medical Research Area",
+    "Find the secret meeting spot near the ventilation shaft between Robotic Sandbox B and Seed Vault",
+    "Find the secret meeting spot at the bottom of the staircase connecting the Cultural Archives and Seed Vault",
+    "Search the meeting area",
+    "Bring the Secret Meeting Info to Shani"
+   ],
+   "required_items": [],
+   "created_at": "2026-04-04"
+  },
+  {
+   "id": "greasing-her-palms",
+   "name": "Greasing Her Palms",
+   "trader": "Celeste",
+   "objectives": [
+    "On Dam Battlegrounds, visit the Locked Room in the Water Treatment Control building",
+    "On Spaceport, scope out the rocket thrusters outside the Rocket Assembly",
+    "On Buried City, visit the barricaded area on floor 6 of the Space Travel Building",
+    "Find a spare Dam Surveillance Key"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-30"
+  },
+  {
+   "id": "groundbreaking",
+   "name": "Groundbreaking",
+   "trader": "Apollo",
+   "objectives": [
+    "Find a spare Blue Gate Communication Tower Key",
+    "Enter the locked room at Pilgrim's Peak",
+    "Search the room for any construction research",
+    "Find the building pictured on the whiteboard",
+    "Photograph the abandoned housing project"
+   ],
+   "required_items": [],
+   "created_at": "2025-12-16"
+  },
+  {
+   "id": "hatch-repairs",
+   "name": "Hatch Repairs",
+   "trader": "Shani",
+   "objectives": [
+    "Repair the leaking hydraulic pipes near a Raider Hatch",
+    "Search for a Hatch Key near the Raider Hatch"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "home-to-roost",
+   "name": "Home to Roost",
+   "trader": "Shani",
+   "objectives": [
+    "Reach the back of the Blue Gate tunnels",
+    "Scan any Android in the back of the Traffic Tunnels",
+    "Head to the MANTIKOR locker room",
+    "Search the locker room for any clues",
+    "Read the last vehicle weighing logs",
+    "(Optional) Find the hidden key",
+    "Enter the Confiscation Room",
+    "Transmit MANTIKOR's security last recordings to Shani"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-08"
+  },
+  {
+   "id": "in-my-image",
+   "name": "In My Image",
+   "trader": "Lance",
+   "objectives": [
+    "Deploy into Stella Montis",
+    "Find and search 3 Androids"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-14"
+  },
+  {
+   "id": "industrial-espionage",
+   "name": "Industrial Espionage",
+   "trader": "TianWen",
+   "objectives": [
+    "Find Tian Wen's weapon cache near the Gas Station in the Outskirts",
+    "Deliver the Burletta to the rival weapon cache",
+    "Plant a bug on the weapon cache"
+   ],
+   "required_items": [
+    {
+     "name": "Burletta I",
+     "quantity": 1
+    }
+   ],
+   "created_at": "2025-11-01"
+  },
+  {
+   "id": "into-the-fray",
+   "name": "Into the Fray",
+   "trader": "Shani",
+   "objectives": [
+    "Destroy a Leaper",
+    "Destroy 4 Leaper legs",
+    "Obtain a Leaper Pulse Unit"
+   ],
+   "required_items": [
+    {
+     "name": "Leaper Pulse Unit",
+     "quantity": 1
+    }
+   ],
+   "created_at": "2025-11-02"
+  },
+  {
+   "id": "keeping-an-eye-out",
+   "name": "Keeping an Eye Out",
+   "trader": "Celeste",
+   "objectives": [
+    "Locate the collapsed highway by the southern edge of the Barren Clearing",
+    "Find Bilguun's shelter, and search for any clues of his presence"
+   ],
+   "required_items": [],
+   "created_at": "2026-02-24"
+  },
+  {
+   "id": "keeping-the-memory",
+   "name": "Keeping the Memory",
+   "trader": "Celeste",
+   "objectives": [
+    "Reach the wreckage in the Formicai Hills",
+    "Search for the missing helmet",
+    "Return the helmet to the memorial"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-01"
+  },
+  {
+   "id": "last-entry",
+   "name": "Last Entry",
+   "trader": "Shani",
+   "objectives": [
+    "Find and access the right work station in the Seed Vault for clues",
+    "Search for the hidden key in the adjacent room",
+    "Search the Seed Vault and unlock the seed deposit box",
+    "Search the seed deposit box",
+    "Bring the Official Shutdown Documentation to Shani"
+   ],
+   "required_items": [],
+   "created_at": "2026-04-04"
+  },
+  {
+   "id": "life-of-a-pharmacist",
+   "name": "Life of a Pharmacist",
+   "trader": "Lance",
+   "objectives": [
+    "Find the Arbusto Farmacia by the collapsed highway",
+    "Document the pharmacist’s skills",
+    "Document the pharmacist’s taste",
+    "Document the pharmacist’s family",
+    "Document the pharmacist’s hobbies"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "line-in-the-sand",
+   "name": "Line in the Sand",
+   "trader": "Celeste",
+   "objectives": [
+    "Find out why the train never reached Marano Station",
+    "Find out who orchestrated the robbery",
+    "Find out where the thruster valves were stashed",
+    "Search the basement of the merchant’s nearby apartment"
+   ],
+   "required_items": [],
+   "created_at": "2026-04-28"
+  },
+  {
+   "id": "lost-in-transmission",
+   "name": "Lost in Transmission",
+   "trader": "Shani",
+   "objectives": [
+    "Visit Control Tower A6",
+    "Find a spare key",
+    "Reach the top of Control Tower A6",
+    "Establish a connection from the terminal"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-02"
+  },
+  {
+   "id": "marked-for-death",
+   "name": "Marked for Death",
+   "trader": "TianWen",
+   "objectives": [
+    "Reach the Su Durante Warehouses in the Outskirts in Buried City",
+    "Search for Tian Wen's cache near the Warehouses",
+    "Follow the clues"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-01"
+  },
+  {
+   "id": "market-correction",
+   "name": "Market Correction",
+   "trader": "TianWen",
+   "objectives": [
+    "Locate the cache near Marano Station",
+    "Sabotage the cache"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-01"
+  },
+  {
+   "id": "medical-merchandise",
+   "name": "Medical Merchandise",
+   "trader": "Lance",
+   "objectives": [
+    "On Spaceport, search 2 containers in the Departure Building's exam rooms",
+    "Search 3 containers in the Hospital in Buried City",
+    "On Dam Battlegrounds, search 2 containers in the Research & Administration building's medical room"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-01"
+  },
+  {
+   "id": "mixed-signals",
+   "name": "Mixed Signals",
+   "trader": "Shani",
+   "objectives": [
+    "Destroy an ARC Surveyor",
+    "Obtain 1 Surveyor Vault"
+   ],
+   "required_items": [
+    {
+     "name": "Surveyor Vault",
+     "quantity": 1
+    }
+   ],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "movie-night",
+   "name": "Movie Night",
+   "trader": "Apollo",
+   "objectives": [
+    "Deliver a Portable TV to Apollo",
+    "On Stella Montis, search the Cultural Archives for old movie tapes",
+    "Deliver the Stack of Movie Tapes to Apollo"
+   ],
+   "required_items": [
+    {
+     "name": "Portable TV",
+     "quantity": 1
+    }
+   ],
+   "created_at": "2026-01-27"
+  },
+  {
+   "id": "nothing-gained",
+   "name": "Nothing Gained",
+   "trader": "Apollo",
+   "objectives": [
+    "Destroy a Matriarch",
+    "Destroy a Queen",
+    "Deliver a Queen Reactor to Apollo",
+    "Deliver a Matriarch Reactor to Apollo"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-09"
+  },
+  {
+   "id": "nothing-ventured",
+   "name": "Nothing Ventured",
+   "trader": "Apollo",
+   "objectives": [
+    "Destroy 3 Comets",
+    "Destroy 5 Rocketeers",
+    "Destroy 2 Sentinels",
+    "Deliver 3 Comet Igniters to Apollo",
+    "Deliver 3 Rocketeer Drivers to Apollo",
+    "Deliver 6 ARC Circuitry to Apollo",
+    "Deliver 6 ARC Motion Cores to Apollo",
+    "Destroy a Bombardier on Buried City",
+    "Destroy a Bastion on Stella Montis"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-09"
+  },
+  {
+   "id": "off-the-raider",
+   "name": "Off The Radar",
+   "trader": "Shani",
+   "objectives": [
+    "Visit a Field Depot",
+    "Repair the antenna on the roof of the Field Depot"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-17"
+  },
+  {
+   "id": "on-deaf-ears",
+   "name": "On Deaf Ears",
+   "trader": "Lance",
+   "objectives": [
+    "Find the researcher's guest logs on the reception computers",
+    "Find where the researcher held their lecture, and access their notes",
+    "Find information about the prototypes on the Medical Research computers"
+   ],
+   "required_items": [],
+   "created_at": "2026-01-27"
+  },
+  {
+   "id": "on-the-map",
+   "name": "On The Map",
+   "trader": "Lance",
+   "objectives": [
+    "Head to where the Fuel Lines snapped, and transmit your location",
+    "Head to the antenna near the Fuel Control, and transmit your location",
+    "Head to the cactus patch in the wall breach, and transmit your location",
+    "Transmit your location from the roof of the Container Storage building",
+    "Find the container covered in tarp, and mark it"
+   ],
+   "required_items": [],
+   "created_at": "2026-01-27"
+  },
+  {
+   "id": "our-presence-up-there",
+   "name": "Our Presence up There",
+   "trader": "Shani",
+   "objectives": [
+    "Visit the Pattern House in The Dam",
+    "Find and flip the power switch",
+    "Complete the antenna installation on the roof"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "out-of-the-shadows",
+   "name": "Out of the Shadows",
+   "trader": "Shani",
+   "objectives": [
+    "Destroy a Rocketeer",
+    "Obtain a Rocketeer Driver"
+   ],
+   "required_items": [
+    {
+     "name": "Rocketeer Driver",
+     "quantity": 1
+    }
+   ],
+   "created_at": "2025-11-02"
+  },
+  {
+   "id": "outstanding-balance",
+   "name": "Outstanding Balance",
+   "trader": "TianWen",
+   "objectives": [
+    "Search for Dodger's stash inside the Traffic Tunnel",
+    "Search Dodger's deal spot by the Pilgrim's Peak antenna",
+    "Deliver Dodger's Note to Tian Wen"
+   ],
+   "required_items": [],
+   "created_at": "2026-04-04"
+  },
+  {
+   "id": "paving-the-way",
+   "name": "Paving the Way",
+   "trader": "Apollo",
+   "objectives": [
+    "Go to any ENELICA building",
+    "Search for a notice board with a note from the researcher",
+    "On Buried City, reach the top floor above the Convinio in Piazza Roma",
+    "Find the researcher's flat and search for any research data"
+   ],
+   "required_items": [],
+   "created_at": "2025-12-16"
+  },
+  {
+   "id": "picking-up-the-pieces",
+   "name": "Picking Up The Pieces",
+   "trader": "Shani",
+   "objectives": [
+    "Visit any area on your map with a loot category icon",
+    "Loot 3 containers"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-17"
+  },
+  {
+   "id": "power-out",
+   "name": "Power Out",
+   "trader": "Celeste",
+   "objectives": [
+    "Find the Electrical Substation south of the Spaceport",
+    "Find any sign of the missing engineer",
+    "Install the fuse",
+    "Restore the power"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "prescriptions-of-the-past",
+   "name": "Prescriptions of the Past",
+   "trader": "Lance",
+   "objectives": [
+    "Visit the Departure Building in Spaceport",
+    "Find the Medical Exam Room inside the Departure Building",
+    "Search for the records"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "reduced-to-rubble",
+   "name": "Reduced to Rubble",
+   "trader": "Shani",
+   "objectives": [
+    "Take a photo of the Collapsed Highway",
+    "Go to the Broken Earth",
+    "Follow the trail of destruction through the Broken Earth",
+    "Investigate the unknown ARC machines"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-30"
+  },
+  {
+   "id": "ruins-and-reverberations",
+   "name": "Ruins and Reverberations",
+   "trader": "Celeste",
+   "objectives": [
+    "Connect a Spotter Relay to the antenna on the roof of the Cielo Sereno Observatory",
+    "Weld the wires in the crawlspace under the control room to redirect power",
+    "Activate the Spotter Relay at the antenna again"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-09"
+  },
+  {
+   "id": "safe-harbor",
+   "name": "Safe Harbor",
+   "trader": "TianWen",
+   "objectives": [
+    "Find the clue left by the restaurant kitchen staff",
+    "Find the area portrayed in the sketch",
+    "Dig up the buried part",
+    "Deliver the Precision Gimbal to Tian Wen"
+   ],
+   "required_items": [],
+   "created_at": "2026-04-28"
+  },
+  {
+   "id": "safe-passage",
+   "name": "Safe Passage",
+   "trader": "Apollo",
+   "objectives": [
+    "Destroy 2 ARC enemies using any explosive grenade"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "settled-in-full",
+   "name": "Settled in Full",
+   "trader": "TianWen",
+   "objectives": [
+    "Destroy a Bastion",
+    "Deliver a Bastion Cell to Tian Wen"
+   ],
+   "required_items": [],
+   "created_at": "2026-04-04"
+  },
+  {
+   "id": "shoring-up-defenses",
+   "name": "Shoring Up Defenses",
+   "trader": "Apollo",
+   "objectives": [
+    "Destroy 5 Wasps",
+    "Destroy 3 Fireflies",
+    "Use 1 ARC Alloy to reinforce the Raider structure on top of any Stacking Yard crane",
+    "Board up shuttered windows in the hotel"
+   ],
+   "required_items": [],
+   "created_at": "2026-04-28"
+  },
+  {
+   "id": "sizing-things-up",
+   "name": "Sizing Things Up",
+   "trader": "Celeste",
+   "objectives": [
+    "Take a photo of the Emperor's southern leg from the bridge outside Old Town",
+    "Break open the crashed probe by the Emperor's northwestern leg",
+    "Inspect the circuitry in the probe",
+    "Analyze the exposed area on top of the Emperor's eastern leg",
+    "Reach the base of the Emperor",
+    "Search the Buried Harvester Payload",
+    "Deliver the ARC Conductive Coupler to Celeste"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-08"
+  },
+  {
+   "id": "snap-and-salvage",
+   "name": "Snap and Salvage",
+   "trader": "TianWen",
+   "objectives": [
+    "Take a Photo of any of the Rovers in the Sandbox",
+    "Search the papers in the Security Checkpoint room by the Lobby",
+    "Deliver a Magnetron to Tian Wen",
+    "Deliver a Flow Controller to Tian Wen"
+   ],
+   "required_items": [
+    {
+     "name": "Magnetron",
+     "quantity": 1
+    },
+    {
+     "name": "Flow Controller",
+     "quantity": 1
+    }
+   ],
+   "created_at": "2025-11-14"
+  },
+  {
+   "id": "someone-elses-shoes",
+   "name": "Someone Else's Shoes",
+   "trader": "Celeste",
+   "objectives": [
+    "Scan any Android on Stella Montis",
+    "Find the Android in Research Lab 3 in the Medical Bay",
+    "Reach the Control Room in the Western Tunnels and search for clues"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-08"
+  },
+  {
+   "id": "source-of-the-contamination",
+   "name": "Source of the Contamination",
+   "trader": "Celeste",
+   "objectives": [
+    "Reach the Water Treatment Building in The Dam",
+    "Search for the Flood Spill Intake near the Swamp",
+    "Investigate any suspicious objects"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "sparks-fly",
+   "name": "Sparks Fly",
+   "trader": "Apollo",
+   "objectives": [
+    "Destroy a Hornet using any Grenade",
+    "Destroy a Hornet with a Trigger 'Nade or Snap Blast"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "stable-housing",
+   "name": "Stable Housing",
+   "trader": "TianWen",
+   "objectives": [
+    "Go to the Security Bridge",
+    "Search for the safe in the side room by the third-floor staircases",
+    "Head upstairs to the fourth-floor control room",
+    "Use the Access Card Printer to print a key to the safe",
+    "Search for alternate ways into the safe",
+    "Retrieve the contents of the safe",
+    "Deliver the Project Heartwood Blueprints to Tian Wen"
+   ],
+   "required_items": [],
+   "created_at": "2026-02-24"
+  },
+  {
+   "id": "straight-record",
+   "name": "Straight Record",
+   "trader": "Celeste",
+   "objectives": [
+    "Reach Victory Ridge",
+    "Find the old EMP trap",
+    "Disable the first power switch",
+    "Disable the second power switch",
+    "Disable the third power switch",
+    "Shut down the EMP trap"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-01"
+  },
+  {
+   "id": "switching-the-supply",
+   "name": "Switching the Supply",
+   "trader": "Celeste",
+   "objectives": [
+    "Find the tunnels under the Spaceport",
+    "Find and turn the valve in the tunnels under Spaceport"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "taking-stock",
+   "name": "Taking Stock",
+   "trader": "Cassio",
+   "objectives": [
+    "On Stella Montis, take a photo of the sculpture in the Atrium",
+    "On Spaceport, take a photo of a Baron Husk",
+    "On Dam Battlegrounds, ping a Bombardier",
+    "On Buried City, ping a Bastion",
+    "Deliver 3 Industrial Batteries to the Nomadic Envoy"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-09"
+  },
+  {
+   "id": "test-case",
+   "name": "Test Case",
+   "trader": "Apollo",
+   "objectives": [
+    "Deliver a Hornet Driver to Apollo",
+    "Deliver a Fireball Burner to Apollo",
+    "Destroy a Firefly",
+    "Deliver a Firefly Burner to Apollo"
+   ],
+   "required_items": [],
+   "created_at": "2026-04-04"
+  },
+  {
+   "id": "the-clean-dream",
+   "name": "The Clean Dream",
+   "trader": "Apollo",
+   "objectives": [
+    "On Spaceport, find the underground tunnels",
+    "Find and monitor any Filtration System in the tunnels",
+    "On Spaceport, search 2 containers in the underground tunnels",
+    "On The Blue Gate, visit the Maintenance Bunker",
+    "Monitor the Purification System in the bunker",
+    "Find the Purification System Blueprint in the Bunker",
+    "Deliver the Purification System Blueprint to Apollo"
+   ],
+   "required_items": [],
+   "created_at": "2025-12-16"
+  },
+  {
+   "id": "the-first-nomads",
+   "name": "The First Nomads",
+   "trader": "Shani",
+   "objectives": [
+    "Reach the Security Wing in Blue Gate",
+    "Find the Control Room in the Security Wing",
+    "Use the frequency converter in the Control Room",
+    "Reach the Antenna at Pilgrim's Peak",
+    "Search the Antenna exterior for any tampered frequency boosters",
+    "On Stella Montis, head to the Communications wing",
+    "Turn on the power",
+    "Search for any repair equipment",
+    "Repair the power transformer",
+    "Turn on the power",
+    "Find and run the signal through the frequency converter",
+    "Transmit the location of the sphere",
+    "Loot 5 containers in the Hidden Bunker",
+    "Find the Flooded Cellar",
+    "Find the Server Hall",
+    "Find the Monitoring Room",
+    "Find the Power Room"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-09"
+  },
+  {
+   "id": "the-league",
+   "name": "The League",
+   "trader": "Apollo",
+   "objectives": [
+    "Deliver a Deflated Football to Apollo",
+    "Deliver a Bicycle Pump to Apollo",
+    "On Dam Battlegrounds, photograph the goal by the Water Towers",
+    "On Buried City, photograph the football magazines in any kiosk",
+    "Search for a Deflated Football",
+    "Search for a Bicycle Pump"
+   ],
+   "required_items": [
+    {
+     "name": "Bicycle Pump",
+     "quantity": 1
+    },
+    {
+     "name": "Deflated Football",
+     "quantity": 1
+    }
+   ],
+   "created_at": "2026-01-27"
+  },
+  {
+   "id": "the-majors-footlocker",
+   "name": "The Major’s Footlocker",
+   "trader": "TianWen",
+   "objectives": [
+    "Search for Major Aiva's mementos in the apartments northwest of The Dam",
+    "Deliver Major Aiva's Mementos to Tian Wen"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-02"
+  },
+  {
+   "id": "the-right-tool",
+   "name": "The Right Tool",
+   "trader": "TianWen",
+   "objectives": [
+    "Destroy a Fireball",
+    "Destroy a Hornet",
+    "Destroy a Turret"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-17"
+  },
+  {
+   "id": "the-root-of-the-matter",
+   "name": "The Root of the Matter",
+   "trader": "Celeste",
+   "objectives": [
+    "Go to the Research Building",
+    "Search for the seed vault in the \"room with a great view\"",
+    "Deliver the Experimental Seed Sample to Celeste"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "the-stench-of-corruption",
+   "name": "The Stench of Corruption",
+   "trader": "Shani",
+   "objectives": [
+    "Reach the southwest lobby of the Departure Building",
+    "Find the staff locker room",
+    "Search the room for any clues of the saboteur's identity",
+    "Reach the tunnels below the Spaceport",
+    "Use the key on any Flushing Terminal to override the bypass protocol"
+   ],
+   "required_items": [
+    {
+     "name": "Flushing Terminal Key",
+     "quantity": 1
+    }
+   ],
+   "created_at": "2025-12-16"
+  },
+  {
+   "id": "the-trifecta",
+   "name": "The Trifecta",
+   "trader": "Shani",
+   "objectives": [
+    "Destroy 2 Snitches",
+    "Destroy 2 Wasps",
+    "Destroy 2 Hornets",
+    "Destroy 2 Wasp thrusters",
+    "Destroy 4 Hornet thrusters",
+    "Destroy a Firefly fuel tank"
+   ],
+   "required_items": [
+    {
+     "name": "Snitch Scanner",
+     "quantity": 2
+    },
+    {
+     "name": "Wasp Driver",
+     "quantity": 2
+    },
+    {
+     "name": "Hornet Driver",
+     "quantity": 2
+    }
+   ],
+   "created_at": "2025-10-27"
+  },
+  {
+   "id": "to-the-skies",
+   "name": "To The Skies",
+   "trader": "Apollo",
+   "objectives": [
+    "Scan any Crashed ARC Probe",
+    "Scan any ARC Courier",
+    "Search for the Gondola Prototype near the Red Lakes",
+    "Install ARC Performance Steel",
+    "Install ARC Pop Trigger",
+    "Install ARC Synthetic Resin",
+    "Install ARC Thermo Lining",
+    "Activate the Gondola Prototype",
+    "Search for the Gondola Prototype in the Farmlands",
+    "Install ARC Performance Steel",
+    "Install ARC Pop Trigger",
+    "Install ARC Synthetic Resin",
+    "Install ARC Thermo Lining",
+    "Activate the Gondola Prototype",
+    "Search for the Gondola Prototype in the East Plains",
+    "Install ARC Performance Steel",
+    "Install ARC Pop Trigger",
+    "Install ARC Synthetic Resin",
+    "Install ARC Thermo Lining",
+    "Activate the Gondola Prototype",
+    "Search for the Gondola Prototype at the top of the Dried Riverbed",
+    "Install ARC Performance Steel",
+    "Install ARC Pop Trigger",
+    "Install ARC Synthetic Resin",
+    "Install ARC Thermo Lining",
+    "Activate the Gondola Prototype"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-08"
+  },
+  {
+   "id": "tracks-of-the-beast",
+   "name": "Tracks of the Beast",
+   "trader": "Shani",
+   "objectives": [
+    "On Pendola Pass, head to the Northern Tracks",
+    "Find the destroyed station at the end of the tracks",
+    "Ping a Bully",
+    "Ping a Skulker",
+    "Destroy 3 Skulkers",
+    "Deliver a Skulker Targeter to Shani"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-09"
+  },
+  {
+   "id": "trash-into-treasure",
+   "name": "Trash Into Treasure",
+   "trader": "Shani",
+   "objectives": [
+    "Obtain 6 Wires",
+    "Obtain 1 Battery"
+   ],
+   "required_items": [
+    {
+     "name": "Wires",
+     "quantity": 6
+    },
+    {
+     "name": "Battery",
+     "quantity": 1
+    }
+   ],
+   "created_at": "2025-10-17"
+  },
+  {
+   "id": "tribute-to-toledo",
+   "name": "Tribute to Toledo",
+   "trader": "Celeste",
+   "objectives": [
+    "Get a Power Rod for Celeste"
+   ],
+   "required_items": [
+    {
+     "name": "Power Rod",
+     "quantity": 1
+    }
+   ],
+   "created_at": "2025-11-03"
+  },
+  {
+   "id": "turnabout",
+   "name": "Turnabout",
+   "trader": "Celeste",
+   "objectives": [
+    "Go to the North Trench Tower",
+    "Find a spare key",
+    "Locate and upload the blackmail files to Celeste"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "unexpected-initiative",
+   "name": "Unexpected Initiative",
+   "trader": "TianWen",
+   "objectives": [
+    "Reach the Grandioso Apartments in Buried City",
+    "Search for a Moisture Meter on the rooftop of the Grandioso Apartments",
+    "Reach Piazza Roma in Buried City",
+    "Search for a Nutrient Meter in the broken rooftop gardens at Piazza Roma",
+    "Deliver a Nutrient Meter to Tian Wen",
+    "Deliver a Moisture Meter to Tian Wen"
+   ],
+   "required_items": [
+    {
+     "name": "Water Pump",
+     "quantity": 1
+    },
+    {
+     "name": "Fertilizer",
+     "quantity": 1
+    }
+   ],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "untended-garden",
+   "name": "Untended Garden",
+   "trader": "Celeste",
+   "objectives": [
+    "Go to the Hydroponic Dome Complex",
+    "Access the data archive in one of the domes",
+    "Upload the data to the computer terminal in any Field Depot"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "waking-the-grid",
+   "name": "Waking the Grid",
+   "trader": "Shani",
+   "objectives": [
+    "Activate the security sensors in one of the Guard Towers",
+    "Start the Security Control Center in the Departure Building",
+    "Search for any traces of a security breach in the Arrival Building Data Office"
+   ],
+   "required_items": [],
+   "created_at": "2026-03-31"
+  },
+  {
+   "id": "water-troubles",
+   "name": "Water Troubles",
+   "trader": "Celeste",
+   "objectives": [
+    "Locate the Flood Access Tunnel under the Red Lake Balcony",
+    "Find the intake to the District's Water Supply",
+    "Sample the water"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "what-goes-around",
+   "name": "What Goes Around",
+   "trader": "Apollo",
+   "objectives": [
+    "Destroy any ARC enemy using a Fireball Burner"
+   ],
+   "required_items": [
+    {
+     "name": "Fireball Burner",
+     "quantity": 1
+    }
+   ],
+   "created_at": "2025-10-07"
+  },
+  {
+   "id": "what-we-left-behind",
+   "name": "What We Left Behind",
+   "trader": "TianWen",
+   "objectives": [
+    "On Buried City, search 2 containers in the Raider Camp beneath the Parking Garage",
+    "On Dam Battlegrounds, search for anything significant in the South Swamp Outpost",
+    "On Spaceport, search for anything significant in Bilguun's Hideout, next to the Container Storage"
+   ],
+   "required_items": [],
+   "created_at": "2025-10-31"
+  },
+  {
+   "id": "when-everything-falls",
+   "name": "When Everything Falls",
+   "trader": "Shani",
+   "objectives": [
+    "Go to the Water Towers",
+    "Photograph a Security Booth",
+    "Photograph a reinforced bus",
+    "Photograph the breach in the walls",
+    "Photograph the Arrival Building security room",
+    "Photograph Port A of the Launch Towers",
+    "Photograph the Launch Towers control room",
+    "Photograph the launch platform"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-09"
+  },
+  {
+   "id": "wires-crossed",
+   "name": "Wires Crossed",
+   "trader": "Celeste",
+   "objectives": [
+    "On The Blue Gate, attach a Snitch Scanner to the antenna at Pilgrim’s Peak",
+    "On Spaceport, attach a Surveyor Vault to the antenna on top of the Launch Towers",
+    "On Buried City, attach a Sentinel Firing Core to the antenna at the roof of the Grandioso Apartments"
+   ],
+   "required_items": [],
+   "created_at": "2026-10-09"
+  },
+  {
+   "id": "with-a-trace",
+   "name": "With A Trace",
+   "trader": "Shani",
+   "objectives": [
+    "Reach the Barren Clearing",
+    "Find signs of who brought down the ARC machines",
+    "Inspect the Adorned Wreckage",
+    "Inspect the communications device"
+   ],
+   "required_items": [],
+   "created_at": "2025-11-01"
+  },
+  {
+   "id": "with-a-view",
+   "name": "With a View",
+   "trader": "Shani",
+   "objectives": [
+    "Obtain a Rotary Encoder",
+    "Visit any of the Control Rooms near the Assembly Line",
+    "Use the Rotary Encoder to activate the server switch",
+    "Interact with a nearby computer to help identify the correct parts",
+    "Deliver an Ion Sputter to Shani"
+   ],
+   "required_items": [
+    {
+     "name": "Rotary Encoder",
+     "quantity": 1
+    }
+   ],
+   "created_at": "2026-01-27"
+  },
+  {
+   "id": "worth-your-salt",
+   "name": "Worth Your Salt",
+   "trader": "Celeste",
+   "objectives": [
+    "Go to the Rocket Assembly",
+    "Search for the hidden Battery Prototype in a high place",
+    "Bring the Battery Prototype to the Industrial Recharger",
+    "Use the machinery to charge the battery",
+    "Deliver the Charged Battery to the drop-off point in the corner"
+   ],
+   "required_items": [],
+   "created_at": "2026-02-24"
+  }
+ ]
+}

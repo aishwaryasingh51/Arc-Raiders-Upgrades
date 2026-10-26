@@ -1,0 +1,14 @@
+{
+  "patch": { "name": "Frozen Trail 2.0", "date": "2026-10-08" },
+  "content": {
+    "Sheltered Retreat": { "status": "active", "label": "Permanent · unlocks the Outpost" },
+    "Expedition 5": { "status": "paused", "label": "Expeditions paused for rework" },
+    "Ascending the Mountain": { "status": "ended", "label": "Ended Oct 5, 2026" },
+    "Phantom Targets Part 2": { "status": "ended", "label": "Ended Sep 6, 2026" },
+    "Converging Paths": { "status": "ended", "label": "Ended Jul 27, 2026" },
+    "Avian Alarm": { "status": "ended", "label": "Ended May 26, 2026" },
+    "High-Gain Antenna": { "status": "ended", "label": "Ended" },
+    "Weather Monitor": { "status": "ended", "label": "Ended" },
+    "Flickering Flames": { "status": "ended", "label": "Ended" }
+  }
+}

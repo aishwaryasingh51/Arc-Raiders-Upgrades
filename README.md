@@ -22,7 +22,7 @@ Track bench upgrades, quests, and projects for Arc Raiders with detailed craftin
 To update `items.json` with the latest game data:
 
 ```bash
-node sync_items.js
+node sync_data.js
 ```
 
 This script:
@@ -41,7 +41,7 @@ This script:
 ├── items.csv              # Recycling data & upgrade requirements
 ├── items.json             # Item database (auto-synced)
 ├── items_pretty.json      # Readable JSON format
-├── sync_items.js          # MetaForge API sync script
+├── sync_data.js           # MetaForge sync + CSV report/apply
 └── assets/
     ├── arclogo.png
     └── arcwallpaper.jpg

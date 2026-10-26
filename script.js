@@ -96,6 +96,17 @@ function normalizeFilterValue(value) {
     .toLowerCase();
 }
 
+// Join key between items.csv names and items.json names, so that
+// “Leviathan's Crown” Ship Model == Leviathan's Crown Ship Model (keep in sync with sync_data.js)
+function normKey(name) {
+  return String(name || "")
+    .toLowerCase()
+    .replace(/[\u2018\u2019\u02bc`]/g, "'")
+    .replace(/["\u201c\u201d]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function tokenizeName(name) {
   return String(name || "")
     .toLowerCase()
@@ -109,14 +120,13 @@ function toObjects(rows) {
   for (let r = 1; r < rows.length; r++) {
     const row = rows[r];
     if (row.length === 1 && row[0].trim() === "") continue;
+    if (String(row[0] || "").startsWith("#")) continue; // section comments
     const obj = {};
     for (let c = 0; c < header.length; c++) {
       obj[header[c]] = row[c] !== undefined ? row[c] : "";
     }
     obj.Quantity = normalizeQuantity(obj.Quantity);
-    obj._normName = String(obj.Name || "")
-      .trim()
-      .toLowerCase();
+    obj._normName = normKey(obj.Name);
 
     const locs = splitLocations(obj.LocationType);
     if (locs.length <= 1) {
@@ -180,25 +190,7 @@ function aggregateItems(rows) {
     addFilterKey(entry, "stack", row.ArcStackSize);
     addFilterKey(entry, "weight", row.ArcWeightKg);
 
-    // Merge metadata from items.json
-    const metaData = JSON_DATA_MAP.get(entry._normName);
-    if (metaData) {
-      if (!entry.IconURL && metaData.icon) entry.IconURL = metaData.icon;
-      if (
-        (entry.ArcWeightKg === undefined || entry.ArcWeightKg === "") &&
-        metaData.stat_block?.weight
-      ) {
-        entry.ArcWeightKg = metaData.stat_block.weight;
-      }
-      if (
-        (entry.ArcStackSize === undefined || entry.ArcStackSize === "") &&
-        metaData.stat_block?.stackSize
-      ) {
-        entry.ArcStackSize = metaData.stat_block.stackSize;
-      }
-    }
-
-    // Fallback Icon Generation if still missing
+    // Fallback icon for CSV items MetaForge doesn't know (items.json icons win in finalizeEntry)
     if (!entry.IconURL) {
       const iconBase = "https://cdn.metaforge.app/arc-raiders/icons/";
       const fallbackId = (row.MetaID || row.ArcID || row.ItemID || "")
@@ -227,6 +219,7 @@ function aggregateItems(rows) {
         row.Quantity,
         row.Source,
         questName,
+        row.Note,
       ].join("|");
       if (!entry._usageSet.has(usageKey)) {
         entry._usageSet.add(usageKey);
@@ -236,6 +229,7 @@ function aggregateItems(rows) {
           quantity: row.Quantity,
           source: row.Source,
           questName,
+          note: row.Note || "",
         });
       }
     }
@@ -259,10 +253,89 @@ function aggregateItems(rows) {
     if (!entry.ArcRarity && row.ArcRarity) entry.ArcRarity = row.ArcRarity;
     if (!entry.MetaRarity && row.MetaRarity) entry.MetaRarity = row.MetaRarity;
   }
-  return Array.from(map.values()).map(({ _usageSet, _tokenSet, ...rest }) => ({
-    ...rest,
-    _tokens: Array.from(_tokenSet),
-  }));
+  const entries = Array.from(map.values()).map(
+    ({ _usageSet, _tokenSet, ...rest }) =>
+      finalizeEntry({ ...rest, _tokens: Array.from(_tokenSet) })
+  );
+
+  // Every real item on MetaForge is searchable, even if nothing requires it
+  const known = new Set(entries.map((e) => e._normName));
+  for (const [key, meta] of JSON_DATA_MAP) {
+    if (known.has(key) || !isSearchableJsonItem(meta)) continue;
+    known.add(key);
+    entries.push(
+      finalizeEntry({
+        Name: meta.name,
+        _normName: key,
+        Source: "Item",
+        UsageEntries: [],
+        CategoryList: [],
+        LocationList: [],
+        VendorList: [],
+        SourceList: ["Item"],
+        FilterKeys: new Set(),
+        _tokens: tokenizeName(meta.name).filter((t) => !SEARCH_BLACKLIST.has(t)),
+      })
+    );
+  }
+  return entries;
+}
+
+// Descriptions MetaForge uses as placeholders; a hand-written CSV description beats these
+const GENERIC_DESCRIPTIONS = new Set([
+  "can be recycled into crafting materials.",
+  "used in crafting.",
+  "",
+]);
+
+// Weapon roll variants ("Amplified Burletta (Burst Fire)") would flood results
+function isSearchableJsonItem(meta) {
+  if (!meta?.name) return false;
+  if (meta.item_type === "Weapon" && /\(.*\)\s*$/.test(meta.name)) return false;
+  return true;
+}
+
+// items.json (synced from MetaForge) is authoritative for item metadata;
+// CSV values are a fallback for items MetaForge doesn't cover.
+function finalizeEntry(entry) {
+  const meta = JSON_DATA_MAP.get(entry._normName);
+  if (meta) {
+    const pick = (apiValue, csvValue) =>
+      apiValue !== null && apiValue !== undefined && apiValue !== ""
+        ? apiValue
+        : csvValue;
+    if (meta.icon) entry.IconURL = meta.icon;
+    entry.ArcRarity = pick(meta.rarity, entry.ArcRarity || entry.MetaRarity);
+    entry.ArcValue = pick(meta.value, entry.ArcValue);
+    entry.ArcType = pick(meta.item_type, entry.ArcType);
+    entry.ArcWeightKg = pick(meta.stat_block?.weight, entry.ArcWeightKg);
+    entry.ArcStackSize = pick(meta.stat_block?.stackSize, entry.ArcStackSize);
+    entry.ArcFoundIn = pick(meta.loot_area, entry.ArcFoundIn);
+    const apiDesc = String(meta.description || "").trim();
+    const csvDesc = entry.ArcDescription || entry.MetaDescription || "";
+    entry.ArcDescription =
+      !GENERIC_DESCRIPTIONS.has(apiDesc.toLowerCase()) || !csvDesc
+        ? apiDesc
+        : csvDesc;
+    if (meta.recycle?.length) {
+      entry.Recycle = meta.recycle;
+      // the recycle chips replace any (possibly outdated) prose about recycling
+      entry.ArcDescription = entry.ArcDescription
+        .replace(/\s*Can be recycled into[^.]*\.?/i, "")
+        .trim();
+    }
+    if (meta.dropped_by?.length) entry.DroppedBy = meta.dropped_by;
+    if (meta.created_at) entry.CreatedAt = meta.created_at;
+  }
+  // Filter keys must match the values the card displays
+  const addKey = (type, value) => {
+    const norm = normalizeFilterValue(value);
+    if (norm) entry.FilterKeys.add(`${type}:${norm}`);
+  };
+  addKey("rarity", entry.ArcRarity || entry.MetaRarity);
+  splitLocations(entry.ArcFoundIn).forEach((loc) => addKey("location", loc));
+  addKey("value", entry.ArcValue);
+  return entry;
 }
 
 function deriveQuestName(itemId, slugName, arcId, metaId) {
@@ -338,6 +411,7 @@ function getRarityClass(rarityText) {
 let ITEMS = [];
 let GROUPED_ITEMS = [];
 let JSON_DATA_MAP = new Map();
+let DATA_SYNCED_AT = "";
 let dataLoaded = false;
 let loadFailed = false;
 let activeFilterKey = "";
@@ -358,10 +432,12 @@ async function loadData() {
     jsonRes.json(),
   ]);
 
+  DATA_SYNCED_AT = jsonData?.syncedAt || "";
   if (jsonData?.data) {
     jsonData.data.forEach((item) => {
-      const name = String(item.name || "").trim().toLowerCase();
-      if (name) JSON_DATA_MAP.set(name, item);
+      const name = normKey(item.name);
+      // first entry wins (e.g. three "Colorful Shoes" rarities share a name)
+      if (name && !JSON_DATA_MAP.has(name)) JSON_DATA_MAP.set(name, item);
     });
   }
 
@@ -508,7 +584,13 @@ function renderResults(list, q) {
       }
     }
 
-    if (recycleInfo) {
+    // Structured recycle data from MetaForge beats parsing the description
+    let materials = r.Recycle?.length ? r.Recycle : null;
+    if (!materials && recycleInfo && !/^crafting materials$/i.test(recycleInfo)) {
+      materials = parseRecyclingMaterials(recycleInfo);
+    }
+
+    if (materials?.length) {
       const dismantleDiv = document.createElement("div");
       dismantleDiv.className = "dismantle-info";
 
@@ -518,8 +600,6 @@ function renderResults(list, q) {
 
       const materialsContainer = document.createElement("span");
       materialsContainer.className = "recycle-materials";
-
-      const materials = parseRecyclingMaterials(recycleInfo);
 
       for (const material of materials) {
         const item = findItemByName(material.name);
@@ -610,7 +690,13 @@ function renderResults(list, q) {
           qtyLine.textContent = `Quantity: ${showQuantity}`;
           li.appendChild(qtyLine);
         }
+        if (entry.note) {
+          const noteLine = document.createElement("div");
+          noteLine.textContent = `⚠ ${entry.note}`;
+          li.appendChild(noteLine);
+        }
         const shouldShowSource =
+          entry.source !== "Bench" &&
           !isQuestRequirement &&
           !isExpeditionRequirement &&
           entry.source &&
@@ -680,7 +766,7 @@ function syncUI() {
 
 function matchesQuery(item, query) {
   if (!query) return false;
-  const qTokens = query.toLowerCase().split(/\s+/).filter(Boolean);
+  const qTokens = tokenizeName(query);
   if (qTokens.length === 0) return false;
 
   const itemTokens = item._tokens || [];
@@ -700,7 +786,7 @@ function toggleFilter(key) {
 }
 
 function findItemByName(name) {
-  const normalized = String(name || "").trim().toLowerCase();
+  const normalized = normKey(name);
 
   // First, try to find in CSV data (GROUPED_ITEMS)
   let item = GROUPED_ITEMS.find(item => item._normName === normalized);
@@ -761,7 +847,20 @@ function search(q, maxResults = 50) {
   );
 
   if (prefixMatches.length > 0) {
-    return prefixMatches.slice(0, maxResults);
+    // Exact name first, then items whose own name matches, then everything
+    // else (e.g. requirements of a searched project); alphabetical within each.
+    const qKey = normKey(query);
+    const qTokens = tokenizeName(query);
+    const rank = (it) => {
+      if (it._normName === qKey) return 0;
+      const nameTokens = tokenizeName(it._normName);
+      return qTokens.every((q) => nameTokens.some((t) => t.startsWith(q))) ? 1 : 2;
+    };
+    return prefixMatches
+      .map((it, i) => ({ it, i, r: rank(it) }))
+      .sort((a, b) => a.r - b.r || a.i - b.i)
+      .map((x) => x.it)
+      .slice(0, maxResults);
   }
 
   // fuzzy matches
