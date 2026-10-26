@@ -128,7 +128,9 @@ Quest hand-ins are derived in `sync_data.js → questHandIns`: objectives like "
 (the API's `required_items` is sometimes stale). "Deliver **the** X" items are one-off quest props and are skipped.
 
 ### `script.js` — app logic (read-only for content updates)
-Loads `items.csv` + `items.json`, merges them, builds the token index, and renders results.
+Loads `items.csv` + `items.json` (+ optional `content.json`), merges them, builds the token index, and
+renders results. `renderResults` builds each card; `describeUsage` turns a usage entry into a
+manifest row (type chip, label, sub-label, quantity, note, status).
 
 ---
 
@@ -195,6 +197,55 @@ mostly wrong (invented quantities, non-existent "Shoring Up Defenses") and were 
 ### Expeditions
 Expedition 5 (Phase 1–4; Phase 5 is coin value, Phase 6 is ARC damage, so no rows). The old
 "Expedition: Part 1–4" rows were an earlier expedition's caravan and were replaced.
+
+---
+
+## Visual Design ("Speranza dark")
+
+All styling lives in the `<style>` block of `index.html`; tokens are CSS variables on `:root`.
+- **Palette:** slate panels (`--panel`, `--panel-2`), ARC cream ink (`--cream` #ece0cc, from `arclogo.png`),
+  and the five-colour ARC stripe (`--s-red/orange/yellow/green/teal`, combined as `--stripe`).
+- **Rarity** drives each card's `--accent` (edge bar, corner notch, icon glow, kicker, rarity badge) via
+  `.result.rarity-{common|uncommon|rare|epic|legendary}`. `getRarityClass()` maps aliases.
+- **Requirement types** each get a chip colour: Bench = orange, Quest = teal, Project = yellow,
+  Expedition = red (`describeUsage()` in `script.js` decides the type).
+- **Type:** Barlow Condensed (display/HUD/labels) + Space Grotesk (body), both from Google Fonts.
+- **Atmosphere:** blurred `arcwallpaper-1920.jpg` (a 300 KB resize of the 4K `arcwallpaper.jpg`, which is
+  kept for reference but not loaded), SVG film grain + scanlines in `body::after`, slow background drift.
+- All motion is disabled under `prefers-reduced-motion`.
+
+### Behaviour the redesign must preserve
+Typing searches live; clicking a badge toggles a filter (`activeFilterKey`); the panel compacts and
+moves to the top while a query is present (`syncUI`); clicking anywhere refocuses the input.
+Added affordances: clear (×) button, needed/not-needed count, filter pill (click to clear the active
+badge filter), view-filter chips, rotating example placeholder, HUD line (item count, patch from
+`content.json`, `syncedAt` from `items.json`).
+
+### What a search shows (`main → doSearch`)
+1. **Shopping lists** (`matchGroups` / `renderShoppingList`): if the query matches a bench, quest,
+   project or expedition *name* (≥3 chars, ≤4 matches), a panel lists every stage with its items,
+   a tick box per stage, and "Still needed" totals over unfinished stages. Clicking an item searches it.
+   Groups are built once after load (`buildGroups`). A matching ended project is hidden unless "Ended"
+   is on; an `ended-notice` explains that and offers "Show ended".
+2. **Item cards** only for items with at least one *visible* requirement row (`usageRows` + `rowVisible`).
+   Cards show "Dropped by" (from `items.json` `dropped_by`) and a tick box on every row.
+3. **"Not needed" panel** (`renderNotNeeded`): every other matching item in one compact list, with a
+   reason when it's only needed by ended content, completed stages, or filtered-out types.
+   By design the site only gives full cards to items something needs (owner's decision, 2026-10-26).
+
+### Progress + view filters (localStorage, per device)
+- `arc-raiders-progress-v1`: array of completed stage keys. A stage key is `stationKey(entry)` =
+  `"${Station}|${Tier}"` (e.g. `Gunsmith|2`, `Quest: Movie Night|0`). **Renaming a Station in the CSV
+  resets that stage's progress for users**, so avoid cosmetic renames.
+- `arc-raiders-prefs-v1`: `{types: {bench, quest, project, expedition}, showEnded, showDone}`; the chip row
+  under the search box. Defaults: all types on, ended hidden, done hidden.
+- Storage access is wrapped in try/catch; the site works without it.
+
+### `content.json`
+Optional. `patch` (shown in the HUD) and `content` keyed by project/expedition name (the text before
+the `:` in `Station`): `{status: active|paused|ended, label}`. **`ended` hides that content by default**
+(rows, shopping list), so mark a project ended only once it really has. Update it when a project
+starts or ends.
 
 ---
 

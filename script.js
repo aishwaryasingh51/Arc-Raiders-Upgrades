@@ -412,17 +412,24 @@ let ITEMS = [];
 let GROUPED_ITEMS = [];
 let JSON_DATA_MAP = new Map();
 let DATA_SYNCED_AT = "";
+let CONTENT_META = { patch: null, content: {} };
 let dataLoaded = false;
 let loadFailed = false;
 let activeFilterKey = "";
 let lastQuery = "";
 let triggerSearch = null;
+let searchFor = null;
 
 async function loadData() {
-  const [csvRes, jsonRes] = await Promise.all([
+  const [csvRes, jsonRes, contentMeta] = await Promise.all([
     fetch("items.csv"),
     fetch("items.json"),
+    // optional: project status + current patch; the site works without it
+    fetch("content.json")
+      .then((res) => (res.ok ? res.json() : null))
+      .catch(() => null),
   ]);
+  if (contentMeta) CONTENT_META = contentMeta;
 
   if (!csvRes.ok) throw new Error(`Failed to load CSV (${csvRes.status})`);
   if (!jsonRes.ok) throw new Error(`Failed to load JSON (${jsonRes.status})`);
@@ -446,7 +453,7 @@ async function loadData() {
   GROUPED_ITEMS = aggregateItems(ITEMS);
 }
 
-function setResultsMessage(text, type = "") {
+function setResultsMessage(text, type = "", detail = "") {
   const resultsEl = document.getElementById("results");
   if (!resultsEl) return;
   resultsEl.innerHTML = "";
@@ -454,279 +461,516 @@ function setResultsMessage(text, type = "") {
   const div = document.createElement("div");
   div.className = `empty${type ? ` ${type}` : ""}`;
   div.textContent = text;
+  if (detail) {
+    const small = document.createElement("small");
+    small.textContent = detail;
+    div.appendChild(small);
+  }
   resultsEl.appendChild(div);
 }
 
-function renderResults(list, q) {
-  const resultsEl = document.getElementById("results");
-  resultsEl.innerHTML = "";
-  document.body.classList.toggle("search-active", Boolean(q.trim()));
+function formatValue(value) {
+  const n = Number(value);
+  return Number.isFinite(n) && n > 0 ? `₳${n.toLocaleString()}` : value || "";
+}
 
-  if (list.length === 0) {
-    setResultsMessage(`No matches found for "${q}".`, "error");
-    return;
-  }
+// "Avian Alarm: Stage 2 – Preliminary Signal Birds" → ["Avian Alarm", "Stage 2 – Preliminary Signal Birds"]
+function splitStation(station) {
+  const i = station.indexOf(":");
+  return i < 0 ? [station, ""] : [station.slice(0, i).trim(), station.slice(i + 1).trim()];
+}
 
-  for (const r of list) {
-    const div = document.createElement("div");
-    div.className = "result";
-    const rarityKey = String(r.ArcRarity || r.MetaRarity || "")
-      .trim()
-      .toLowerCase()
-      .replace(/\s+/g, "-");
-    if (rarityKey) {
-      div.classList.add(`rarity-${rarityKey}`);
-    } else {
-      const tierValue = Number.parseInt(r.Tier, 10);
-      div.classList.add(
-        Number.isFinite(tierValue) ? `tier-${tierValue}` : "tier-0"
-      );
-    }
-    const content = document.createElement("div");
-    content.className = "result-body";
-
-    // New Header Layout
-    const header = document.createElement("div");
-    header.className = "result-header";
-
-    if (r.IconURL) {
-      const iconContainer = document.createElement("div");
-      iconContainer.className = "result-icon";
-      const icon = document.createElement("img");
-      const cleanUrl = r.IconURL.replace(/^http:/, "https:");
-      icon.src = cleanUrl;
-      icon.alt = r.Name;
-      iconContainer.appendChild(icon);
-      header.appendChild(iconContainer);
-    }
-
-    const headerContent = document.createElement("div");
-    headerContent.className = "result-header-content";
-
-    const title = document.createElement("strong");
-    title.textContent = r.Name || "Unknown Item";
-    headerContent.appendChild(title);
-
-    const badges = document.createElement("div");
-    badges.className = "badges";
-    const badgeSet = new Set();
-    const addBadge = (text, keyType, rawValue = text) => {
-      if (!text) return;
-      const key = keyType
-        ? `${keyType}:${normalizeFilterValue(rawValue ?? text)}`
-        : "";
-      const dedupeKey = text.trim().toLowerCase();
-      if (badgeSet.has(dedupeKey)) return;
-      badgeSet.add(dedupeKey);
-      const badge = document.createElement("button");
-      badge.type = "button";
-      badge.className = "badge";
-      badge.textContent = text;
-      if (key) {
-        badge.dataset.filterKey = key;
-        if (activeFilterKey === key) badge.classList.add("badge-active");
-        badge.addEventListener("click", (e) => {
-          e.stopPropagation();
-          toggleFilter(key);
-        });
-      }
-      badges.appendChild(badge);
-      return badge;
+// Classify a usage entry into the row the manifest shows
+function describeUsage(entry) {
+  const station = String(entry.station || "").trim().replace(/:$/, "");
+  const stationLower = station.toLowerCase();
+  const source = String(entry.source || "").toLowerCase();
+  const tier = String(entry.tier || "").trim();
+  if (stationLower === "quest" || source === "quest" || entry.questName) {
+    return {
+      type: "quest",
+      label: entry.questName || station.replace(/^Quest:\s*/i, "") || "Unknown Quest",
+      sub: "",
     };
-    const rarityLabel = r.ArcRarity || r.MetaRarity;
-    if (rarityLabel) {
-      const rarityBadge = addBadge(rarityLabel, "rarity", rarityLabel);
-      const rarityClass = getRarityClass(rarityLabel);
-      if (rarityBadge && rarityClass) {
-        rarityBadge.classList.add(
-          "badge-rarity",
-          `badge-rarity-${rarityClass}`
-        );
+  }
+  if (stationLower.startsWith("expedition") || source === "expedition") {
+    const [label, sub] = splitStation(station);
+    return { type: "expedition", label, sub };
+  }
+  if (source === "project") {
+    const [label, sub] = splitStation(station);
+    return { type: "project", label, sub };
+  }
+  return {
+    type: "bench",
+    label: station || "Upgrade requirement",
+    sub: tier && tier !== "0" ? `Tier ${tier}` : "",
+  };
+}
+
+const TYPE_LABELS = { bench: "Bench", quest: "Quest", project: "Project", expedition: "Expedition" };
+
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined && text !== null) node.textContent = text;
+  return node;
+}
+
+function renderIcon(url, alt, className) {
+  const wrap = el("span", className);
+  const img = document.createElement("img");
+  img.src = url.replace(/^http:/, "https:");
+  img.alt = alt;
+  img.loading = "lazy";
+  img.decoding = "async";
+  img.onerror = () => img.remove();
+  wrap.appendChild(img);
+  return wrap;
+}
+
+// ── Progress + view preferences (saved per device) ─────────────────────
+const PROGRESS_KEY = "arc-raiders-progress-v1";
+const PREFS_KEY = "arc-raiders-prefs-v1";
+const DEFAULT_PREFS = {
+  types: { bench: true, quest: true, project: true, expedition: true },
+  showEnded: false,
+  showDone: false,
+};
+
+function loadStored(key, fallback) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key));
+    return value ?? fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function saveStored(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    // private mode / storage blocked: progress just won't persist
+  }
+}
+
+const DONE = new Set(loadStored(PROGRESS_KEY, []));
+const storedPrefs = loadStored(PREFS_KEY, {});
+const PREFS = {
+  ...DEFAULT_PREFS,
+  ...storedPrefs,
+  types: { ...DEFAULT_PREFS.types, ...(storedPrefs.types || {}) },
+};
+
+// A "stage" is one bench tier, one quest, or one project/expedition phase
+function stationKey(entry) {
+  return `${entry.station}|${entry.tier}`;
+}
+
+function toggleDone(key) {
+  if (DONE.has(key)) DONE.delete(key);
+  else DONE.add(key);
+  saveStored(PROGRESS_KEY, [...DONE]);
+  if (typeof triggerSearch === "function") triggerSearch();
+}
+
+function setPref(update) {
+  Object.assign(PREFS, update);
+  saveStored(PREFS_KEY, PREFS);
+  if (typeof triggerSearch === "function") triggerSearch();
+}
+
+function usageRows(item) {
+  return (item.UsageEntries || []).map((entry) => {
+    const info = describeUsage(entry);
+    const status = CONTENT_META.content?.[info.label] || null;
+    const key = stationKey(entry);
+    return { entry, info, status, key, ended: status?.status === "ended", done: DONE.has(key) };
+  });
+}
+
+function rowVisible(row) {
+  return (
+    PREFS.types[row.info.type] !== false &&
+    (PREFS.showEnded || !row.ended) &&
+    (PREFS.showDone || !row.done)
+  );
+}
+
+// Why a matching item has no visible requirements
+function hiddenReason(rows) {
+  if (!rows.length) return "";
+  if (rows.every((r) => r.ended)) return "ended projects only";
+  if (rows.every((r) => r.done || r.ended)) return "your stages are done";
+  return "hidden by filters";
+}
+
+// ── Shopping lists: everything one bench / quest / project needs ───────
+let GROUPS = [];
+
+function stageOrder(entry, info) {
+  const tier = Number.parseInt(entry.tier, 10);
+  if (tier > 0) return tier;
+  const n = String(info.sub).match(/\d+/);
+  return n ? Number(n[0]) : 0;
+}
+
+function buildGroups() {
+  const map = new Map();
+  for (const item of GROUPED_ITEMS) {
+    for (const entry of item.UsageEntries || []) {
+      const info = describeUsage(entry);
+      const groupKey = `${info.type}|${info.label}`;
+      let group = map.get(groupKey);
+      if (!group) {
+        group = { type: info.type, label: info.label, tokens: tokenizeName(info.label), stages: new Map() };
+        map.set(groupKey, group);
+      }
+      const key = stationKey(entry);
+      let stage = group.stages.get(key);
+      if (!stage) {
+        stage = { key, sub: info.sub, order: stageOrder(entry, info), items: [] };
+        group.stages.set(key, stage);
+      }
+      stage.items.push({ item, quantity: Number(entry.quantity) || 0, note: entry.note || "" });
+    }
+  }
+  GROUPS = [...map.values()].map((g) => ({
+    ...g,
+    stages: [...g.stages.values()].sort((a, b) => a.order - b.order),
+  }));
+}
+
+// Searching a bench/quest/project name shows its shopping list
+// Returns { shown, hiddenEnded } so a search for an ended project can explain itself
+function matchGroups(query) {
+  const none = { shown: [], hiddenEnded: [] };
+  const qTokens = tokenizeName(query);
+  if (!qTokens.length || query.trim().length < 3) return none;
+  const matches = GROUPS.filter(
+    (g) =>
+      PREFS.types[g.type] !== false &&
+      qTokens.every((q) => g.tokens.some((t) => t.startsWith(q)))
+  );
+  if (matches.length > 4) return none;
+  const isHidden = (g) =>
+    CONTENT_META.content?.[g.label]?.status === "ended" && !PREFS.showEnded;
+  return { shown: matches.filter((g) => !isHidden(g)), hiddenEnded: matches.filter(isHidden) };
+}
+
+function renderEndedNotice(groups) {
+  const notice = el("div", "ended-notice");
+  const names = groups.map((g) => {
+    const label = CONTENT_META.content?.[g.label]?.label || "Ended";
+    return `${g.label} (${label.replace(/^Ended\s*/i, "ended ").trim()})`;
+  });
+  notice.appendChild(
+    el("span", "", `${names.join(", ")} can't be progressed any more, so it's hidden.`)
+  );
+  const btn = el("button", "view-chip on", "Show ended");
+  btn.type = "button";
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setPref({ showEnded: true });
+  });
+  notice.appendChild(btn);
+  return notice;
+}
+
+function stageTitle(group, stage) {
+  if (group.type === "quest") return "Hand-in";
+  return stage.sub || "Requirements";
+}
+
+function renderShopItem(item, quantity, note) {
+  const tile = el("button", "shop-item");
+  tile.type = "button";
+  tile.title = `Search ${item.Name}`;
+  const rarity = getRarityClass(item.ArcRarity || item.MetaRarity);
+  if (rarity) tile.classList.add(`rarity-${rarity.replace(/\s+/g, "-")}`);
+  if (item.IconURL) tile.appendChild(renderIcon(item.IconURL, "", "shop-icon"));
+  const name = el("span", "shop-name", item.Name);
+  if (note) name.appendChild(el("span", "note", ` ⚠ ${note}`));
+  tile.appendChild(name);
+  tile.appendChild(el("span", "qty", quantity));
+  tile.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (typeof searchFor === "function") searchFor(item.Name);
+  });
+  return tile;
+}
+
+function renderShoppingList(group) {
+  const status = CONTENT_META.content?.[group.label] || null;
+  const panel = el("section", `shop type-${group.type}`);
+  const head = el("header", "shop-head");
+  head.appendChild(el("span", "type-chip", TYPE_LABELS[group.type]));
+  head.appendChild(el("h2", "shop-title", group.label));
+  if (status) head.appendChild(el("span", `status-tag status-${status.status}`, status.label || status.status));
+  const doneCount = group.stages.filter((s) => DONE.has(s.key)).length;
+  head.appendChild(
+    el("span", "shop-progress", `${doneCount}/${group.stages.length} ${group.stages.length === 1 ? "stage" : "stages"} done`)
+  );
+  panel.appendChild(head);
+
+  const bar = el("div", "shop-bar");
+  bar.style.setProperty("--p", group.stages.length ? doneCount / group.stages.length : 0);
+  panel.appendChild(bar);
+
+  const stages = el("ol", "shop-stages");
+  const remaining = new Map();
+  for (const stage of group.stages) {
+    const done = DONE.has(stage.key);
+    const li = el("li", `shop-stage${done ? " done" : ""}`);
+    const check = el("button", "stage-check", done ? "✓" : "");
+    check.type = "button";
+    check.setAttribute("aria-pressed", String(done));
+    check.title = done ? "Mark as not done" : "Mark stage as done";
+    check.setAttribute("aria-label", `${group.label}: ${stageTitle(group, stage)}, ${done ? "done" : "not done"}`);
+    check.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleDone(stage.key);
+    });
+    const title = el("div", "stage-title");
+    title.appendChild(check);
+    title.appendChild(el("span", "", stageTitle(group, stage)));
+    li.appendChild(title);
+    const items = el("div", "shop-items");
+    for (const { item, quantity, note } of stage.items) {
+      items.appendChild(renderShopItem(item, quantity, note));
+      if (!done) {
+        const prev = remaining.get(item._normName);
+        remaining.set(item._normName, { item, quantity: (prev?.quantity || 0) + quantity });
       }
     }
-    const locations = r.ArcFoundIn
-      ? splitLocations(r.ArcFoundIn)
-      : r.LocationList?.length
-        ? r.LocationList
-        : [r.LocationType];
-    locations.forEach((loc) => addBadge(loc, "location", loc));
-    const arcValueNum = Number(r.ArcValue);
-    if (Number.isFinite(arcValueNum) && arcValueNum > 0) {
-      addBadge(`₳${arcValueNum.toLocaleString()}`, "value", arcValueNum);
-    } else if (r.ArcValue) {
-      addBadge(r.ArcValue, "value", r.ArcValue);
-    }
-    headerContent.appendChild(badges);
-    header.appendChild(headerContent);
-    content.appendChild(header);
+    li.appendChild(items);
+    stages.appendChild(li);
+  }
+  panel.appendChild(stages);
 
-    const description = r.ArcDescription || r.MetaDescription;
-    if (description) {
-      const desc = document.createElement("p");
-      desc.className = "description";
-      desc.textContent = description;
-      content.appendChild(desc);
-    }
+  const total = el("footer", "shop-total");
+  if (remaining.size) {
+    const sum = [...remaining.values()].reduce((n, r) => n + r.quantity, 0);
+    const label = el("div", "shop-total-label", "Still needed ");
+    label.appendChild(el("b", "", `${sum.toLocaleString()} items`));
+    total.appendChild(label);
+    const items = el("div", "shop-items");
+    [...remaining.values()]
+      .sort((a, b) => b.quantity - a.quantity)
+      .forEach(({ item, quantity }) => items.appendChild(renderShopItem(item, quantity)));
+    total.appendChild(items);
+  } else {
+    total.appendChild(el("div", "shop-total-label complete", "All stages done ✓"));
+  }
+  panel.appendChild(total);
+  return panel;
+}
 
-    // Extract recycling/dismantling information
+// ── Item cards ──────────────────────────────────────────────────────────
+function renderCard(r, rows, index) {
+  const card = el("article", "result");
+  card.style.setProperty("--i", index);
+  const rarityClass = getRarityClass(r.ArcRarity || r.MetaRarity);
+  if (rarityClass) card.classList.add(`rarity-${rarityClass.replace(/\s+/g, "-")}`);
+  const content = el("div", "result-body");
+
+  // Header: icon, type, name, badges
+  const header = el("header", "result-header");
+  if (r.IconURL) header.appendChild(renderIcon(r.IconURL, r.Name, "result-icon"));
+  const headerContent = el("div", "result-header-content");
+  if (r.ArcType) headerContent.appendChild(el("div", "result-kicker", r.ArcType));
+  headerContent.appendChild(el("strong", "", r.Name || "Unknown Item"));
+
+  const badges = el("div", "badges");
+  const badgeSet = new Set();
+  const addBadge = (text, keyType, rawValue = text) => {
+    if (!text) return null;
+    const key = keyType ? `${keyType}:${normalizeFilterValue(rawValue ?? text)}` : "";
+    const dedupeKey = String(text).trim().toLowerCase();
+    if (badgeSet.has(dedupeKey)) return null;
+    badgeSet.add(dedupeKey);
+    const badge = el("button", "badge", text);
+    badge.type = "button";
+    if (key) {
+      badge.dataset.filterKey = key;
+      badge.title = activeFilterKey === key ? "Remove filter" : "Filter results by this";
+      if (activeFilterKey === key) badge.classList.add("badge-active");
+      badge.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleFilter(key);
+      });
+    }
+    badges.appendChild(badge);
+    return badge;
+  };
+  const rarityLabel = r.ArcRarity || r.MetaRarity;
+  if (rarityLabel) addBadge(rarityLabel, "rarity", rarityLabel)?.classList.add("badge-rarity");
+  const locations = r.ArcFoundIn
+    ? splitLocations(r.ArcFoundIn)
+    : r.LocationList?.length
+      ? r.LocationList
+      : [r.LocationType];
+  locations.forEach((loc) => addBadge(loc, "location", loc));
+  const arcValueNum = Number(r.ArcValue);
+  if (Number.isFinite(arcValueNum) && arcValueNum > 0) {
+    addBadge(formatValue(arcValueNum), "value", arcValueNum)?.classList.add("badge-value");
+  } else if (r.ArcValue) {
+    addBadge(r.ArcValue, "value", r.ArcValue);
+  }
+  if (badges.children.length) headerContent.appendChild(badges);
+  header.appendChild(headerContent);
+  content.appendChild(header);
+
+  const description = r.ArcDescription || r.MetaDescription;
+  if (description) content.appendChild(el("p", "description", description));
+
+  // Recycling: structured MetaForge data first, description text as fallback
+  let materials = r.Recycle?.length ? r.Recycle : null;
+  if (!materials && description) {
     const recyclePatterns = [
       /Can be recycled into ([^.]+)\.?/i,
       /Dismantle(?:s)? (?:into|yields):?\s*([^.]+)\.?/i,
       /(?:Breaks down|Converts) (?:into|to):?\s*([^.]+)\.?/i,
     ];
-
-    let recycleInfo = null;
     for (const pattern of recyclePatterns) {
-      const match = description?.match(pattern);
-      if (match) {
-        recycleInfo = match[1].trim();
+      const match = description.match(pattern);
+      if (match && !/^crafting materials$/i.test(match[1].trim())) {
+        materials = parseRecyclingMaterials(match[1].trim());
         break;
       }
     }
-
-    // Structured recycle data from MetaForge beats parsing the description
-    let materials = r.Recycle?.length ? r.Recycle : null;
-    if (!materials && recycleInfo && !/^crafting materials$/i.test(recycleInfo)) {
-      materials = parseRecyclingMaterials(recycleInfo);
-    }
-
-    if (materials?.length) {
-      const dismantleDiv = document.createElement("div");
-      dismantleDiv.className = "dismantle-info";
-
-      const label = document.createElement("strong");
-      label.textContent = "Recycles Into: ";
-      dismantleDiv.appendChild(label);
-
-      const materialsContainer = document.createElement("span");
-      materialsContainer.className = "recycle-materials";
-
-      for (const material of materials) {
-        const item = findItemByName(material.name);
-
-        const materialSpan = document.createElement("span");
-        materialSpan.className = "recycle-material";
-
-        if (item?.IconURL) {
-          const iconContainer = document.createElement("span");
-          iconContainer.className = "recycle-material-icon";
-
-          const icon = document.createElement("img");
-          const cleanUrl = item.IconURL.replace(/^http:/, "https:");
-          icon.src = cleanUrl;
-          icon.alt = material.name;
-          iconContainer.appendChild(icon);
-
-          if (material.quantity !== null) {
-            const qtyBadge = document.createElement("span");
-            qtyBadge.className = "recycle-quantity-badge";
-            qtyBadge.textContent = material.quantity;
-            iconContainer.appendChild(qtyBadge);
-          }
-
-          materialSpan.appendChild(iconContainer);
-        }
-
-        const nameSpan = document.createElement("span");
-        nameSpan.className = "recycle-material-name";
-        nameSpan.textContent = material.quantity !== null
-          ? `${material.quantity} ${material.name}`
-          : material.name;
-        materialSpan.appendChild(nameSpan);
-
-        materialsContainer.appendChild(materialSpan);
-      }
-
-      dismantleDiv.appendChild(materialsContainer);
-      content.appendChild(dismantleDiv);
-    }
-
-    const hasUsage = (r.UsageEntries?.length || 0) > 0;
-    const advisory = document.createElement("div");
-    advisory.className = `usage ${hasUsage ? "required" : "optional"}`;
-    const usageTitle = document.createElement("div");
-    usageTitle.className = "usage-title";
-
-    if (hasUsage) {
-      const usageEntries = r.UsageEntries || [];
-      usageTitle.textContent = "Required";
-      advisory.appendChild(usageTitle);
-
-      const usageList = document.createElement("ul");
-      usageList.className = "usage-list";
-      usageEntries.forEach((entry) => {
-        const li = document.createElement("li");
-        const stationLower = String(entry.station || "").toLowerCase();
-        const sourceLower = String(entry.source || "").toLowerCase();
-        const isQuestRequirement =
-          stationLower === "quest" ||
-          sourceLower === "quest" ||
-          Boolean(entry.questName);
-        const isExpeditionRequirement = stationLower.startsWith("expedition");
-        const rawTier = String(entry.tier || "").trim();
-        const hideTier = !rawTier || rawTier === "0";
-        const tierText = hideTier ? "" : `Tier ${rawTier}`;
-        const baseStationLabel = String(entry.station || "")
-          .trim()
-          .replace(/:$/, "");
-        const heading = isQuestRequirement
-          ? `Quest: ${entry.questName || "Unknown Quest"}`
-          : baseStationLabel && tierText
-            ? `${baseStationLabel}: ${tierText}`
-            : baseStationLabel || tierText || "Upgrade requirement";
-        const headingEl = document.createElement("div");
-        headingEl.textContent = heading;
-        li.appendChild(headingEl);
-
-        const hasNumericQuantity = Number.isFinite(entry.quantity);
-        let showQuantity = null;
-        if (hasNumericQuantity && entry.quantity > 0) {
-          showQuantity = entry.quantity;
-        } else if (isQuestRequirement || isExpeditionRequirement) {
-          showQuantity = hasNumericQuantity ? entry.quantity : 0;
-        }
-        if (showQuantity !== null) {
-          const qtyLine = document.createElement("div");
-          qtyLine.textContent = `Quantity: ${showQuantity}`;
-          li.appendChild(qtyLine);
-        }
-        if (entry.note) {
-          const noteLine = document.createElement("div");
-          noteLine.textContent = `⚠ ${entry.note}`;
-          li.appendChild(noteLine);
-        }
-        const shouldShowSource =
-          entry.source !== "Bench" &&
-          !isQuestRequirement &&
-          !isExpeditionRequirement &&
-          entry.source &&
-          entry.source !== "Item";
-        if (shouldShowSource) {
-          const srcLine = document.createElement("div");
-          srcLine.textContent = `Source: ${entry.source}`;
-          li.appendChild(srcLine);
-        }
-        usageList.appendChild(li);
-      });
-      advisory.appendChild(usageList);
-    } else {
-      usageTitle.textContent = "Not listed for quests / upgrades";
-      advisory.appendChild(usageTitle);
-      const safeMsg = document.createElement("p");
-      const saleValue = Number(r.ArcValue);
-      const saleText =
-        Number.isFinite(saleValue) && saleValue > 0
-          ? `₳${saleValue.toLocaleString()}`
-          : r.ArcValue || "its listed value";
-      safeMsg.textContent = `This item does not appear in the upgrade data set and can be sold for ${saleText} or dismantled safely.`;
-      advisory.appendChild(safeMsg);
-    }
-
-    content.appendChild(advisory);
-
-    div.appendChild(content);
-    resultsEl.appendChild(div);
   }
+  if (materials?.length) {
+    const strip = el("div", "dismantle-info");
+    strip.appendChild(el("strong", "", "Recycles into"));
+    const list = el("span", "recycle-materials");
+    for (const material of materials) {
+      const item = findItemByName(material.name);
+      const chip = el("span", "recycle-material");
+      if (item?.IconURL) {
+        const icon = renderIcon(item.IconURL, material.name, "recycle-material-icon");
+        if (material.quantity !== null && material.quantity !== undefined) {
+          icon.appendChild(el("span", "recycle-quantity-badge", material.quantity));
+        }
+        chip.appendChild(icon);
+      }
+      chip.appendChild(
+        el(
+          "span",
+          "recycle-material-name",
+          item?.IconURL || material.quantity === null || material.quantity === undefined
+            ? material.name
+            : `${material.quantity} ${material.name}`
+        )
+      );
+      list.appendChild(chip);
+    }
+    strip.appendChild(list);
+    content.appendChild(strip);
+  }
+
+  // Which ARC to farm
+  if (r.DroppedBy?.length) {
+    const drops = el("div", "dropped-by");
+    drops.appendChild(el("strong", "", "Dropped by"));
+    const list = el("span", "drop-list");
+    r.DroppedBy.forEach((name) => list.appendChild(el("span", "drop-chip", name)));
+    drops.appendChild(list);
+    content.appendChild(drops);
+  }
+
+  // Requirement manifest: current content first, ended at the bottom
+  const usage = el("section", "usage required");
+  const title = el("div", "usage-title", "Needed for ");
+  title.appendChild(el("span", "usage-count", rows.filter((row) => !row.done).length));
+  usage.appendChild(title);
+  const sorted = [...rows].sort((a, b) => Number(a.ended) - Number(b.ended) || Number(a.done) - Number(b.done));
+  const ul = el("ul", "usage-list");
+  for (const { entry, info, status, ended, done, key } of sorted) {
+    const li = el("li", `usage-row type-${info.type}${ended ? " ended" : ""}${done ? " done" : ""}`);
+    li.appendChild(el("span", "type-chip", TYPE_LABELS[info.type]));
+    const name = el("span", "usage-name");
+    name.appendChild(el("span", "usage-label", info.label));
+    if (info.sub) name.appendChild(el("span", "usage-sub", info.sub));
+    li.appendChild(name);
+    const qty = Number(entry.quantity);
+    li.appendChild(el("span", "qty", Number.isFinite(qty) && qty > 0 ? qty : "?"));
+    const check = el("button", "stage-check", done ? "✓" : "");
+    check.type = "button";
+    check.setAttribute("aria-pressed", String(done));
+    check.title = done ? "Mark as not done" : "Mark this stage done";
+    check.setAttribute("aria-label", `${info.label}${info.sub ? ` ${info.sub}` : ""}: ${done ? "done" : "not done"}`);
+    check.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleDone(key);
+    });
+    li.appendChild(check);
+    if (entry.note || status) {
+      const extra = el("div", "usage-extra");
+      if (status) {
+        extra.appendChild(el("span", `status-tag status-${status.status}`, status.label || status.status));
+      }
+      if (entry.note) extra.appendChild(el("span", "note", `⚠ ${entry.note}`));
+      li.appendChild(extra);
+    }
+    ul.appendChild(li);
+  }
+  usage.appendChild(ul);
+  content.appendChild(usage);
+
+  card.appendChild(content);
+  return card;
+}
+
+// Matching items nothing (currently) needs: one compact note, not a card each
+function renderNotNeeded(items) {
+  const panel = el("section", "not-needed");
+  panel.appendChild(el("div", "safe-stamp", "Not needed"));
+  const body = el("div", "not-needed-body");
+  body.appendChild(
+    el("p", "", "Nothing you're tracking needs these. Safe to sell or recycle:")
+  );
+  const list = el("ul", "nn-list");
+  const shown = items.slice(0, 12);
+  for (const { item, reason } of shown) {
+    const li = el("li", "nn-item");
+    if (item.IconURL) li.appendChild(renderIcon(item.IconURL, "", "nn-icon"));
+    li.appendChild(el("span", "nn-name", item.Name));
+    const value = formatValue(item.ArcValue);
+    if (value) li.appendChild(el("span", "nn-value", value));
+    if (reason) li.appendChild(el("span", "nn-reason", reason));
+    list.appendChild(li);
+  }
+  body.appendChild(list);
+  if (items.length > shown.length) {
+    body.appendChild(el("p", "nn-more", `…and ${items.length - shown.length} more`));
+  }
+  panel.appendChild(body);
+  return panel;
+}
+
+function renderResults(views, q, notNeeded = [], groupMatch = { shown: [], hiddenEnded: [] }) {
+  const groups = groupMatch.shown;
+  const resultsEl = document.getElementById("results");
+  resultsEl.innerHTML = "";
+  document.body.classList.toggle("search-active", Boolean(q.trim()));
+
+  if (!views.length && !notNeeded.length && !groups.length && !groupMatch.hiddenEnded.length) {
+    setResultsMessage(
+      `No signal for “${q.trim()}”`,
+      "error",
+      activeFilterKey
+        ? "A badge filter is active. Clear it to widen the search."
+        : "Try part of a name, a bench (gunsmith), a quest or a project."
+    );
+    return;
+  }
+
+  if (groupMatch.hiddenEnded.length) resultsEl.appendChild(renderEndedNotice(groupMatch.hiddenEnded));
+  groups.forEach((group) => resultsEl.appendChild(renderShoppingList(group)));
+  views.forEach(({ item, rows }, index) => resultsEl.appendChild(renderCard(item, rows, index)));
+  if (notNeeded.length) resultsEl.appendChild(renderNotNeeded(notNeeded));
 }
 
 function itemKey(r) {
@@ -884,28 +1128,101 @@ function search(q, maxResults = 50) {
   return results;
 }
 
+const SEARCH_HINTS = [
+  "Search items, benches, quests…",
+  "Try “tick pod”",
+  "Try a bench: “gunsmith”",
+  "Try “ascending the mountain”",
+  "Try a quest: “movie night”",
+  "Try “research station”",
+];
+
+function formatDate(iso) {
+  const d = new Date(`${iso}T00:00:00`);
+  return Number.isNaN(d.getTime())
+    ? iso
+    : d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
+
+function renderHud(state, message = "") {
+  const hud = document.getElementById("hud");
+  if (!hud) return;
+  hud.innerHTML = "";
+  const item = (children) => {
+    const span = el("span", "hud-item");
+    children.forEach((c) => span.appendChild(c));
+    hud.appendChild(span);
+  };
+  const withBold = (before, bold, after = "") => {
+    const frag = document.createDocumentFragment();
+    if (before) frag.append(before);
+    frag.appendChild(el("b", "", bold));
+    if (after) frag.append(after);
+    return frag;
+  };
+  item([el("span", `hud-dot${state === "ready" ? "" : ` ${state}`}`), document.createTextNode(message)]);
+  if (state !== "ready") return;
+  item([withBold("", GROUPED_ITEMS.length.toLocaleString(), " items tracked")]);
+  if (CONTENT_META.patch?.name) item([withBold("Patch ", CONTENT_META.patch.name)]);
+  if (DATA_SYNCED_AT) item([withBold("Synced ", formatDate(DATA_SYNCED_AT))]);
+}
+
+function describeFilter(key) {
+  const [type, ...rest] = key.split(":");
+  const value = rest.join(":");
+  const label = type === "value" && Number(value) ? formatValue(value) : titleCase(value);
+  return `${type === "location" ? "Found in" : titleCase(type)}: ${label}`;
+}
+
 async function main() {
   const qEl = document.getElementById("q");
+  const searchEl = document.getElementById("search");
+  const clearEl = document.getElementById("clear");
+  const countEl = document.getElementById("result-count");
+  const pillEl = document.getElementById("filter-pill");
+  const viewFiltersEl = document.getElementById("view-filters");
   qEl.disabled = true;
 
   try {
     await loadData();
+    buildGroups();
     dataLoaded = true;
     qEl.disabled = false;
+    qEl.placeholder = SEARCH_HINTS[0];
     qEl.focus();
     setResultsMessage("");
+    renderHud("ready", "Data link online");
   } catch (e) {
-    setResultsMessage(e.message, "error");
+    setResultsMessage("Data link failed", "error", e.message);
+    renderHud("error", "Data link offline");
+    qEl.placeholder = "Couldn't load the item database";
     loadFailed = true;
+  }
+  searchEl.classList.remove("loading");
+
+  function updateMeta(count, notNeededCount = 0) {
+    const hasQuery = Boolean(qEl.value.trim());
+    countEl.textContent = "";
+    if (hasQuery && dataLoaded) {
+      countEl.appendChild(el("b", "", count));
+      countEl.append(" needed");
+      if (notNeededCount) countEl.append(` · ${notNeededCount} not needed`);
+    }
+    pillEl.classList.toggle("on", Boolean(activeFilterKey) && hasQuery);
+    pillEl.textContent = activeFilterKey ? `${describeFilter(activeFilterKey)} ✕` : "";
+    pillEl.title = "Remove filter";
   }
 
   function doSearch() {
     const q = qEl.value;
     lastQuery = q;
     document.body.classList.toggle("search-active", Boolean(q.trim()));
+    searchEl.classList.toggle("has-value", q.length > 0);
     const resultsEl = document.getElementById("results");
     if (!q.trim()) {
       if (resultsEl) resultsEl.innerHTML = "";
+      updateMeta(0);
+      syncUI();
       return;
     }
     if (!dataLoaded) {
@@ -914,21 +1231,90 @@ async function main() {
       }
       return;
     }
-    const res = search(q);
-    renderResults(applyActiveFilter(res), q);
+    // Only items something still needs get a card; other matches are listed as "not needed"
+    const views = [];
+    const notNeeded = [];
+    for (const item of applyActiveFilter(search(q, 250))) {
+      const rows = usageRows(item);
+      const visible = rows.filter(rowVisible);
+      if (visible.length) views.push({ item, rows: visible });
+      else notNeeded.push({ item, reason: hiddenReason(rows) });
+    }
+    renderResults(views.slice(0, 60), q, notNeeded, matchGroups(q));
+    updateMeta(views.length, notNeeded.length);
     syncUI();
   }
+
+  // View filters: requirement types, ended content, completed stages
+  function renderViewFilters() {
+    viewFiltersEl.innerHTML = "";
+    const chip = (label, on, onClick, extraClass = "") => {
+      const b = el("button", `view-chip${on ? " on" : ""}${extraClass ? ` ${extraClass}` : ""}`, label);
+      b.type = "button";
+      b.setAttribute("aria-pressed", String(on));
+      b.addEventListener("click", (e) => {
+        e.stopPropagation();
+        onClick();
+        renderViewFilters();
+      });
+      viewFiltersEl.appendChild(b);
+    };
+    for (const type of Object.keys(TYPE_LABELS)) {
+      chip(TYPE_LABELS[type], PREFS.types[type] !== false, () =>
+        setPref({ types: { ...PREFS.types, [type]: PREFS.types[type] === false } }), `type-${type}`);
+    }
+    viewFiltersEl.appendChild(el("span", "view-sep"));
+    chip("Ended", PREFS.showEnded, () => setPref({ showEnded: !PREFS.showEnded }));
+    chip(`Done${DONE.size ? ` (${DONE.size})` : ""}`, PREFS.showDone, () => setPref({ showDone: !PREFS.showDone }));
+  }
+
+  // Clicking an item in a shopping list searches for it
+  searchFor = (name) => {
+    qEl.value = name;
+    doSearch();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    qEl.focus();
+  };
 
   qEl.addEventListener("input", () => {
     if (dataLoaded) {
       doSearch();
     }
   });
+  clearEl.addEventListener("click", (e) => {
+    e.stopPropagation();
+    qEl.value = "";
+    doSearch();
+    qEl.focus();
+  });
+  pillEl.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (activeFilterKey) toggleFilter(activeFilterKey);
+  });
   document.addEventListener("click", () => {
     if (!qEl.disabled) qEl.focus();
   });
-  triggerSearch = doSearch;
+  triggerSearch = () => {
+    doSearch();
+    if (dataLoaded) renderViewFilters();
+  };
+  if (dataLoaded) renderViewFilters();
   syncUI();
+
+  // Cycle example searches in the placeholder while the box is empty
+  const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  if (dataLoaded && !reduceMotion) {
+    let hint = 0;
+    setInterval(() => {
+      if (qEl.value) return;
+      qEl.classList.add("hint-fade");
+      setTimeout(() => {
+        hint = (hint + 1) % SEARCH_HINTS.length;
+        qEl.placeholder = SEARCH_HINTS[hint];
+        qEl.classList.remove("hint-fade");
+      }, 300);
+    }, 3800);
+  }
 }
 
 main();
